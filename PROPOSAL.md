@@ -33,6 +33,8 @@ In addition, this project will include:
  a display to list controls, an about button to give credit to the
  inspiration of the game, Geometry Wars, and a link to my Github and LinkedIn
 
+
+
  ## Architecture and Technologies
 
  This project will be implemented with teh following technologies:
