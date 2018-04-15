@@ -1,4 +1,4 @@
-# Shape Struggle
+# Shape Wars
 
 ## Background and Overview
 

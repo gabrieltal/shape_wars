@@ -1,18 +1,14 @@
 * {
-  margin: 0;
+  margin: 0 auto;
+  padding: 0;
 }
 
 h1 {
-  margin: 10px 5px;
   text-align: center;
 }
 
 #canvas {
-  position: absolute;
-  margin: 5% 10%;
-  min-width: 640px;
-  min-height: 480px;
-  width: 80%;
-  height: 70%;
-  background-color: black;
+  display: block;
+  margin: auto;
+  background: black;
 }
