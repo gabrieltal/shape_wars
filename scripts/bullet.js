@@ -2,25 +2,33 @@ const bulletSize = 5;
 
 const bulletCount = 10;
 
-
-function drawBullet() {
-  destroyBullet();
-  ctx.save();
-  ctx.beginPath();
-  ctx.arc(a, b, 10, 0, 2 * Math.PI)
-  ctx.strokeStyle = "red";
-  ctx.fillStyle ="red";
-  ctx.fill();
-  ctx.stroke();
-  ctx.restore();
-  ctx.closePath();
-}
-
-function destroyBullet() {
-  if ( a > canvas.width - shipSize || a < shipSize) {
-    a = x;
+class Bullet {
+  constructor(a, b, angle) {
+    this.a = a;
+    this.b = b;
+    this.angle = angle;
   }
-  if ( b > canvas.width - shipSize || b < shipSize) {
-    b = y;
+
+  drawBullet() {
+    this.destroyBullet();
+    ctx.save();
+    ctx.arc(this.a, this.b, 10, 0, 2 *Math.PI);
+    ctx.fillStyle = "red";
+    ctx.fill();
+    ctx.closePath();
+  }
+
+  destroyBullet() {
+    if (this.a > canvas.width - shipSize || this.a < shipSize) {
+      this.a = ship.x;
+      this.b = ship.y;
+      this.angle = ship.angle;
+    }
+    if ( this.b > canvas.width - shipSize || this.b < shipSize) {
+      this.b = ship.y;
+      this.a = ship.x;
+      this.angle = ship.angle;
+
+    }
   }
 }
