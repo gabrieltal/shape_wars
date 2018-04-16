@@ -3,15 +3,19 @@ let ctx = canvas.getContext("2d");
 let dx = 0;
 let dy = 0;
 const shipSize = 10;
-
+const bulletCount = 3;
+const bullets = [];
 let ship = new Ship(shipSize, canvas.width/2, canvas.height/2, 0);
-let bullet = new Bullet(canvas.width/2, canvas.height/2, ship.angle);
-
+for (var i = 0; i < bulletCount; i++) {
+  bullets.push(new Bullet(canvas.width/2, canvas.height/2, 0))
+}
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  console.log(ship.angle);
-  bullet.drawBullet();
   ship.drawShip();
+
+  for (var i = 0; i < bullets.length; i++) {
+    bullets[i].drawBullet();
+  }
   updatePosition();
   checkBounds();
 }
@@ -61,8 +65,10 @@ function checkBounds() {
 function move() {
   ship.x += dx;
   ship.y += dy;
-  bullet.a += Math.cos((bullet.angle));
-  bullet.b += Math.sin((bullet.angle));
+  for (var i = 0; i < bullets.length; i++) {
+    bullets[i].x += 2 * Math.cos((bullets[i].angle));
+    bullets[i].y += 2 * Math.sin((bullets[i].angle));
+  }
 }
 
 function turn () {

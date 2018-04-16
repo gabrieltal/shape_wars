@@ -1,32 +1,30 @@
-const bulletSize = 5;
-
-const bulletCount = 10;
+const bulletSize = 3;
 
 class Bullet {
-  constructor(a, b, angle) {
-    this.a = a;
-    this.b = b;
+  constructor(x, y, angle) {
+    this.x = x;
+    this.y = y;
     this.angle = angle;
   }
 
   drawBullet() {
     this.destroyBullet();
-    ctx.save();
-    ctx.arc(this.a, this.b, 10, 0, 2 *Math.PI);
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, bulletSize, 0, 2 *Math.PI);
     ctx.fillStyle = "red";
     ctx.fill();
     ctx.closePath();
   }
 
   destroyBullet() {
-    if (this.a > canvas.width - shipSize || this.a < shipSize) {
-      this.a = ship.x;
-      this.b = ship.y;
+    if (this.x > canvas.width - shipSize || this.x < shipSize) {
+      this.x = ship.x;
+      this.y = ship.y;
       this.angle = ship.angle;
     }
-    if ( this.b > canvas.width - shipSize || this.b < shipSize) {
-      this.b = ship.y;
-      this.a = ship.x;
+    if ( this.y > canvas.width - shipSize || this.y < shipSize) {
+      this.y = ship.y;
+      this.x = ship.x;
       this.angle = ship.angle;
 
     }
