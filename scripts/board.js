@@ -3,18 +3,24 @@ let ctx = canvas.getContext("2d");
 let dx = 0;
 let dy = 0;
 const shipSize = 10;
-const bulletCount = 3;
-const bullets = [];
+
 let ship = new Ship(shipSize, canvas.width/2, canvas.height/2, 0);
-for (var i = 0; i < bulletCount; i++) {
-  bullets.push(new Bullet(canvas.width/2, canvas.height/2, 0))
+const bullets = [];
+for (var i = 0; i < 6; i++) {
+  bullets.push(new Bullet(ship.x, ship.y, 0));
 }
+
+const enemies = [];
+enemies.push(new Enemy(10, 20, 20));
+
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ship.drawShip();
-
   for (var i = 0; i < bullets.length; i++) {
     bullets[i].drawBullet();
+  }
+  for (var i = 0; i < enemies.length; i++) {
+    enemies[i].drawEnemy();
   }
   updatePosition();
   checkBounds();
@@ -39,7 +45,11 @@ function updatePosition() {
   } else if (rotateRight) {
     ship.angle += .03;
   }
+}
 
+
+
+function shipCollisionDetection() {
 
 }
 
@@ -66,8 +76,8 @@ function move() {
   ship.x += dx;
   ship.y += dy;
   for (var i = 0; i < bullets.length; i++) {
-    bullets[i].x += 2 * Math.cos((bullets[i].angle));
-    bullets[i].y += 2 * Math.sin((bullets[i].angle));
+    bullets[i].x += ((i + 3) * Math.cos(bullets[i].angle));
+    bullets[i].y += ((i + 3) * Math.sin(bullets[i].angle));
   }
 }
 

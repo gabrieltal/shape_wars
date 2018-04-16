@@ -11,7 +11,7 @@ class Bullet {
     this.destroyBullet();
     ctx.beginPath();
     ctx.arc(this.x, this.y, bulletSize, 0, 2 *Math.PI);
-    ctx.fillStyle = "red";
+    ctx.fillStyle = "yellow";
     ctx.fill();
     ctx.closePath();
   }
