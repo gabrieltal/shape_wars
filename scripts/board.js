@@ -1,5 +1,8 @@
 const canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
+
+let shipSize = 10;
+
 let x = canvas.width/ 2;
 let y = canvas.height/2;
 let dx = 0;
@@ -10,27 +13,29 @@ let keyLeft = false;
 let keyUp = false;
 let keyDown = false;
 let keySpace = false;
-
+let rotateLeft = false;
+let rotateRight = false;
 function keyDownHandler(e) {
   e.preventDefault();
   switch (e.keyCode) {
     case 65:
-    case 37:
       keyLeft = true;
       break;
+    case 37:
+      rotateLeft = true;
+      break;
     case 87:
-    case 38:
       keyUp = true;
       break;
     case 68:
-    case 39:
       keyRight = true;
       break;
+    case 39:
+      rotateRight = true;
+      break;
     case 83:
-    case 40:
       keyDown = true;
       break;
-    case 32:
     case 75:
       keySpace = true;
       break;
@@ -41,35 +46,39 @@ function keyUpHandler(e) {
   e.preventDefault();
   switch (e.keyCode) {
     case 65:
-    case 37:
       keyLeft = false;
       break;
+    case 37:
+      rotateLeft = false;
     case 87:
-    case 38:
       keyUp = false;
       break;
     case 68:
-    case 39:
       keyRight = false;
       break;
+    case 39:
+      rotateRight = false;
+      break;
     case 83:
-    case 40:
       keyDown = false;
       break;
-    case 32:
     case 75:
       keySpace = false;
       break;
   }
 }
-
+let angle = 0;
 function drawShip() {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(angle);
   ctx.beginPath();
-  ctx.moveTo(x, y);
-  ctx.lineTo(x + 10, y - 10);
-  ctx.lineTo(x, y-20);
+  ctx.moveTo(-shipSize/2, shipSize/2);
+  ctx.lineTo(shipSize, 0);
+  ctx.lineTo(-shipSize/2, -shipSize/2);
   ctx.fillStyle = "white";
   ctx.fill();
+  ctx.restore();
   ctx.closePath();
 }
 
@@ -86,16 +95,30 @@ function draw() {
   } else if (keyDown) {
     dy += .2;
   }
+  if (rotateLeft) {
+    angle -= .1;
+  } else if (rotateRight) {
+    angle += .1;
+  }
   x += dx;
   y += dy;
 
-  if ( x > canvas.width ) {
+  if ( x > canvas.width - shipSize ) {
     dx = 0;
-    x = 640;
+    x = canvas.width - shipSize;
   }
-  if ( y  > canvas.height ) {
+  if ( y  > canvas.height - shipSize ) {
     dy = 0;
-    y = 480;
+    y = canvas.height - shipSize;
+  }
+
+  if ( y < shipSize ) {
+    dy = 0;
+    y = shipSize;
+  }
+  if ( x < shipSize ) {
+    dx = 0;
+    x = shipSize;
   }
 }
 document.addEventListener("keydown", keyDownHandler, false);
