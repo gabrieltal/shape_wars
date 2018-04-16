@@ -4,33 +4,40 @@ let x = canvas.width/ 2;
 let y = canvas.height/2;
 let dx = 0;
 let dy = 0;
+let a = x;
+let b = y;
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawShip();
+  drawBullet();
   updatePosition();
   checkBounds();
 }
 
-
 function updatePosition() {
   if (keyLeft) {
-    dx -= .2;
+    dx -= .03;
   } else if (keyRight) {
-    dx += .2;
-  }
-  if (keyUp) {
-    dy -= .2;
+    dx += .03;
+  } else if (keyUp) {
+    dy -= .03;
   } else if (keyDown) {
-    dy += .2;
+    dy += .03;
+  } else {
+    dx += dx > 0 ? -.02 : 0.02;
+    dy += dy > 0 ? -.02 : 0.02;
   }
+
   if (rotateLeft) {
-    angle -= .1;
+    angle -= .03;
   } else if (rotateRight) {
-    angle += .1;
+    angle += .03;
   }
   x += dx;
   y += dy;
+  a += Math.cos(angle);
+  b += Math.sin(angle);
 }
 
 function checkBounds() {
@@ -52,4 +59,13 @@ function checkBounds() {
   }
 }
 
-setInterval(draw, 10);
+function move() {
+  
+}
+
+function turn () {
+  move();
+  draw();
+}
+
+setInterval(turn, 10);

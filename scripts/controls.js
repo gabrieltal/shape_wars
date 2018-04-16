@@ -2,7 +2,6 @@ let keyRight = false;
 let keyLeft = false;
 let keyUp = false;
 let keyDown = false;
-let keySpace = false;
 let rotateLeft = false;
 let rotateRight = false;
 
@@ -27,9 +26,6 @@ function keyDownHandler(e) {
     case 83:
       keyDown = true;
       break;
-    case 75:
-      keySpace = true;
-      break;
   }
 }
 
@@ -52,9 +48,6 @@ function keyUpHandler(e) {
       break;
     case 83:
       keyDown = false;
-      break;
-    case 75:
-      keySpace = false;
       break;
   }
 }

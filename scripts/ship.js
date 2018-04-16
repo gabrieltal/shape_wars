@@ -1,5 +1,6 @@
 const shipSize = 10;
 let angle = 0;
+
 function drawShip() {
   ctx.save();
   ctx.translate(x, y);
