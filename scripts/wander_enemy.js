@@ -3,6 +3,8 @@ class WanderEnemy {
     this.size = size;
     this.x = x;
     this.y = y;
+    this.dx = Math.random() < 0.5 ? -.4 : .4;;
+    this.dy = Math.random() < 0.5 ? -.4 : .4;
   }
 
   drawEnemy () {
@@ -21,8 +23,9 @@ class WanderEnemy {
   }
 
   enemyMove() {
-    this.x += Math.random() < 0.5 ? -.3 : .3;
-    this.y += Math.random() < 0.5 ? -.3 : .3;
+    this.bounce();
+    this.x += this.dx;
+    this.y += this.dy;
   }
 
   bounce() {
