@@ -1,21 +1,20 @@
 const canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
-let dx = 0;
-let dy = 0;
-const shipSize = 10;
 
-let ship = new Ship(shipSize, canvas.width/2, canvas.height/2, 0);
+const shipSize = 10;
+let points = 0;
+let pointBoard = document.getElementById("points");
+let ship = new Ship(canvas.width/2, canvas.height/2, 0);
 let bullets = [];
 for (var i = 0; i < 10; i++) {
-  bullets.push(new Bullet(ship.x, ship.y, 0));
+  bullets.push(new Bullet(ship.x, ship.y, ship.angle));
 }
 
 const wanderEnemies = [];
 for (var i = 0; i < 10; i++) {
   let x = Math.floor(Math.random() * canvas.width);
   if (x === ship.x) x++;
-  wanderEnemies.push(new WanderEnemy(20, x,
-    Math.floor(Math.random() * canvas.width)));
+  wanderEnemies.push(new WanderEnemy());
 }
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -32,16 +31,16 @@ function draw() {
 
 function updatePosition() {
   if (keyLeft) {
-    dx -= .04;
+    ship.dx -= .04;
   } else if (keyRight) {
-    dx += .04;
+    ship.dx += .04;
   } else if (keyUp) {
-    dy -= .04;
+    ship.dy -= .04;
   } else if (keyDown) {
-    dy += .04;
+    ship.dy += .04;
   } else {
-    dx += dx > 0 ? -.02 : 0.02;
-    dy += dy > 0 ? -.02 : 0.02;
+    ship.dx += ship.dx > 0 ? -.02 : 0.02;
+    ship.dy += ship.dy > 0 ? -.02 : 0.02;
   }
 
   if (rotateLeft) {
@@ -64,6 +63,8 @@ function checkBulletCollision() {
         wanderEnemies.splice(j, 1);
         wanderEnemies.push(new WanderEnemy(20, Math.floor(Math.random() * canvas.width),
           Math.floor(Math.random() * canvas.width)));
+          points += 10;
+          pointBoard.innerHTML = "Points: " + points;
       }
     }
   }
@@ -85,26 +86,26 @@ function shipCollisionDetection() {
 
 function checkBounds() {
   if ( ship.x > canvas.width - shipSize ) {
-    dx = 0;
+    ship.dx = 0;
     ship.x = canvas.width - shipSize;
   }
   if ( ship.y  > canvas.height - shipSize ) {
-    dy = 0;
+    ship.dy = 0;
     ship.y = canvas.height - shipSize;
   }
   if ( ship.y < shipSize ) {
-    dy = 0;
+    ship.dy = 0;
     ship.y = shipSize;
   }
   if ( ship.x < shipSize ) {
-    dx = 0;
+    ship.dx = 0;
     ship.x = shipSize;
   }
 }
 
 function move() {
-  ship.x += dx;
-  ship.y += dy;
+  ship.x += ship.dx;
+  ship.y += ship.dy;
   for (var i = 0; i < bullets.length; i++) {
     bullets[i].x += ((i + 3) * Math.cos(bullets[i].angle));
     bullets[i].y += ((i + 3) * Math.sin(bullets[i].angle));

@@ -1,10 +1,12 @@
 class Ship {
-  constructor(shipSize, x, y, angle, color="white") {
+  constructor(x, y, angle, color="white") {
     this.x = x;
     this.y = y;
-    this.shipSize = shipSize;
+    this.size = 10;
     this.angle = angle;
     this.color = color;
+    this.dx = 0;
+    this.dy = 0;
   }
 
   drawShip() {
@@ -12,12 +14,14 @@ class Ship {
     ctx.translate(this.x, this.y);
     ctx.rotate(this.angle);
     ctx.beginPath();
-    ctx.moveTo(-this.shipSize/2, this.shipSize/2);
-    ctx.lineTo(this.shipSize, 0);
-    ctx.lineTo(-this.shipSize/2, -this.shipSize/2);
+    ctx.moveTo(-this.size/2, this.size/2);
+    ctx.lineTo(this.size, 0);
+    ctx.lineTo(-this.size/2, -this.size/2);
     ctx.fillStyle = this.color;
     ctx.fill();
     ctx.restore();
     ctx.closePath();
   }
+
+
 }

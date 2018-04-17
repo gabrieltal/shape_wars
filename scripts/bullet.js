@@ -17,12 +17,12 @@ class Bullet {
   }
 
   destroyBullet() {
-    if (this.x > canvas.width - shipSize || this.x < shipSize) {
+    if (this.x > canvas.width - ship.size || this.x < ship.size) {
       this.x = ship.x;
       this.y = ship.y;
       this.angle = ship.angle;
     }
-    if ( this.y > canvas.width - shipSize || this.y < shipSize) {
+    if ( this.y > canvas.width - ship.size || this.y < ship.size) {
       this.y = ship.y;
       this.x = ship.x;
       this.angle = ship.angle;

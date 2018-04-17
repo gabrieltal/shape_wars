@@ -1,8 +1,10 @@
 class WanderEnemy {
-  constructor(size, x, y) {
-    this.size = size;
+  constructor() {
+    let x = Math.floor(Math.random() * canvas.width);
+    if ( x === ship.x) x+= 5;
+    this.size = 20;
     this.x = x;
-    this.y = y;
+    this.y = Math.floor(Math.random() * canvas.width);
     this.dx = Math.random() < 0.5 ? -.4 : .4;;
     this.dy = Math.random() < 0.5 ? -.4 : .4;
   }
@@ -10,14 +12,14 @@ class WanderEnemy {
   drawEnemy () {
     let width = this.size/2;
     ctx.beginPath();
-    ctx.moveTo(this.x, this.y - width);
+    ctx.moveTo(this.x, this.y);
     ctx.lineTo(this.x + width, this.y);
     ctx.lineTo(this.x, this.y + width);
     ctx.lineTo(this.x - width, this.y);
-    ctx.lineTo(this.x, this.y - width);
+    ctx.lineTo(this.x, this.y);
 
     ctx.lineWidth = 3;
-    ctx.strokeStyle = "blue";
+    ctx.strokeStyle = "purple";
     ctx.stroke();
     ctx.closePath();
   }
