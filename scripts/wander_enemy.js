@@ -29,17 +29,23 @@ class WanderEnemy {
   }
 
   bounce() {
-    if (this.x > canvas.width - this.size || this.x < this.size) {
-      let x = Math.floor(Math.random() * canvas.width);
-      if (x === ship.x) x++;
+    if (this.x > canvas.width) {
+      let x = 0;
+      if (x === ship.x) x += 5;
       this.x = x;
+      this.y = Math.floor(Math.random() * canvas.width);
+    } else if (this.x <= 0) {
+      this.x = canvas.width;
       this.y = Math.floor(Math.random() * canvas.width);
     }
-    if ( this.y > canvas.width - this.size || this.y < this.size) {
-      let x = Math.floor(Math.random() * canvas.width);
-      if (x === ship.x) x++;
-      this.x = x;
-      this.y = Math.floor(Math.random() * canvas.width);
+    if (this.y > canvas.width) {
+      let y = 0;
+      if (y === ship.y) y += 5;
+      this.y = y;
+      this.x = Math.floor(Math.random() * canvas.width);
+    } else if (this.y <= 0) {
+      this.y = canvas.width;
+      this.x = Math.floor(Math.random() * canvas.width);
     }
   }
 
