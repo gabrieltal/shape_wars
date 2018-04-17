@@ -1,54 +1,41 @@
 const canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 
-const shipSize = 10;
 let points = 0;
 let pointBoard = document.getElementById("points");
-let ship = new Ship(canvas.width/2, canvas.height/2, 0);
+let ship = new Ship(canvas.width/2, canvas.height/2);
+
 let bullets = [];
 for (var i = 0; i < 10; i++) {
   bullets.push(new Bullet(ship.x, ship.y, ship.angle));
 }
-
 const wanderEnemies = [];
 for (var i = 0; i < 10; i++) {
   let x = Math.floor(Math.random() * canvas.width);
   if (x === ship.x) x++;
   wanderEnemies.push(new WanderEnemy());
 }
+
+const followEnemies = [];
+for (var i = 0; i < 5; i++) {
+  followEnemies.push(new FollowEnemy());
+}
+
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ship.drawShip();
+  ship.draw();
   for (var i = 0; i < bullets.length; i++) {
-    bullets[i].drawBullet();
+    bullets[i].draw();
   }
   for (var i = 0; i < wanderEnemies.length; i++) {
-    wanderEnemies[i].drawEnemy();
-  }
-  updatePosition();
-  checkBounds();
-}
-
-function updatePosition() {
-  if (keyLeft) {
-    ship.dx -= .04;
-  } else if (keyRight) {
-    ship.dx += .04;
-  } else if (keyUp) {
-    ship.dy -= .04;
-  } else if (keyDown) {
-    ship.dy += .04;
-  } else {
-    ship.dx += ship.dx > 0 ? -.02 : 0.02;
-    ship.dy += ship.dy > 0 ? -.02 : 0.02;
+    wanderEnemies[i].draw();
   }
 
-  if (rotateLeft) {
-    ship.angle -= .03;
-  } else if (rotateRight) {
-    ship.angle += .03;
+  for (var i = 0; i < followEnemies.length; i++) {
+    followEnemies[i].draw();
   }
 }
+
 
 function checkBulletCollision() {
   for (var i = 0; i < bullets.length; i++) {
@@ -84,34 +71,17 @@ function shipCollisionDetection() {
   }
 }
 
-function checkBounds() {
-  if ( ship.x > canvas.width - shipSize ) {
-    ship.dx = 0;
-    ship.x = canvas.width - shipSize;
-  }
-  if ( ship.y  > canvas.height - shipSize ) {
-    ship.dy = 0;
-    ship.y = canvas.height - shipSize;
-  }
-  if ( ship.y < shipSize ) {
-    ship.dy = 0;
-    ship.y = shipSize;
-  }
-  if ( ship.x < shipSize ) {
-    ship.dx = 0;
-    ship.x = shipSize;
-  }
-}
-
 function move() {
-  ship.x += ship.dx;
-  ship.y += ship.dy;
+  ship.move();
   for (var i = 0; i < bullets.length; i++) {
-    bullets[i].x += ((i + 3) * Math.cos(bullets[i].angle));
-    bullets[i].y += ((i + 3) * Math.sin(bullets[i].angle));
+    bullets[i].move(i);
   }
   for (var i = 0; i < wanderEnemies.length; i++) {
-    wanderEnemies[i].enemyMove();
+    wanderEnemies[i].move();
+  }
+
+  for (var i = 0; i < followEnemies.length; i++) {
+    followEnemies[i].move();
   }
 }
 

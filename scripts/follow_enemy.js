@@ -1,10 +1,14 @@
-class FollowEnemy {
-  constructor (size, x, y) {
-    this.size = size;
-    this.x = x;
+
+class FollowEnemy extends MovingObject {
+  constructor () {
+    let x = Math.floor(Math.random() * canvas.width);
+    if (x === ship.x) x += 5;
+    let y = Math.floor(Math.random() * canvas.width);
+    super(x, y, 20, "blue", 0, 0);
+    this.speed = .6;
   }
 
-  drawEnemy () {
+  draw() {
     let width = this.size/2;
     ctx.beginPath();
     ctx.moveTo(this.x, this.y - width);
@@ -14,8 +18,14 @@ class FollowEnemy {
     ctx.lineTo(this.x, this.y - width);
 
     ctx.lineWidth = 3;
-    ctx.strokeStyle = "blue";
+    ctx.strokeStyle = this.color;
     ctx.stroke();
     ctx.closePath();
+    this.updateDirection();
+  }
+
+  updateDirection() {
+    this.dx = ship.x - this.x < 0 ? -this.speed : this.speed;
+    this.dy = ship.y - this.y < 0 ? -this.speed : this.speed;
   }
 }

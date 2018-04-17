@@ -1,22 +1,27 @@
 const bulletSize = 3;
-
-class Bullet {
+const bulletSpeed = 4;
+class Bullet extends MovingObject {
   constructor(x, y, angle) {
-    this.x = x;
-    this.y = y;
+    super(x, y, bulletSize, "yellow", 0, 0)
     this.angle = angle;
+    this.i = i+1;
   }
 
-  drawBullet() {
-    this.destroyBullet();
+  draw() {
+    this.checkBounds();
     ctx.beginPath();
-    ctx.arc(this.x, this.y, bulletSize, 0, 2 *Math.PI);
-    ctx.fillStyle = "yellow";
+    ctx.arc(this.x, this.y, this.size, 0, 2 *Math.PI);
+    ctx.fillStyle = this.color;
     ctx.fill();
     ctx.closePath();
   }
 
-  destroyBullet() {
+  move(i) {
+    this.x += (i + bulletSpeed) * Math.cos(this.angle);
+    this.y += (i + bulletSpeed) * Math.sin(this.angle);
+  }
+
+  checkBounds() {
     if (this.x > canvas.width - ship.size || this.x < ship.size) {
       this.x = ship.x;
       this.y = ship.y;
