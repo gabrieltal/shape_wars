@@ -17,20 +17,20 @@ class MovingObject {
   checkBounds() {
     if (this.x > canvas.width) {
       let x = 0;
-      if (x === ship.x) x += 5;
+      if (x === ship.x) x += 30;
       this.x = x;
       this.y = Math.floor(Math.random() * canvas.width);
-    } else if (this.x <= 0) {
-      this.x = canvas.width;
+    } else if (this.x + this.size <= 0) {
+      this.x = canvas.width - this.size;
       this.y = Math.floor(Math.random() * canvas.width);
     }
     if (this.y > canvas.width) {
       let y = 0;
-      if (y === ship.y) y += 5;
+      if (y === ship.y) y += 30;
       this.y = y;
       this.x = Math.floor(Math.random() * canvas.width);
     } else if (this.y <= 0) {
-      this.y = canvas.width;
+      this.y = canvas.width - this.size;
       this.x = Math.floor(Math.random() * canvas.width);
     }
   }

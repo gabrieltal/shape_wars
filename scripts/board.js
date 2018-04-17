@@ -10,17 +10,14 @@ for (var i = 0; i < 10; i++) {
   bullets.push(new Bullet(ship.x, ship.y, ship.angle));
 }
 const wanderEnemies = [];
+const followEnemies = [];
 for (var i = 0; i < 10; i++) {
-  let x = Math.floor(Math.random() * canvas.width);
-  if (x === ship.x) x++;
   wanderEnemies.push(new WanderEnemy());
 }
 
-const followEnemies = [];
 for (var i = 0; i < 5; i++) {
   followEnemies.push(new FollowEnemy());
 }
-
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ship.draw();
@@ -67,7 +64,6 @@ function checkBulletCollision() {
     }
   }
 }
-
 
 function shipCollisionDetection() {
   const enemies = wanderEnemies.concat(followEnemies);
