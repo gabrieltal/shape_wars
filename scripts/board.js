@@ -48,21 +48,33 @@ function checkBulletCollision() {
       if (bx >= enemyX - enemyWidth && bx <= enemyX + enemyWidth
         && by >= enemyY - enemyWidth && by <= enemyY + enemyWidth ) {
         wanderEnemies.splice(j, 1);
-        wanderEnemies.push(new WanderEnemy(20, Math.floor(Math.random() * canvas.width),
-          Math.floor(Math.random() * canvas.width)));
+        wanderEnemies.push(new WanderEnemy());
           points += 10;
           pointBoard.innerHTML = "Points: " + points;
       }
+    }
+    for (var z = 0; z < followEnemies.length; z++) {
+      let enemyX = followEnemies[z].x;
+      let enemyY = followEnemies[z].y;
+      let enemyWidth = followEnemies[z].size/2;
+      if (bx >= enemyX - enemyWidth && bx <= enemyX + enemyWidth
+        && by >= enemyY - enemyWidth && by <= enemyY + enemyWidth ) {
+        followEnemies.splice(z, 1);
+        followEnemies.push(new FollowEnemy());
+          points += 20;
+          pointBoard.innerHTML = "Points: " + points;
+        }
     }
   }
 }
 
 
 function shipCollisionDetection() {
-  for (var i = 0; i < wanderEnemies.length; i++) {
-    let enemyX = wanderEnemies[i].x;
-    let enemyY = wanderEnemies[i].y;
-    let enemyWidth = wanderEnemies[i].size/2;
+  const enemies = wanderEnemies.concat(followEnemies);
+  for (var i = 0; i < enemies.length; i++) {
+    let enemyX = enemies[i].x;
+    let enemyY = enemies[i].y;
+    let enemyWidth = enemies[i].size/2;
     if (ship.x >= enemyX - enemyWidth && ship.x <= enemyX + enemyWidth
        && ship.y >= enemyY - enemyWidth && ship.y <= enemyY + enemyWidth) {
         ship.color = "black";
