@@ -25,5 +25,20 @@ class WanderEnemy {
     this.y += Math.random() < 0.5 ? -.3 : .3;
   }
 
+  bounce() {
+    if (this.x > canvas.width - shipSize || this.x < shipSize) {
+      let x = Math.floor(Math.random() * canvas.width);
+      if (x === ship.x) x++;
+      this.x = x;
+      this.y = Math.floor(Math.random() * canvas.width);
+    }
+    if ( this.y > canvas.width - shipSize || this.y < shipSize) {
+      let x = Math.floor(Math.random() * canvas.width);
+      if (x === ship.x) x++;
+      this.x = x;
+      this.y = Math.floor(Math.random() * canvas.width);
+    }
+  }
+
 
 }

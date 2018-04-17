@@ -11,10 +11,12 @@ for (var i = 0; i < 10; i++) {
 }
 
 const wanderEnemies = [];
-for (var i = 0; i < 8; i++) {
-  wanderEnemies.push(new WanderEnemy(20, canvas.width/2, canvas.width/2));
+for (var i = 0; i < 10; i++) {
+  let x = Math.floor(Math.random() * canvas.width);
+  if (x === ship.x) x++;
+  wanderEnemies.push(new WanderEnemy(20, x,
+    Math.floor(Math.random() * canvas.width)));
 }
-
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ship.drawShip();
@@ -60,6 +62,8 @@ function checkBulletCollision() {
       if (bx >= enemyX - enemyWidth && bx <= enemyX + enemyWidth
         && by >= enemyY - enemyWidth && by <= enemyY + enemyWidth ) {
         wanderEnemies.splice(j, 1);
+        wanderEnemies.push(new WanderEnemy(20, Math.floor(Math.random() * canvas.width),
+          Math.floor(Math.random() * canvas.width)));
       }
     }
   }
