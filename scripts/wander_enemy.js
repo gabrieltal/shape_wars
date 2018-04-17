@@ -26,13 +26,13 @@ class WanderEnemy {
   }
 
   bounce() {
-    if (this.x > canvas.width - shipSize || this.x < shipSize) {
+    if (this.x > canvas.width - this.size || this.x < this.size) {
       let x = Math.floor(Math.random() * canvas.width);
       if (x === ship.x) x++;
       this.x = x;
       this.y = Math.floor(Math.random() * canvas.width);
     }
-    if ( this.y > canvas.width - shipSize || this.y < shipSize) {
+    if ( this.y > canvas.width - this.size || this.y < this.size) {
       let x = Math.floor(Math.random() * canvas.width);
       if (x === ship.x) x++;
       this.x = x;
