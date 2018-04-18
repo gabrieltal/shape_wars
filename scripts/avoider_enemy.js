@@ -27,17 +27,28 @@ class AvoiderEnemy extends MovingObject {
   }
 
   updateDirection () {
-    this.dx = ship.x - this.x < 0 ? -this.speed : this.speed;
-    this.dy = ship.y - this.y < 0 ? -this.speed : this.speed;
+    let incomingBullets = false;
     for (var i = 0; i < bullets.length; i++) {
       let bullet = bullets[i];
-      let closeX = Math.abs(bullet.x - this.x) < 100 ? true : false;
-      let closeY = Math.abs(bullet.y - this.y) < 100 ? true : false;
+      let closeX = Math.abs(bullet.x - this.x) < 75 ? true : false;
+      let closeY = Math.abs(bullet.y - this.y) < 75 ? true : false;
       let sameDirectionX = Math.abs(bullet.dx + this.dx) < Math.abs(bullet.dx) ? true : false;
       let sameDirectionY = Math.abs(bullet.dy + this.dy) < Math.abs(bullet.dy) ? true : false;
       if (closeX && closeY && sameDirectionX && sameDirectionY) {
-        console.log("hi");
+        if (this.dx < 10) {
+          this.dx = bullet.dx < 0 ? 3 : -3;
+        } else if (this.dy < 10) {
+          this.dy = bullet.dy < 0 ? 3 : -3;
+        } else {
+          this.dx = bullet.dx < 0 ? 3 : -3;
+        }
+        incomingBullets = true;
+        console.log("incoming");
       }
+    }
+    if (!incomingBullets) {
+      this.dx = ship.x - this.x < 0 ? -this.speed : this.speed;
+      this.dy = ship.y - this.y < 0 ? -this.speed : this.speed;
     }
   }
 }

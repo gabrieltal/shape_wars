@@ -14,11 +14,11 @@ for (var i = 0; i < bulletCount; i++) {
 }
 let wanderEnemies = [];
 let followEnemies = [];
-let avoiderEnemy = new AvoiderEnemy();
+let avoiderEnemies = [];
+
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ship.draw();
-  avoiderEnemy.draw();
   for (var i = 0; i < bullets.length; i++) {
     bullets[i].draw();
   }
@@ -28,6 +28,10 @@ function draw() {
 
   for (var i = 0; i < followEnemies.length; i++) {
     followEnemies[i].draw();
+  }
+
+  for (var i = 0; i < avoiderEnemies.length; i++) {
+    avoiderEnemies[i].draw();
   }
 }
 
@@ -45,6 +49,7 @@ function reset() {
     points = 0;
     wanderEnemies = [];
     followEnemies = [];
+    avoiderEnemies = [];
     ship.lives = 2;
     livesDisplay.innerHTML = "Lives Left: " + ship.lives;
   }
@@ -63,10 +68,13 @@ function checkBulletCollision() {
   for (var i = 0; i < bullets.length; i++) {
     let bx = bullets[i].x;
     let by = bullets[i].y;
+    let enemyX;
+    let enemyY;
+    let enemyWidth;
     for (var j = 0; j < wanderEnemies.length; j++) {
-      let enemyX = wanderEnemies[j].x;
-      let enemyY = wanderEnemies[j].y;
-      let enemyWidth = wanderEnemies[j].size/2;
+      enemyX = wanderEnemies[j].x;
+      enemyY = wanderEnemies[j].y;
+      enemyWidth = wanderEnemies[j].size/2;
       if (bx >= enemyX - enemyWidth && bx <= enemyX + enemyWidth
         && by >= enemyY - enemyWidth && by <= enemyY + enemyWidth ) {
         wanderEnemies.splice(j, 1);
@@ -76,14 +84,27 @@ function checkBulletCollision() {
       }
     }
     for (var z = 0; z < followEnemies.length; z++) {
-      let enemyX = followEnemies[z].x;
-      let enemyY = followEnemies[z].y;
-      let enemyWidth = followEnemies[z].size/2;
+      enemyX = followEnemies[z].x;
+      enemyY = followEnemies[z].y;
+      enemyWidth = followEnemies[z].size/2;
       if (bx >= enemyX - enemyWidth && bx <= enemyX + enemyWidth
         && by >= enemyY - enemyWidth && by <= enemyY + enemyWidth ) {
         followEnemies.splice(z, 1);
         followEnemies.push(new FollowEnemy());
           points += 20;
+          pointBoard.innerHTML = "Points: " + points;
+        }
+    }
+
+    for (var y = 0; y < avoiderEnemies.length; y++) {
+      enemyX = avoiderEnemies[y].x;
+      enemyY = avoiderEnemies[y].y;
+      enemyWidth = avoiderEnemies[y].size;
+      if (bx >= enemyX - enemyWidth && bx <= enemyX + enemyWidth
+        && by >= enemyY - enemyWidth && by <= enemyY + enemyWidth) {
+          avoiderEnemies.splice(y, 1);
+          avoiderEnemies.push(new AvoiderEnemy());
+          points += 30;
           pointBoard.innerHTML = "Points: " + points;
         }
     }
@@ -142,11 +163,15 @@ function populateBoard () {
     for (var i = 0; i < 3; i++) {
       followEnemies.push(new FollowEnemy());
     }
+    avoiderEnemies.push(new AvoiderEnemy());
   }
 
   if (followEnemies.length < 8 && points === 3000) {
     for (var i = 0; i < 3; i++) {
       followEnemies.push(new FollowEnemy());
+    }
+    for (var i = 0; i < 2; i++) {
+      avoiderEnemies.push(new AvoiderEnemy());
     }
   }
 }
@@ -163,7 +188,10 @@ function move() {
   for (var i = 0; i < followEnemies.length; i++) {
     followEnemies[i].move();
   }
-  avoiderEnemy.move();
+
+  for (var i = 0; i < avoiderEnemies.length; i++) {
+    avoiderEnemies[i].move();
+  }
 }
 
 function turn () {
