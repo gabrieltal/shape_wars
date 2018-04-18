@@ -4,7 +4,7 @@ let keyUp = false;
 let keyDown = false;
 let rotateLeft = false;
 let rotateRight = false;
-
+let restart = false;
 function keyDownHandler(e) {
   e.preventDefault();
   switch (e.keyCode) {
@@ -25,6 +25,12 @@ function keyDownHandler(e) {
       break;
     case 83:
       keyDown = true;
+      break;
+    case 82:
+      reset();
+      break;
+    case 72:
+      fillBullets();
       break;
   }
 }

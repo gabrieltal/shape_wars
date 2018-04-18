@@ -8,8 +8,21 @@
   </head>
   <body>
     <h1>Shape Wars</h1>
+    <p id="gameOver"></p>
+    <p id="points">Points: 0</p>
+
+    <ul id="controls">
+      <li>W: move up</li>
+      <li>A: move left</li>
+      <li>S: move left</li>
+      <li>D: move right</li>
+      <li>&larr; rotate left </li>
+      <li>&rarr; rotate right </li>
+      <li>R: restart game</li>
+    </ul>
+
     <canvas id="canvas" width="640" height="480"></canvas>
-    <p id="points"></p>
+    <div id="livesDisplay">Lives Left: </div>
   </body>
   <script src="scripts/controls.js"></script>
   <script src="scripts/movingObject.js"></script>

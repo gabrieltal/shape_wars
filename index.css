@@ -1,14 +1,52 @@
 * {
   margin: 0 auto;
   padding: 0;
+  background: black;
 }
 
 h1 {
   text-align: center;
+  margin: 15px 0;
+  color: white;
+  font-size: 38px;
 }
 
 #canvas {
   display: block;
   margin: auto;
   background: black;
+  border: 2px solid red;
+}
+
+#points {
+  font-size: 32px;
+  color: white;
+  margin-top: 10px;
+  margin-left: 40px;
+}
+
+#controls {
+  size: 18px;
+  color: white;
+  float: left;
+  margin-left: 55px;
+  list-style: none;
+}
+
+li {
+  margin-top: 5px;
+}
+
+#gameOver {
+  color: red;
+  font-size: 18px;
+  margin-left: 50px;
+}
+
+#livesDisplay {
+  color: skyblue;
+  font-style: bold;
+  font-size: 20px;
+  float: left;
+  margin-left: 50px;
 }

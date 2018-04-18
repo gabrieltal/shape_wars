@@ -1,18 +1,22 @@
 const canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 
+let bulletCount = 10;
 let points = 0;
 let pointBoard = document.getElementById("points");
+let gameOver = document.getElementById("gameOver");
+let livesDisplay = document.getElementById("livesDisplay");
 let ship = new Ship(canvas.width/2, canvas.height/2);
-
+livesDisplay.innerHTML = "Lives Left: " + (ship.lives);
 let bullets = [];
-for (var i = 0; i < 10; i++) {
+for (var i = 0; i < bulletCount; i++) {
   bullets.push(new Bullet(ship.x, ship.y, ship.angle));
 }
 const wanderEnemies = [];
 const followEnemies = [];
 
 function draw() {
+  console.log(ship.lives);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ship.draw();
   for (var i = 0; i < bullets.length; i++) {
@@ -27,6 +31,28 @@ function draw() {
   }
 }
 
+function reset() {
+  ship.x = canvas.width/2;
+  ship.y = canvas.width/2;
+  ship.angle = 0;
+  ship.color = "white";
+  bullets = [];
+  for (var i = 0; i < bulletCount; i++) {
+    bullets.push(new Bullet(ship.x, ship.y, ship.angle));
+  }
+  if (ship.lives === 0) {
+    points = 0;
+    ship.lives === 2;
+  }
+}
+
+function fillBullets() {
+  if (bullets.length === 10) {
+    for (var i = 0; i < 90; i++) {
+      bullets.push(new Bullet(ship.x, ship.y, ship.angle));
+    }
+  }
+}
 
 function checkBulletCollision() {
   for (var i = 0; i < bullets.length; i++) {
@@ -66,9 +92,24 @@ function shipCollisionDetection() {
     let enemyY = enemies[i].y;
     let enemyWidth = enemies[i].size/2;
     if (ship.x >= enemyX - enemyWidth && ship.x <= enemyX + enemyWidth
-       && ship.y >= enemyY - enemyWidth && ship.y <= enemyY + enemyWidth) {
-        ship.color = "black";
-        bullets = [];
+       && ship.y >= enemyY - enemyWidth && ship.y <= enemyY + enemyWidth)
+    {
+      ship.color = "black";
+        if (ship.lives === 2) {
+          ship.lives -= 1;
+          livesDisplay.innerHTML = "Lives Left: " + (ship.lives);
+          reset();
+        }
+        else if (ship.lives === 1) {
+          ship.lives -= 1;
+          livesDisplay.innerHTML = "Lives Left: " + (ship.lives);
+          reset();
+        }
+        else if (ship.lives === 0) {
+          bullets = [];
+          livesDisplay.innerHTML = "Lives Left: " + (ship.lives) + " :(";
+          gameOver.innerHTML = "Game Over!!!!";
+        }
     }
   }
 }
