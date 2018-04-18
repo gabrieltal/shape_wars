@@ -112,7 +112,7 @@ function checkBulletCollision() {
 }
 
 function shipCollisionDetection() {
-  const enemies = wanderEnemies.concat(followEnemies);
+  const enemies = wanderEnemies.concat(followEnemies).concat(avoiderEnemies);
   for (var i = 0; i < enemies.length; i++) {
     let enemyX = enemies[i].x;
     let enemyY = enemies[i].y;
