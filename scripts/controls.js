@@ -5,6 +5,10 @@ let keyDown = false;
 let rotateLeft = false;
 let rotateRight = false;
 let restart = false;
+console.log("hello");
+console.log(restart);
+console.log("hello");
+
 function keyDownHandler(e) {
   e.preventDefault();
   switch (e.keyCode) {
@@ -27,6 +31,7 @@ function keyDownHandler(e) {
       keyDown = true;
       break;
     case 82:
+      restart = true;
       reset();
       break;
     case 72:
@@ -54,6 +59,9 @@ function keyUpHandler(e) {
       break;
     case 83:
       keyDown = false;
+      break;
+    case 82:
+      restart = false;
       break;
   }
 }

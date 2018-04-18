@@ -12,11 +12,10 @@ let bullets = [];
 for (var i = 0; i < bulletCount; i++) {
   bullets.push(new Bullet(ship.x, ship.y, ship.angle));
 }
-const wanderEnemies = [];
-const followEnemies = [];
+let wanderEnemies = [];
+let followEnemies = [];
 
 function draw() {
-  console.log(ship.lives);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ship.draw();
   for (var i = 0; i < bullets.length; i++) {
@@ -32,6 +31,7 @@ function draw() {
 }
 
 function reset() {
+  gameOver.innerHTML = "";
   ship.x = canvas.width/2;
   ship.y = canvas.width/2;
   ship.angle = 0;
@@ -40,10 +40,14 @@ function reset() {
   for (var i = 0; i < bulletCount; i++) {
     bullets.push(new Bullet(ship.x, ship.y, ship.angle));
   }
-  if (ship.lives === 0) {
+  if (restart === true) {
     points = 0;
-    ship.lives === 2;
+    wanderEnemies = [];
+    followEnemies = [];
+    ship.lives = 2;
+    livesDisplay.innerHTML = "Lives Left: " + ship.lives;
   }
+  pointBoard.innerHTML = "Points: " + points;
 }
 
 function fillBullets() {
