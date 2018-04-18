@@ -14,10 +14,11 @@ for (var i = 0; i < bulletCount; i++) {
 }
 let wanderEnemies = [];
 let followEnemies = [];
-
+let avoiderEnemies = [];
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ship.draw();
+  avoiderEnemy.draw();
   for (var i = 0; i < bullets.length; i++) {
     bullets[i].draw();
   }
