@@ -14,7 +14,7 @@ for (var i = 0; i < bulletCount; i++) {
 }
 let wanderEnemies = [];
 let followEnemies = [];
-let avoiderEnemies = [];
+let avoiderEnemy = new AvoiderEnemy();
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ship.draw();
@@ -163,6 +163,7 @@ function move() {
   for (var i = 0; i < followEnemies.length; i++) {
     followEnemies[i].move();
   }
+  avoiderEnemy.move();
 }
 
 function turn () {

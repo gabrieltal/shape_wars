@@ -17,8 +17,10 @@ class Bullet extends MovingObject {
   }
 
   move(i) {
-    this.x += (i + bulletSpeed) * Math.cos(this.angle);
-    this.y += (i + bulletSpeed) * Math.sin(this.angle);
+    this.dx = (i + bulletSpeed) * Math.cos(this.angle);
+    this.dy = (i + bulletSpeed) * Math.sin(this.angle);
+    this.x += this.dx;
+    this.y += this.dy;
   }
 
   checkBounds() {

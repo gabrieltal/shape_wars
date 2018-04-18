@@ -5,9 +5,6 @@ let keyDown = false;
 let rotateLeft = false;
 let rotateRight = false;
 let restart = false;
-console.log("hello");
-console.log(restart);
-console.log("hello");
 
 function keyDownHandler(e) {
   e.preventDefault();
