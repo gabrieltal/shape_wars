@@ -11,13 +11,7 @@ for (var i = 0; i < 10; i++) {
 }
 const wanderEnemies = [];
 const followEnemies = [];
-for (var i = 0; i < 10; i++) {
-  wanderEnemies.push(new WanderEnemy());
-}
 
-for (var i = 0; i < 5; i++) {
-  followEnemies.push(new FollowEnemy());
-}
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ship.draw();
@@ -79,6 +73,38 @@ function shipCollisionDetection() {
   }
 }
 
+function populateBoard () {
+  if (wanderEnemies.length < 5 && points === 0) {
+    for (var i = 0; i < 5; i++) {
+      wanderEnemies.push(new WanderEnemy());
+    }
+  }
+
+  if (wanderEnemies.length < 11 && points === 50) {
+    for (var i = 0; i < 5; i++) {
+      wanderEnemies.push(new WanderEnemy());
+    }
+  }
+
+  if (followEnemies.length < 2 && points === 200) {
+    for (var i = 0; i < 2; i++) {
+      followEnemies.push(new FollowEnemy());
+    }
+  }
+
+  if (followEnemies.length < 5 && points === 400) {
+    for (var i = 0; i < 3; i++) {
+      followEnemies.push(new FollowEnemy());
+    }
+  }
+
+  if (followEnemies.length < 8 && points === 3000) {
+    for (var i = 0; i < 3; i++) {
+      followEnemies.push(new FollowEnemy());
+    }
+  }
+}
+
 function move() {
   ship.move();
   for (var i = 0; i < bullets.length; i++) {
@@ -94,6 +120,7 @@ function move() {
 }
 
 function turn () {
+  populateBoard();
   move();
   shipCollisionDetection();
   checkBulletCollision();
