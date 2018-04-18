@@ -7,8 +7,8 @@ let pointBoard = document.getElementById("points");
 let gameOver = document.getElementById("gameOver");
 let livesDisplay = document.getElementById("livesDisplay");
 let ship = new Ship(canvas.width/2, canvas.height/2);
-let timeToRespawn = Date.now();
 livesDisplay.innerHTML = "Lives Left: " + (ship.lives);
+let timeToSpawn = Date.now();
 let bullets = [];
 for (var i = 0; i < bulletCount; i++) {
   bullets.push(new Bullet(ship.x, ship.y, ship.angle));
@@ -37,20 +37,22 @@ function draw() {
 }
 
 function reset() {
+  timeToSpawn = Date.now();
   gameOver.innerHTML = "";
   ship.x = canvas.width/2;
   ship.y = canvas.width/2;
   ship.angle = 0;
   ship.color = "white";
+  wanderEnemies = [];
+  followEnemies = [];
+  avoiderEnemies = [];
+
   bullets = [];
   for (var i = 0; i < bulletCount; i++) {
     bullets.push(new Bullet(ship.x, ship.y, ship.angle));
   }
   if (restart === true) {
     points = 0;
-    wanderEnemies = [];
-    followEnemies = [];
-    avoiderEnemies = [];
     ship.lives = 2;
     livesDisplay.innerHTML = "Lives Left: " + ship.lives;
   }
@@ -141,37 +143,46 @@ function shipCollisionDetection() {
 }
 
 function populateBoard () {
-  if (wanderEnemies.length < 5 && points === 0) {
+  let time = Date.now() - timeToSpawn;
+  if (time < 100 && wanderEnemies.length < 5) {
     for (var i = 0; i < 5; i++) {
       wanderEnemies.push(new WanderEnemy());
     }
   }
 
-  if (wanderEnemies.length < 11 && points === 50) {
+  if (time >= 15000 && wanderEnemies.length < 5) {
     for (var i = 0; i < 5; i++) {
       wanderEnemies.push(new WanderEnemy());
     }
   }
 
-  if (followEnemies.length < 2 && points === 200) {
+  if (followEnemies.length < 2 && time >= 30000) {
     for (var i = 0; i < 2; i++) {
       followEnemies.push(new FollowEnemy());
     }
   }
 
-  if (followEnemies.length < 5 && points === 400) {
+  if (followEnemies.length < 5 && time >= 45000 ) {
     for (var i = 0; i < 3; i++) {
       followEnemies.push(new FollowEnemy());
     }
     avoiderEnemies.push(new AvoiderEnemy());
   }
 
-  if (followEnemies.length < 8 && points === 3000) {
+  if (followEnemies.length < 8 && time >= 60000 ) {
     for (var i = 0; i < 3; i++) {
       followEnemies.push(new FollowEnemy());
     }
     for (var i = 0; i < 2; i++) {
       avoiderEnemies.push(new AvoiderEnemy());
+    }
+  }
+
+  if (time >= 75000 && followEnemies.length <= 11) {
+    for (var i = 0; i < 3; i++) {
+      followEnemies.push(new FollowEnemy());
+      avoiderEnemies.push(new AvoiderEnemy());
+      wanderEnemies.push(new WanderEnemy());
     }
   }
 }
