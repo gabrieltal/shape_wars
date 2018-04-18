@@ -7,6 +7,7 @@ let pointBoard = document.getElementById("points");
 let gameOver = document.getElementById("gameOver");
 let livesDisplay = document.getElementById("livesDisplay");
 let ship = new Ship(canvas.width/2, canvas.height/2);
+let timeToRespawn = Date.now();
 livesDisplay.innerHTML = "Lives Left: " + (ship.lives);
 let bullets = [];
 for (var i = 0; i < bulletCount; i++) {
@@ -125,13 +126,12 @@ function shipCollisionDetection() {
           ship.lives -= 1;
           livesDisplay.innerHTML = "Lives Left: " + (ship.lives);
           reset();
-        }
-        else if (ship.lives === 1) {
+        } else if (ship.lives === 1 ) {
           ship.lives -= 1;
           livesDisplay.innerHTML = "Lives Left: " + (ship.lives);
+          timeToRespawn = Date.now();
           reset();
-        }
-        else if (ship.lives === 0) {
+        } else if (ship.lives === 0 ) {
           bullets = [];
           livesDisplay.innerHTML = "Lives Left: " + (ship.lives) + " :(";
           gameOver.innerHTML = "Game Over!!!!";

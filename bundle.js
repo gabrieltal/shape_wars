@@ -70,9 +70,7 @@
 "use strict";
 
 
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("hi");
-});
+document.addEventListener("DOMContentLoaded", function () {});
 
 /***/ })
 /******/ ]);
