@@ -34,12 +34,16 @@ function enemies() {
   return  wanderEnemies.concat(followEnemies).concat(avoiderEnemies);
 }
 
+function emptyEnemies() {
+  wanderEnemies = [];
+  followEnemies = [];
+  avoiderEnemies = [];
+}
+
 function bomb() {
   if (ship.bombs > 0) {
     ship.bombs -= 1;
-    wanderEnemies = [];
-    followEnemies = [];
-    avoiderEnemies = [];
+    this.emptyEnemies();
     bombsDisplay.innerHTML = "Bombs Left: " + (ship.bombs);
     reset();
   }
@@ -50,9 +54,7 @@ function reset() {
   ship.y = canvas.width/2;
   ship.angle = 0;
   ship.color = "white";
-  wanderEnemies = [];
-  followEnemies = [];
-  avoiderEnemies = [];
+  emptyEnemies();
   timeToSpawn = Date.now();
   bullets = [];
   for (var i = 0; i < bulletCount; i++) {
@@ -146,6 +148,8 @@ function shipCollisionDetection() {
           reset();
         } else if (ship.lives === 0 ) {
           bullets = [];
+          emptyEnemies();
+          ship.lives -= 1;
           livesDisplay.removeAttribute("id");
           livesDisplay.setAttribute("id", "gameOver");
           livesDisplay.innerHTML = "Game Over!!!!";
@@ -156,8 +160,10 @@ function shipCollisionDetection() {
 
 function populateBoard () {
   let time = Date.now() - timeToSpawn;
+  if (ship.lives < 0) {
 
-  if (ship.bombs < 1 || ship.lives < 2) {
+  }
+  else if (ship.bombs < 1 || ship.lives < 2) {
     if (time >= 1000 && wanderEnemies.length < 7) {
       for (var i = 0; i < 7; i++) {
         wanderEnemies.push(new WanderEnemy());
