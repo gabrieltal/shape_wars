@@ -18,6 +18,18 @@ let wanderEnemies = [];
 let followEnemies = [];
 let avoiderEnemies = [];
 
+let PARTICLE_MAX_LIFE = 150;
+let num_particles = 50;
+let particles = [];
+
+function checkParticleLife() {
+  for (var i = 0; i < particles.length; i++) {
+    if (particles[i].life >= particles[i].maxLife) {
+      particles.splice(i, 1);
+    }
+  }
+}
+
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ship.draw();
@@ -27,6 +39,9 @@ function draw() {
   }
   for (var i = 0; i < enemies.length; i++) {
     enemies[i].draw();
+  }
+  for (var i = 0; i < particles.length; i++) {
+    particles[i].draw();
   }
 }
 
@@ -42,10 +57,13 @@ function emptyEnemies() {
 
 function bomb() {
   if (ship.bombs > 0) {
+    for (var i = 0; i < num_particles; i++) {
+      particles.push(new Particles(ship.x, ship.y, "green", 200));
+    }
+    timeToSpawn = Date.now();
     ship.bombs -= 1;
     this.emptyEnemies();
     bombsDisplay.innerHTML = "Bombs Left: " + (ship.bombs);
-    reset();
   }
 }
 
@@ -54,7 +72,7 @@ function reset() {
   ship.y = canvas.width/2;
   ship.angle = 0;
   ship.color = "white";
-  emptyEnemies();
+  this.emptyEnemies();
   timeToSpawn = Date.now();
   bullets = [];
   for (var i = 0; i < bulletCount; i++) {
@@ -137,6 +155,9 @@ function shipCollisionDetection() {
        && ship.y >= enemyY - enemyWidth && ship.y <= enemyY + enemyWidth)
     {
       ship.color = "black";
+      for (var i = 0; i < num_particles; i++) {
+        particles.push(new Particles(ship.x, ship.y, "red", 100));
+      }
         if (ship.lives === 2) {
           ship.lives -= 1;
           livesDisplay.innerHTML = "Lives Left: " + (ship.lives);
@@ -158,10 +179,21 @@ function shipCollisionDetection() {
   }
 }
 
+let hidingTime = Date.now();
+let hidingX = ship.x;
+let hidingY = ship.y;
+function stopCamping() {
+  let time = Date.now() - hidingTime;
+  if (ship.x === hidingX && ship.y === hidingY && time >= 5000) {
+    for (var i = 0; i < 2; i++) {
+      followEnemies.push(new FollowEnemy(ship.x + 30, ship.y + 30));
+    }
+  }
+}
+
 function populateBoard () {
   let time = Date.now() - timeToSpawn;
   if (ship.lives < 0) {
-
   }
   else if (ship.bombs < 1 || ship.lives < 2) {
     if (time >= 1000 && wanderEnemies.length < 7) {
@@ -232,6 +264,8 @@ function populateBoard () {
 
 function move() {
   ship.move();
+  hidingX = ship.x;
+  hidingY = ship.y;
   for (var i = 0; i < bullets.length; i++) {
     bullets[i].move(i);
   }
@@ -239,6 +273,10 @@ function move() {
   let enemies = this.enemies();
   for (var i = 0; i < enemies.length; i++) {
     enemies[i].move();
+  }
+
+  for (var i = 0; i < particles.length; i++) {
+    particles[i].move();
   }
 }
 
@@ -248,6 +286,7 @@ function turn () {
   shipCollisionDetection();
   checkBulletCollision();
   draw();
+  checkParticleLife();
 }
 
 setInterval(turn, 10);
