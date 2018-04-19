@@ -5,7 +5,7 @@ class FollowEnemy extends MovingObject {
     if ((x >= ship.x - 200) && (x <= ship.x + 200)) x += 300;
     let y = Math.floor(Math.random() * canvas.width);
     super(x, y, 20, "blue", 0, 0);
-    this.speed = .5;
+    this.speed = .7;
   }
 
   draw() {

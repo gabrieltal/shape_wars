@@ -44,8 +44,7 @@ function bomb() {
     followEnemies = [];
     avoiderEnemies = [];
     bombsDisplay.innerHTML = "Bombs Left: " + (ship.bombs);
-
-    timeToSpawn = Date.now();
+    reset();
   }
 }
 
@@ -54,7 +53,6 @@ function reset() {
   ship.y = canvas.width/2;
   ship.angle = 0;
   ship.color = "white";
-  this.bomb();
   wanderEnemies = [];
   followEnemies = [];
   avoiderEnemies = [];
