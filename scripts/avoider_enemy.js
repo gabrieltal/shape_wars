@@ -4,7 +4,7 @@ class AvoiderEnemy extends MovingObject {
     if ((x >= ship.x - 200) && (x <= ship.x + 200)) x += 300;
     let y = Math.floor(Math.random() * canvas.width);
     super(x, y, 20, "green", 0, 0);
-    this.speed = .3;
+    this.speed = .5;
   }
 
   draw () {
@@ -37,10 +37,13 @@ class AvoiderEnemy extends MovingObject {
       if (closeX && closeY && sameDirectionX && sameDirectionY) {
         if (this.dx < 10) {
           this.dx = bullet.dx < 0 ? 3 : -3;
+          this.dy = bullet.dy < 0 ? -3 : 3;
         } else if (this.dy < 10) {
+          this.dx = bullet.dx < 0 ? -3 : 3;
           this.dy = bullet.dy < 0 ? 3 : -3;
         } else {
           this.dx = bullet.dx < 0 ? 3 : -3;
+          this.dy = bullet.dy < 0 ? -3 : 3;
         }
         incomingBullets = true;
         console.log("incoming");

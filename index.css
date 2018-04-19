@@ -16,7 +16,7 @@ h1 {
   display: block;
   margin: auto;
   background: black;
-  border: 2px solid red;
+  border: 3px solid red;
 }
 
 #points {
@@ -47,5 +47,5 @@ li {
   font-style: bold;
   font-size: 20px;
   float: left;
-  margin-left: 50px;
+  margin-left: 40px;
 }

@@ -144,45 +144,62 @@ function shipCollisionDetection() {
 
 function populateBoard () {
   let time = Date.now() - timeToSpawn;
-  if (time < 100 && wanderEnemies.length < 5) {
-    for (var i = 0; i < 5; i++) {
-      wanderEnemies.push(new WanderEnemy());
-    }
-  }
 
-  if (time >= 15000 && wanderEnemies.length < 5) {
-    for (var i = 0; i < 5; i++) {
-      wanderEnemies.push(new WanderEnemy());
+  if (ship.lives < 2) {
+    if (time < 5000 && wanderEnemies.length < 7) {
+      for (var i = 0; i < 7; i++) {
+        wanderEnemies.push(new WanderEnemy());
+      }
     }
-  }
 
-  if (followEnemies.length < 2 && time >= 30000) {
-    for (var i = 0; i < 2; i++) {
-      followEnemies.push(new FollowEnemy());
+    if (time >= 10000 && avoiderEnemies.length < 5) {
+      for (var i = 0; i < 5; i++) {
+        followEnemies.push(new FollowEnemy());
+        wanderEnemies.push(new WanderEnemy());
+        avoiderEnemies.push(new AvoiderEnemy());
+      }
     }
-  }
+  } else {
+    if (time < 100 && wanderEnemies.length < 5) {
+      for (var i = 0; i < 5; i++) {
+        wanderEnemies.push(new WanderEnemy());
+      }
+    }
 
-  if (followEnemies.length < 5 && time >= 45000 ) {
-    for (var i = 0; i < 3; i++) {
-      followEnemies.push(new FollowEnemy());
+    if (time >= 15000 && wanderEnemies.length < 5) {
+      for (var i = 0; i < 5; i++) {
+        wanderEnemies.push(new WanderEnemy());
+      }
     }
-    avoiderEnemies.push(new AvoiderEnemy());
-  }
 
-  if (followEnemies.length < 8 && time >= 60000 ) {
-    for (var i = 0; i < 3; i++) {
-      followEnemies.push(new FollowEnemy());
+    if (followEnemies.length < 2 && time >= 15000) {
+      for (var i = 0; i < 2; i++) {
+        followEnemies.push(new FollowEnemy());
+      }
     }
-    for (var i = 0; i < 2; i++) {
+
+    if (followEnemies.length < 5 && time >= 30000 ) {
+      for (var i = 0; i < 3; i++) {
+        followEnemies.push(new FollowEnemy());
+      }
       avoiderEnemies.push(new AvoiderEnemy());
     }
-  }
 
-  if (time >= 75000 && followEnemies.length <= 11) {
-    for (var i = 0; i < 3; i++) {
-      followEnemies.push(new FollowEnemy());
-      avoiderEnemies.push(new AvoiderEnemy());
-      wanderEnemies.push(new WanderEnemy());
+    if (followEnemies.length < 8 && time >= 45000 ) {
+      for (var i = 0; i < 3; i++) {
+        followEnemies.push(new FollowEnemy());
+      }
+      for (var i = 0; i < 2; i++) {
+        avoiderEnemies.push(new AvoiderEnemy());
+      }
+    }
+
+    if (time >= 60000 && followEnemies.length <= 11) {
+      for (var i = 0; i < 3; i++) {
+        followEnemies.push(new FollowEnemy());
+        avoiderEnemies.push(new AvoiderEnemy());
+        wanderEnemies.push(new WanderEnemy());
+      }
     }
   }
 }
