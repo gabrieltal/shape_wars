@@ -4,10 +4,11 @@ let ctx = canvas.getContext("2d");
 let bulletCount = 10;
 let points = 0;
 let pointBoard = document.getElementById("points");
-let gameOver = document.getElementById("gameOver");
 let livesDisplay = document.getElementById("livesDisplay");
 let ship = new Ship(canvas.width/2, canvas.height/2);
 livesDisplay.innerHTML = "Lives Left: " + (ship.lives);
+let bombsDisplay = document.getElementById("bombsDisplay");
+bombsDisplay.innerHTML = "Bombs Left: " + (ship.bombs);
 let timeToSpawn = Date.now();
 let bullets = [];
 for (var i = 0; i < bulletCount; i++) {
@@ -42,12 +43,13 @@ function bomb() {
     wanderEnemies = [];
     followEnemies = [];
     avoiderEnemies = [];
+    bombsDisplay.innerHTML = "Bombs Left: " + (ship.bombs);
+
     timeToSpawn = Date.now();
   }
 }
 
 function reset() {
-  gameOver.innerHTML = "";
   ship.x = canvas.width/2;
   ship.y = canvas.width/2;
   ship.angle = 0;
@@ -64,6 +66,10 @@ function reset() {
   if (restart === true) {
     points = 0;
     ship.lives = 2;
+    ship.bombs = 1;
+    bombsDisplay.innerHTML = "Bombs Left: " + (ship.bombs);
+    livesDisplay.removeAttribute("id");
+    livesDisplay.setAttribute("id", "livesDisplay");
     livesDisplay.innerHTML = "Lives Left: " + ship.lives;
   }
   pointBoard.innerHTML = "Points: " + points;
@@ -145,8 +151,9 @@ function shipCollisionDetection() {
           reset();
         } else if (ship.lives === 0 ) {
           bullets = [];
-          livesDisplay.innerHTML = "Lives Left: " + (ship.lives) + " :(";
-          gameOver.innerHTML = "Game Over!!!!";
+          livesDisplay.removeAttribute("id");
+          livesDisplay.setAttribute("id", "gameOver");
+          livesDisplay.innerHTML = "Game Over!!!!";
         }
     }
   }
@@ -155,14 +162,14 @@ function shipCollisionDetection() {
 function populateBoard () {
   let time = Date.now() - timeToSpawn;
 
-  if (ship.lives < 2 || ship.bombs < 1) {
-    if (time < 5000 && wanderEnemies.length < 7) {
+  if (ship.bombs < 1 || ship.lives < 2) {
+    if (time >= 1000 && wanderEnemies.length < 7) {
       for (var i = 0; i < 7; i++) {
         wanderEnemies.push(new WanderEnemy());
       }
     }
 
-    if (time >= 7000 && avoiderEnemies.length < 7) {
+    if (time >= 8000 && avoiderEnemies.length < 7) {
       for (var i = 0; i < 7; i++) {
         followEnemies.push(new FollowEnemy());
         wanderEnemies.push(new WanderEnemy());

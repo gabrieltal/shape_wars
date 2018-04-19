@@ -5,31 +5,64 @@
 
 header {
   text-align: center;
-  margin: 15px 0;
+  padding: 15px;
+  border-bottom: 2px solid black;
+  margin: 0;
+  background: white;
+}
+
+body {
+  background: black;
+}
+
+#userInfo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5px;
+  margin-bottom: 15px;
+  margin-top: 15px;
 }
 
 h1 {
   font-size: 38px;
 }
 
+#bombsDisplay {
+  margin: auto;
+  font-size: 18px;
+  color: lightgreen;
+}
+
 #canvas {
   display: block;
   margin: auto;
+  margin-left: 25px;
   background: black;
-  border: 3px solid red;
+  border: 3px solid orange;
 }
 
 #points {
-  font-size: 32px;
-  margin-top: 10px;
-  margin-left: 40px;
+  font-size: 26px;
+  color: white;
+}
+
+#container {
+  display: flex;
 }
 
 #controls {
   size: 18px;
-  float: left;
-  margin-left: 55px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 25px;
+  color: white;
+}
+
+ul {
   list-style: none;
+  text-align: center;
 }
 
 li {
@@ -38,14 +71,11 @@ li {
 
 #gameOver {
   color: red;
-  font-size: 18px;
-  margin-left: 50px;
+  font-size: 20px;
 }
 
 #livesDisplay {
-  color: blue;
+  color: lightblue;
   font-style: bold;
   font-size: 20px;
-  float: left;
-  margin-left: 40px;
 }

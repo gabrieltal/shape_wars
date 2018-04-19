@@ -46,7 +46,6 @@ class AvoiderEnemy extends MovingObject {
           this.dy = bullet.dy < 0 ? -5 : 5;
         }
         incomingBullets = true;
-        console.log("incoming");
       }
     }
     if (!incomingBullets) {
