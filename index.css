@@ -18,6 +18,10 @@ header {
   margin-right: 10px;
 }
 
+a {
+  text-decoration: none;
+}
+
 img {
   width: 48px;
   height: 44px;
@@ -38,7 +42,9 @@ body {
 }
 
 h1 {
+  font-family: 'Exo 2', sans-serif;
   font-size: 38px;
+  font-weight: none;
   margin-right: 0;
 }
 
