@@ -36,17 +36,27 @@ function draw() {
   }
 }
 
+function bomb() {
+  if (ship.bombs > 0) {
+    ship.bombs -= 1;
+    wanderEnemies = [];
+    followEnemies = [];
+    avoiderEnemies = [];
+    timeToSpawn = Date.now();
+  }
+}
+
 function reset() {
-  timeToSpawn = Date.now();
   gameOver.innerHTML = "";
   ship.x = canvas.width/2;
   ship.y = canvas.width/2;
   ship.angle = 0;
   ship.color = "white";
+  this.bomb();
   wanderEnemies = [];
   followEnemies = [];
   avoiderEnemies = [];
-
+  timeToSpawn = Date.now();
   bullets = [];
   for (var i = 0; i < bulletCount; i++) {
     bullets.push(new Bullet(ship.x, ship.y, ship.angle));
@@ -145,14 +155,22 @@ function shipCollisionDetection() {
 function populateBoard () {
   let time = Date.now() - timeToSpawn;
 
-  if (ship.lives < 2) {
+  if (ship.lives < 2 || ship.bombs < 1) {
     if (time < 5000 && wanderEnemies.length < 7) {
       for (var i = 0; i < 7; i++) {
         wanderEnemies.push(new WanderEnemy());
       }
     }
 
-    if (time >= 10000 && avoiderEnemies.length < 5) {
+    if (time >= 7000 && avoiderEnemies.length < 7) {
+      for (var i = 0; i < 7; i++) {
+        followEnemies.push(new FollowEnemy());
+        wanderEnemies.push(new WanderEnemy());
+        avoiderEnemies.push(new AvoiderEnemy());
+      }
+    }
+
+    if (time >= 20000 && avoiderEnemies.length < 8) {
       for (var i = 0; i < 5; i++) {
         followEnemies.push(new FollowEnemy());
         wanderEnemies.push(new WanderEnemy());
@@ -160,13 +178,13 @@ function populateBoard () {
       }
     }
   } else {
-    if (time < 100 && wanderEnemies.length < 5) {
+    if (time < 5000 && wanderEnemies.length < 5) {
       for (var i = 0; i < 5; i++) {
         wanderEnemies.push(new WanderEnemy());
       }
     }
 
-    if (time >= 15000 && wanderEnemies.length < 5) {
+    if (time >= 10000 && wanderEnemies.length < 5) {
       for (var i = 0; i < 5; i++) {
         wanderEnemies.push(new WanderEnemy());
       }
@@ -178,14 +196,14 @@ function populateBoard () {
       }
     }
 
-    if (followEnemies.length < 5 && time >= 30000 ) {
+    if (followEnemies.length < 5 && time >= 20000 ) {
       for (var i = 0; i < 3; i++) {
         followEnemies.push(new FollowEnemy());
       }
       avoiderEnemies.push(new AvoiderEnemy());
     }
 
-    if (followEnemies.length < 8 && time >= 45000 ) {
+    if (followEnemies.length < 8 && time >= 35000 ) {
       for (var i = 0; i < 3; i++) {
         followEnemies.push(new FollowEnemy());
       }
@@ -194,8 +212,8 @@ function populateBoard () {
       }
     }
 
-    if (time >= 60000 && followEnemies.length <= 11) {
-      for (var i = 0; i < 3; i++) {
+    if (time >= 45000 && followEnemies.length <= 11) {
+      for (var i = 0; i < 4; i++) {
         followEnemies.push(new FollowEnemy());
         avoiderEnemies.push(new AvoiderEnemy());
         wanderEnemies.push(new WanderEnemy());

@@ -36,14 +36,14 @@ class AvoiderEnemy extends MovingObject {
       let sameDirectionY = Math.abs(bullet.dy + this.dy) < Math.abs(bullet.dy) ? true : false;
       if (closeX && closeY && sameDirectionX && sameDirectionY) {
         if (this.dx < 10) {
-          this.dx = bullet.dx < 0 ? 3 : -3;
-          this.dy = bullet.dy < 0 ? -3 : 3;
+          this.dx = bullet.dx < 0 ? 5 : -5;
+          this.dy = bullet.dy < 0 ? -5 : 5;
         } else if (this.dy < 10) {
-          this.dx = bullet.dx < 0 ? -3 : 3;
-          this.dy = bullet.dy < 0 ? 3 : -3;
+          this.dx = bullet.dx < 0 ? -5 : 5;
+          this.dy = bullet.dy < 0 ? 5 : -5;
         } else {
-          this.dx = bullet.dx < 0 ? 3 : -3;
-          this.dy = bullet.dy < 0 ? -3 : 3;
+          this.dx = bullet.dx < 0 ? 5 : -5;
+          this.dy = bullet.dy < 0 ? -5 : 5;
         }
         incomingBullets = true;
         console.log("incoming");

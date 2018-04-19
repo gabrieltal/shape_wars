@@ -3,6 +3,7 @@ class Ship extends MovingObject{
     super(x, y, 10, "white", 0, 0)
     this.angle = 0;
     this.lives = 2;
+    this.bombs = 1;
   }
 
   draw() {
