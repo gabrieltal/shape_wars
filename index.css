@@ -6,7 +6,7 @@
 header {
   text-align: center;
   padding: 15px;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid orange;
   margin: 0;
   background: white;
   display: flex;
@@ -74,6 +74,10 @@ h1 {
   color: white;
 }
 
+h3 {
+  border-bottom: 2px solid orange;
+}
+
 ul {
   list-style: none;
   text-align: center;
@@ -81,6 +85,7 @@ ul {
 
 li {
   margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 #gameOver {

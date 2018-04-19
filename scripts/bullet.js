@@ -1,3 +1,4 @@
+
 const bulletSize = 3;
 const bulletSpeed = 4;
 class Bullet extends MovingObject {
