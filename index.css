@@ -9,6 +9,19 @@ header {
   border-bottom: 2px solid black;
   margin: 0;
   background: white;
+  display: flex;
+  margin-right: 0;
+  align-items: center;
+}
+
+#links {
+  margin-right: 10px;
+}
+
+img {
+  width: 48px;
+  height: 44px;
+  padding: 5px;
 }
 
 body {
@@ -26,6 +39,7 @@ body {
 
 h1 {
   font-size: 38px;
+  margin-right: 0;
 }
 
 #bombsDisplay {
