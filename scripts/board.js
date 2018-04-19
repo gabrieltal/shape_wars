@@ -21,20 +21,17 @@ let avoiderEnemies = [];
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ship.draw();
+  let enemies = this.enemies();
   for (var i = 0; i < bullets.length; i++) {
     bullets[i].draw();
   }
-  for (var i = 0; i < wanderEnemies.length; i++) {
-    wanderEnemies[i].draw();
+  for (var i = 0; i < enemies.length; i++) {
+    enemies[i].draw();
   }
+}
 
-  for (var i = 0; i < followEnemies.length; i++) {
-    followEnemies[i].draw();
-  }
-
-  for (var i = 0; i < avoiderEnemies.length; i++) {
-    avoiderEnemies[i].draw();
-  }
+function enemies() {
+  return  wanderEnemies.concat(followEnemies).concat(avoiderEnemies);
 }
 
 function bomb() {
@@ -232,16 +229,10 @@ function move() {
   for (var i = 0; i < bullets.length; i++) {
     bullets[i].move(i);
   }
-  for (var i = 0; i < wanderEnemies.length; i++) {
-    wanderEnemies[i].move();
-  }
 
-  for (var i = 0; i < followEnemies.length; i++) {
-    followEnemies[i].move();
-  }
-
-  for (var i = 0; i < avoiderEnemies.length; i++) {
-    avoiderEnemies[i].move();
+  let enemies = this.enemies();
+  for (var i = 0; i < enemies.length; i++) {
+    enemies[i].move();
   }
 }
 
