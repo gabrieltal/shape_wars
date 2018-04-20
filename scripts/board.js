@@ -17,7 +17,8 @@ for (var i = 0; i < bulletCount; i++) {
 let wanderEnemies = [];
 let followEnemies = [];
 let avoiderEnemies = [];
-
+let highScoreDisplay = document.getElementById("highScores");
+let highScore = parseInt(highScoreDisplay.innerText);
 let PARTICLE_MAX_LIFE = 65;
 let num_particles = 15;
 let particles = [];
@@ -189,6 +190,10 @@ function shipCollisionDetection() {
           livesDisplay.removeAttribute("id");
           livesDisplay.setAttribute("id", "gameOver");
           livesDisplay.innerHTML = "Game Over!!!!";
+          if (points > highScore) {
+            highScoreDisplay.innerText = points;
+            highScore = points;
+          }
           emptyEnemies();
         }
     }
