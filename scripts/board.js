@@ -18,8 +18,8 @@ let wanderEnemies = [];
 let followEnemies = [];
 let avoiderEnemies = [];
 
-let PARTICLE_MAX_LIFE = 150;
-let num_particles = 50;
+let PARTICLE_MAX_LIFE = 65;
+let num_particles = 15;
 let particles = [];
 
 function checkParticleLife() {
@@ -50,6 +50,12 @@ function enemies() {
 }
 
 function emptyEnemies() {
+  let enemies = this.enemies();
+  for (var i = 0; i < enemies.length; i++) {
+    for (var j = 0; j < num_particles; j++) {
+      particles.push(new Particles(enemies[i].x, enemies[i].y, enemies[i].color, PARTICLE_MAX_LIFE));
+    }
+  }
   wanderEnemies = [];
   followEnemies = [];
   avoiderEnemies = [];
@@ -58,7 +64,7 @@ function emptyEnemies() {
 function bomb() {
   if (ship.bombs > 0) {
     for (var i = 0; i < num_particles; i++) {
-      particles.push(new Particles(ship.x, ship.y, "green", 200));
+      particles.push(new Particles(ship.x, ship.y, "green", PARTICLE_MAX_LIFE));
     }
     timeToSpawn = Date.now();
     ship.bombs -= 1;
@@ -111,6 +117,10 @@ function checkBulletCollision() {
       enemyWidth = wanderEnemies[j].size/2;
       if (bx >= enemyX - enemyWidth && bx <= enemyX + enemyWidth
         && by >= enemyY - enemyWidth && by <= enemyY + enemyWidth ) {
+
+        for (var i = 0; i < num_particles; i++) {
+          particles.push(new Particles(wanderEnemies[j].x, wanderEnemies[j].y, wanderEnemies[j].color, PARTICLE_MAX_LIFE));
+        }
         wanderEnemies.splice(j, 1);
         wanderEnemies.push(new WanderEnemy());
           points += 10;
@@ -123,6 +133,9 @@ function checkBulletCollision() {
       enemyWidth = followEnemies[z].size/2;
       if (bx >= enemyX - enemyWidth && bx <= enemyX + enemyWidth
         && by >= enemyY - enemyWidth && by <= enemyY + enemyWidth ) {
+        for (var i = 0; i < num_particles; i++) {
+          particles.push(new Particles(followEnemies[z].x, followEnemies[z].y, followEnemies[z].color, PARTICLE_MAX_LIFE));
+        }
         followEnemies.splice(z, 1);
         followEnemies.push(new FollowEnemy());
           points += 20;
@@ -136,6 +149,9 @@ function checkBulletCollision() {
       enemyWidth = avoiderEnemies[y].size;
       if (bx >= enemyX - enemyWidth && bx <= enemyX + enemyWidth
         && by >= enemyY - enemyWidth && by <= enemyY + enemyWidth) {
+          for (var i = 0; i < num_particles; i++) {
+            particles.push(new Particles(avoiderEnemies[y].x, avoiderEnemies[y].y, avoiderEnemies[y].color, PARTICLE_MAX_LIFE));
+          }
           avoiderEnemies.splice(y, 1);
           avoiderEnemies.push(new AvoiderEnemy());
           points += 30;
@@ -156,7 +172,7 @@ function shipCollisionDetection() {
     {
       ship.color = "black";
       for (var i = 0; i < num_particles; i++) {
-        particles.push(new Particles(ship.x, ship.y, "red", 100));
+        particles.push(new Particles(ship.x, ship.y, "red", PARTICLE_MAX_LIFE));
       }
         if (ship.lives === 2) {
           ship.lives -= 1;
@@ -169,24 +185,12 @@ function shipCollisionDetection() {
           reset();
         } else if (ship.lives === 0 ) {
           bullets = [];
-          emptyEnemies();
           ship.lives -= 1;
           livesDisplay.removeAttribute("id");
           livesDisplay.setAttribute("id", "gameOver");
           livesDisplay.innerHTML = "Game Over!!!!";
+          emptyEnemies();
         }
-    }
-  }
-}
-
-let hidingTime = Date.now();
-let hidingX = ship.x;
-let hidingY = ship.y;
-function stopCamping() {
-  let time = Date.now() - hidingTime;
-  if (ship.x === hidingX && ship.y === hidingY && time >= 5000) {
-    for (var i = 0; i < 2; i++) {
-      followEnemies.push(new FollowEnemy(ship.x + 30, ship.y + 30));
     }
   }
 }
@@ -196,55 +200,54 @@ function populateBoard () {
   if (ship.lives < 0) {
   }
   else if (ship.bombs < 1 || ship.lives < 2) {
-    if (time >= 1000 && wanderEnemies.length < 7) {
+    if (time >= 1000 && wanderEnemies.length < 6) {
       for (var i = 0; i < 7; i++) {
         wanderEnemies.push(new WanderEnemy());
       }
     }
 
-    if (time >= 8000 && avoiderEnemies.length < 7) {
-      for (var i = 0; i < 7; i++) {
+    if (time >= 8000 && avoiderEnemies.length < 3) {
+      for (var i = 0; i < 4; i++) {
         followEnemies.push(new FollowEnemy());
         wanderEnemies.push(new WanderEnemy());
         avoiderEnemies.push(new AvoiderEnemy());
       }
     }
 
-    if (time >= 20000 && avoiderEnemies.length < 8) {
-      for (var i = 0; i < 5; i++) {
+    if (time >= 20000 && avoiderEnemies.length < 5) {
+      for (var i = 0; i < 2; i++) {
         followEnemies.push(new FollowEnemy());
-        wanderEnemies.push(new WanderEnemy());
         avoiderEnemies.push(new AvoiderEnemy());
       }
     }
   } else {
-    if (time < 5000 && wanderEnemies.length < 5) {
-      for (var i = 0; i < 5; i++) {
+    if (time < 3000 && wanderEnemies.length < 4) {
+      for (var i = 0; i < 4; i++) {
         wanderEnemies.push(new WanderEnemy());
       }
     }
 
-    if (time >= 10000 && wanderEnemies.length < 5) {
-      for (var i = 0; i < 5; i++) {
+    if (time >= 5000 && wanderEnemies.length < 5) {
+      for (var i = 0; i < 4; i++) {
         wanderEnemies.push(new WanderEnemy());
       }
     }
 
-    if (followEnemies.length < 2 && time >= 15000) {
+    if (followEnemies.length < 2 && time >= 10000) {
       for (var i = 0; i < 2; i++) {
         followEnemies.push(new FollowEnemy());
       }
     }
 
-    if (followEnemies.length < 5 && time >= 20000 ) {
+    if (followEnemies.length < 3 && time >= 15000 ) {
       for (var i = 0; i < 3; i++) {
         followEnemies.push(new FollowEnemy());
       }
       avoiderEnemies.push(new AvoiderEnemy());
     }
 
-    if (followEnemies.length < 8 && time >= 35000 ) {
-      for (var i = 0; i < 3; i++) {
+    if (followEnemies.length < 6 && time >= 20000 ) {
+      for (var i = 0; i < 2; i++) {
         followEnemies.push(new FollowEnemy());
       }
       for (var i = 0; i < 2; i++) {
@@ -252,8 +255,8 @@ function populateBoard () {
       }
     }
 
-    if (time >= 45000 && followEnemies.length <= 11) {
-      for (var i = 0; i < 4; i++) {
+    if (time >= 30000 && followEnemies.length <= 6) {
+      for (var i = 0; i < 3; i++) {
         followEnemies.push(new FollowEnemy());
         avoiderEnemies.push(new AvoiderEnemy());
         wanderEnemies.push(new WanderEnemy());
@@ -264,8 +267,6 @@ function populateBoard () {
 
 function move() {
   ship.move();
-  hidingX = ship.x;
-  hidingY = ship.y;
   for (var i = 0; i < bullets.length; i++) {
     bullets[i].move(i);
   }

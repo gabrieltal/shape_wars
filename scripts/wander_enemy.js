@@ -3,8 +3,8 @@ class WanderEnemy extends MovingObject{
     let x = Math.floor(Math.random() * canvas.width);
     if ( x >= ship.x - 100 && x <= ship.x + 100) x+= 200;
     let y = Math.floor(Math.random() * canvas.width);
-    let dx = Math.random() < 0.5 ? -.4 : .4;;
-    let dy = Math.random() < 0.5 ? -.4 : .4;
+    let dx = Math.random() < 0.5 ? -.5 : .5;
+    let dy = Math.random() < 0.5 ? -.5 : .5;
     super(x, y, 20, "purple", dx, dy);
   }
 

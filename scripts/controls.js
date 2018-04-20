@@ -35,6 +35,7 @@ function keyDownHandler(e) {
       fillBullets();
       break;
     case 66:
+    case 32:
       bomb();
       break;
   }

@@ -1,10 +1,10 @@
 
 class FollowEnemy extends MovingObject {
-  constructor (a, b) {
+  constructor () {
     let x = Math.floor(Math.random() * canvas.width);
     if ((x >= ship.x - 100) && (x <= ship.x + 100)) x += 200;
     let y = Math.floor(Math.random() * canvas.width);
-    super(a || x, b || y, 20, "blue", 0, 0);
+    super(x, y, 20, "blue", 0, 0);
     this.speed = .8;
   }
 
