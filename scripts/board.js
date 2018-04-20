@@ -19,8 +19,8 @@ let followEnemies = [];
 let avoiderEnemies = [];
 let highScoreDisplay = document.getElementById("highScores");
 let highScore = parseInt(highScoreDisplay.innerText);
-let PARTICLE_MAX_LIFE = 50;
-let num_particles = 10;
+let PARTICLE_MAX_LIFE = 35;
+let num_particles = 15;
 let particles = [];
 
 function checkParticleLife() {
@@ -205,21 +205,21 @@ function populateBoard () {
   if (ship.lives < 0) {
   }
   else if (ship.bombs < 1 || ship.lives < 2) {
-    if (time >= 1000 && wanderEnemies.length < 6) {
-      for (var i = 0; i < 7; i++) {
+    if (time >= 1000 && wanderEnemies.length < 5) {
+      for (var i = 0; i < 6; i++) {
         wanderEnemies.push(new WanderEnemy());
       }
     }
 
-    if (time >= 8000 && avoiderEnemies.length < 3) {
-      for (var i = 0; i < 4; i++) {
+    if (time >= 8000 && avoiderEnemies.length < 2) {
+      for (var i = 0; i < 3; i++) {
         followEnemies.push(new FollowEnemy());
         wanderEnemies.push(new WanderEnemy());
         avoiderEnemies.push(new AvoiderEnemy());
       }
     }
 
-    if (time >= 20000 && avoiderEnemies.length < 5) {
+    if (time >= 20000 && avoiderEnemies.length < 4) {
       for (var i = 0; i < 2; i++) {
         followEnemies.push(new FollowEnemy());
         avoiderEnemies.push(new AvoiderEnemy());
@@ -233,7 +233,7 @@ function populateBoard () {
     }
 
     if (time >= 5000 && wanderEnemies.length < 5) {
-      for (var i = 0; i < 4; i++) {
+      for (var i = 0; i < 3; i++) {
         wanderEnemies.push(new WanderEnemy());
       }
     }
@@ -260,8 +260,8 @@ function populateBoard () {
       }
     }
 
-    if (time >= 30000 && followEnemies.length <= 6) {
-      for (var i = 0; i < 3; i++) {
+    if (time >= 30000 && followEnemies.length < 7) {
+      for (var i = 0; i < 2; i++) {
         followEnemies.push(new FollowEnemy());
         avoiderEnemies.push(new AvoiderEnemy());
         wanderEnemies.push(new WanderEnemy());
