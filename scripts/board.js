@@ -19,7 +19,7 @@ let followEnemies = [];
 let avoiderEnemies = [];
 let highScoreDisplay = document.getElementById("highScores");
 let highScore = parseInt(highScoreDisplay.innerText);
-let PARTICLE_MAX_LIFE = 35;
+let PARTICLE_MAX_LIFE = 30;
 let num_particles = 15;
 let particles = [];
 
