@@ -5,7 +5,6 @@ class Bullet extends MovingObject {
   constructor(x, y, angle) {
     super(x, y, bulletSize, "yellow", 0, 0)
     this.angle = angle;
-    this.i = i+1;
   }
 
   draw() {
