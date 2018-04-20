@@ -16,6 +16,8 @@ Shape Wars is a JavaScript game using HTML5 Canvas. It is a Geometry Wars and As
 ### Particles!
    * After each enemy is destroy a parade of particles are released and give life and color to the game
 
+![Particles](https://github.com/gabrieltal/shape_wars/blob/master/docs/particles.gif)
+
 ### Future
   * I'd like to add music and sound effects
   * I would like to add a backend to hold high scores
