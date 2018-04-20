@@ -4,8 +4,8 @@ let ctx = canvas.getContext("2d");
 let bulletCount = 10;
 let points = 0;
 let timeToSpawn = Date.now();
-let PARTICLE_MAX_LIFE = 30;
-let num_particles = 15;
+let PARTICLE_MAX_LIFE = 40;
+let num_particles = 30;
 
 let ship = new Ship(canvas.width/2, canvas.height/2);
 let enemies = [];
