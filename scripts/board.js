@@ -19,8 +19,8 @@ let followEnemies = [];
 let avoiderEnemies = [];
 let highScoreDisplay = document.getElementById("highScores");
 let highScore = parseInt(highScoreDisplay.innerText);
-let PARTICLE_MAX_LIFE = 65;
-let num_particles = 15;
+let PARTICLE_MAX_LIFE = 50;
+let num_particles = 10;
 let particles = [];
 
 function checkParticleLife() {
