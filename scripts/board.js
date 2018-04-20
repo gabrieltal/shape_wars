@@ -183,7 +183,6 @@ function populateBoard () {
         enemies.push(new WanderEnemy());
       }
     }
-    console.log(enemies.length);
     if (time >= 8000 && enemies.length <= 6) {
       for (var i = 0; i < 3; i++) {
         enemies.push(new FollowEnemy());
