@@ -1,5 +1,6 @@
 const canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
+let pause = true;
 
 let bulletCount = 10;
 let points = 0;
@@ -68,7 +69,7 @@ function replaceEnemy(enemy) {
 
 function bomb() {
   if (ship.bombs > 0) {
-    createParticles(ship.x, ship.y, "green");
+    createParticles(ship.x, ship.y, "white");
     timeToSpawn = Date.now();
     ship.bombs -= 1;
     this.emptyEnemies();
@@ -85,7 +86,7 @@ function resetBullets() {
 
 function shipReset() {
   ship.x = canvas.width/2;
-  ship.y = canvas.width/2;
+  ship.y = canvas.height/2;
   ship.angle = 0;
   ship.color = "white";
 }
@@ -173,6 +174,10 @@ function shipCollisionDetection() {
   }
 }
 
+function pauseGame() {
+  pause = !pause;
+}
+
 function populateBoard () {
   let time = Date.now() - timeToSpawn;
   if (ship.lives < 0) {
@@ -249,11 +254,13 @@ function move() {
 
 function turn () {
   populateBoard();
+  if (pause) {} else {
   move();
   shipCollisionDetection();
   checkBulletCollision();
   draw();
   checkParticleLife();
+}
 }
 
 setInterval(turn, 10);
