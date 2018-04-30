@@ -53,6 +53,7 @@ function draw() {
 function startGame () {
   let initialDisplay = document.getElementById("overDisplay");
   initialDisplay.style.display = 'none';
+
   pauseGame();
 }
 
@@ -260,13 +261,13 @@ function move() {
 
 function turn () {
   populateBoard();
-  if (pause) {} else {
-  move();
-  shipCollisionDetection();
-  checkBulletCollision();
-  draw();
-  checkParticleLife();
-}
+  if (!pause) {
+    move();
+    shipCollisionDetection();
+    checkBulletCollision();
+    draw();
+    checkParticleLife();
+  }
 }
 
 setInterval(turn, 10);
