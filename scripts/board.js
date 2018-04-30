@@ -50,6 +50,12 @@ function draw() {
   }
 }
 
+function startGame () {
+  let initialDisplay = document.getElementById("overDisplay");
+  initialDisplay.style.display = 'none';
+  pauseGame();
+}
+
 function emptyEnemies() {
   for (var i = 0; i < enemies.length; i++) {
     createParticles(enemies[i].x, enemies[i].y, enemies[i].color);
