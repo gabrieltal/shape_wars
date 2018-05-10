@@ -7,6 +7,7 @@ Shape Wars is a JavaScript game using HTML5 Canvas. It is a Geometry Wars and As
 ## Features
 
 Players are able to move around and rotate with WASD and left and right arrow keys respectively. Players are given one bomb to wipe the screen. The player must navigate and maneuver around the various enemy types and take them out before they are taken out.
+
 ![Avoiders](https://github.com/gabrieltal/shape_wars/blob/master/docs/avoiders.gif)
 
 ### AI Enemies
