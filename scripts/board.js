@@ -46,7 +46,11 @@ function switchMute() {
     muteDisplay.removeAttribute("id");
     soundOnDisplay.setAttribute("id", "selectedMute");
   }
-  updateVoume();
+
+  bombSound.muted = mute;
+  mainSong.muted = mute;
+  deathSound.muted = mute;
+  enemyDestroy.muted = mute;
 }
 
 function updateVolume() {
@@ -54,11 +58,6 @@ function updateVolume() {
   mainSong.volume = volumeCtrls.value;
   deathSound.volume = volumeCtrls.value;
   enemyDestroy.volume = volumeCtrls.value;
-
-  bombSound.muted = mute;
-  mainSong.muted = mute;
-  deathSound.muted = mute;
-  enemyDestroy.muted = mute;
 }
 
 function checkParticleLife() {
