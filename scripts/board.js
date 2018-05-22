@@ -1,7 +1,6 @@
 const canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 let pause = true;
-
 let bulletCount = 10;
 let points = 0;
 let timeToSpawn = Date.now();
@@ -19,8 +18,48 @@ let livesDisplay = document.getElementById("livesDisplay");
 let bombsDisplay = document.getElementById("bombsDisplay");
 let highScoreDisplay = document.getElementById("highScores");
 let highScore = parseInt(highScoreDisplay.innerText);
+let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+let bombSound = document.getElementById('bombAudio');
+let enemyDestroy = document.getElementById('destroyEnemy');
+let mainSong = document.getElementById('mainSong');
+let deathSound = document.getElementById('die');
+let mute = false;
+let muteDisplay = document.querySelector(".fas.fa-volume-off");
+let soundOnDisplay = document.querySelector(".fas.fa-volume-up");
+let volumeCtrls = document.getElementById("volume-ctrls");
+addMuteListener();
 livesDisplay.innerHTML = "Lives Left: " + (ship.lives);
 bombsDisplay.innerHTML = "Bombs Left: " + (ship.bombs);
+
+function addMuteListener() {
+  volumeCtrls.addEventListener("change", this.updateVolume);
+  soundOnDisplay.addEventListener("click", this.switchMute);
+  muteDisplay.addEventListener("click", this.switchMute);
+}
+
+function switchMute() {
+  mute = !mute;
+  if (mute) {
+    soundOnDisplay.removeAttribute("id");
+    muteDisplay.setAttribute("id", "selectedMute");
+  } else {
+    muteDisplay.removeAttribute("id");
+    soundOnDisplay.setAttribute("id", "selectedMute");
+  }
+  updateVoume();
+}
+
+function updateVolume() {
+  bombSound.volume = volumeCtrls.value;
+  mainSong.volume = volumeCtrls.value;
+  deathSound.volume = volumeCtrls.value;
+  enemyDestroy.volume = volumeCtrls.value;
+
+  bombSound.muted = mute;
+  mainSong.muted = mute;
+  deathSound.muted = mute;
+  enemyDestroy.muted = mute;
+}
 
 function checkParticleLife() {
   for (var i = 0; i < particles.length; i++) {
@@ -53,11 +92,7 @@ function draw() {
 function startGame () {
   let initialDisplay = document.getElementById("overDisplay");
   initialDisplay.style.display = 'none';
-
-  // let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  // let sound = document.querySelector('audio');
-  // let source = audioCtx.createBufferSource(sound);
-  // sound.play();
+  mainSong.play();
   pauseGame();
 }
 
@@ -80,6 +115,9 @@ function replaceEnemy(enemy) {
 
 function bomb() {
   if (ship.bombs > 0) {
+    bombSound.play();
+    points += 200;
+    pointBoard.innerHTML = "Points: " + points;
     createParticles(ship.x, ship.y, "white");
     timeToSpawn = Date.now();
     ship.bombs -= 1;
@@ -144,6 +182,7 @@ function checkBulletCollision() {
         createParticles(enemies[j].x, enemies[j].y, enemies[j].color);
         replaceEnemy(enemies[j]);
         enemies.splice(j, 1);
+          enemyDestroy.play();
           points += 10;
           pointBoard.innerHTML = "Points: " + points;
       }
@@ -171,6 +210,7 @@ function shipCollisionDetection() {
        && ship.y >= enemyY - enemyWidth && ship.y <= enemyY + enemyWidth)
     {
       ship.color = "black";
+      deathSound.play();
       createParticles(ship.x, ship.y, "red");
         if (ship.lives > 0) {
           updateLives();

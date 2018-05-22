@@ -35,6 +35,39 @@ a {
   border: 2px solid blue;
 }
 
+#audioControls {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  margin-left: 20px;
+}
+
+#volume-ctrls {
+  padding: 5px;
+  margin-left: 10px;
+}
+
+#musicBy {
+  color: white;
+  text-align: center;
+  margin-top: 10px;
+  margin-left: 200px;
+}
+
+#selectedMute {
+  color: orange;
+}
+
+.fas.fa-volume-up {
+  color: white;
+  padding: 5px;
+}
+
+.fas.fa-volume-off {
+  color: white;
+  padding: 5px;
+}
+
 img {
   width: 48px;
   height: 44px;
@@ -71,7 +104,7 @@ h1 {
 
 #canvas {
   display: block;
-  margin: auto;
+  margin: 0 auto;
   margin-left: 25px;
   border: 3px solid orange;
   background: transparent;
@@ -92,6 +125,8 @@ h1 {
 
 #container {
   display: flex;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 #controls {
