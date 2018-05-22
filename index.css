@@ -49,9 +49,8 @@ body {
   font-family: 'Exo 2', sans-serif;
 
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  padding: 5px;
   margin-bottom: 15px;
   margin-top: 15px;
 }
@@ -64,8 +63,9 @@ h1 {
 }
 
 #bombsDisplay {
-  margin: auto;
-  font-size: 18px;
+  font-size: 26px;
+  margin: 0;
+  padding: 10px;
   color: lightgreen;
 }
 
@@ -86,6 +86,8 @@ h1 {
 #points {
   font-size: 26px;
   color: white;
+  margin: 0;
+  padding: 10px;
 }
 
 #container {
@@ -124,11 +126,15 @@ li {
 
 #gameOver {
   color: red;
-  font-size: 20px;
+  font-size: 26px;
+  margin: 0;
+  padding: 10px;
 }
 
 #livesDisplay {
   color: lightblue;
   font-style: bold;
-  font-size: 20px;
+  font-size: 26px;
+  margin: 0;
+  padding: 10px;
 }

@@ -7,7 +7,6 @@ let rotateRight = false;
 let restart = false;
 
 function keyDownHandler(e) {
-  e.preventDefault();
   switch (e.keyCode) {
     case 65:
       keyLeft = true;
@@ -39,6 +38,7 @@ function keyDownHandler(e) {
       break;
     case 66:
     case 32:
+      e.preventDefault();
       bomb();
       break;
   }

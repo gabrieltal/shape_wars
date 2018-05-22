@@ -54,6 +54,10 @@ function startGame () {
   let initialDisplay = document.getElementById("overDisplay");
   initialDisplay.style.display = 'none';
 
+  // let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  // let sound = document.querySelector('audio');
+  // let source = audioCtx.createBufferSource(sound);
+  // sound.play();
   pauseGame();
 }
 
@@ -106,7 +110,7 @@ function reset() {
   if (restart === true) {
     points = 0;
     ship.lives = 2;
-    ship.bombs = 1;
+    ship.bombs = 2;
     bombsDisplay.innerHTML = "Bombs Left: " + (ship.bombs);
     livesDisplay.removeAttribute("id");
     livesDisplay.setAttribute("id", "livesDisplay");
@@ -152,7 +156,7 @@ function updateLives() {
   if (ship.lives < 0) {
     livesDisplay.removeAttribute("id");
     livesDisplay.setAttribute("id", "gameOver");
-    livesDisplay.innerHTML = "Game Over!!!";
+    livesDisplay.innerHTML = "Game Over!!! Press R to restart";
   } else {
     livesDisplay.innerHTML = "Lives Left: " + (ship.lives);
   }
