@@ -217,6 +217,10 @@ function shipCollisionDetection() {
           reset();
         } else {
           bullets = [];
+          if (points > highScore) {
+            highScore = points;
+            highScoreDisplay.innerHTML = highScore;
+          }
           updateLives();
           emptyEnemies();
         }
