@@ -226,6 +226,11 @@ function shipCollisionDetection() {
 
 function pauseGame() {
   pause = !pause;
+  if (pause) {
+    mainSong.pause();
+  } else {
+    mainSong.play();
+  }
 }
 
 function populateBoard () {
