@@ -50,7 +50,7 @@
       <div id="audioControls">
         <i id="selectedMute" class="fas fa-volume-up"></i>
         <i class="fas fa-volume-off"></i>
-        <input id="volume-ctrls" value=".6" type="range" min="0" max="1" step=".1"/>
+        <input id="volume-ctrls" value="0" type="range" min="0" max="1" step=".1"/>
       </div>
     </div>
     <div id="container">
@@ -72,9 +72,11 @@
           1000
         </div>
     </div>
-    <button id="overDisplay"
-      onclick="startGame()">Click me to start the game </button>
     <canvas id="canvas" width="720" height="540"></canvas>
+    <p id="soundTipDisplay">Sound is currently off. Move the slider above to turn up volume</p>
+    <p id="demoDisplay">Tutorial: Press W to move up</p>
+    <button id="overDisplay"
+    onclick="startGame()">Click me to start the game </button>
   </div>
   <p id="musicBy">Music by <a href="http://freemusicarchive.org/music/Rolemusic/The_Pirate_And_The_Dancer/">Rolemusic</a>, 'The Pirate And The Dancer'</p>
   </body>

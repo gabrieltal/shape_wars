@@ -4,6 +4,7 @@ let keyUp = false;
 let keyDown = false;
 let rotateLeft = false;
 let rotateRight = false;
+let bombPress = false;
 let restart = false;
 
 function keyDownHandler(e) {
@@ -39,6 +40,7 @@ function keyDownHandler(e) {
     case 66:
     case 32:
       e.preventDefault();
+      bombPress = true;
       bomb();
       break;
   }

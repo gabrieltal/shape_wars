@@ -3,7 +3,7 @@ let ctx = canvas.getContext("2d");
 let pause = true;
 let bulletCount = 10;
 let points = 0;
-let timeToSpawn = Date.now();
+let timeToSpawn;
 let PARTICLE_MAX_LIFE = 40;
 let num_particles = 30;
 
@@ -12,7 +12,7 @@ let enemies = [];
 let bullets = [];
 let particles = [];
 resetBullets();
-
+let soundTips = document.getElementById("soundTipDisplay");
 let pointBoard = document.getElementById("points");
 let livesDisplay = document.getElementById("livesDisplay");
 let bombsDisplay = document.getElementById("bombsDisplay");
@@ -23,18 +23,111 @@ let bombSound = document.getElementById('bombAudio');
 let enemyDestroy = document.getElementById('destroyEnemy');
 let mainSong = document.getElementById('mainSong');
 let deathSound = document.getElementById('die');
-let mute = false;
+let mute = true;
 let muteDisplay = document.querySelector(".fas.fa-volume-off");
 let soundOnDisplay = document.querySelector(".fas.fa-volume-up");
 let volumeCtrls = document.getElementById("volume-ctrls");
+let demoDisplay = document.getElementById("demoDisplay");
+let demoInt;
+let demoLoop;
 addMuteListener();
+updateVolume();
+switchMute();
 livesDisplay.innerHTML = "Lives Left: " + (ship.lives);
 bombsDisplay.innerHTML = "Bombs Left: " + (ship.bombs);
+demo();
+
+function demo() {
+  ship.color = "white";
+  demoTurn();
+  startDemoReel();
+  demoInt = setInterval(demoTurn, 12);
+}
+
+function WpressDemo() {
+  demoLoop = setInterval(() => {
+    if (keyLeft) {
+      clearInterval(demoLoop);
+      demoDisplay.innerHTML = "Press S to move down";
+      ApressDemo();
+    }
+  }, 100)
+}
+
+function ApressDemo() {
+  demoLoop = setInterval(() => {
+    if (keyDown) {
+      clearInterval(demoLoop);
+      demoDisplay.innerHTML = "Press D to move right";
+      SpressDemo();
+    }
+  }, 100)
+}
+
+function SpressDemo() {
+  demoLoop = setInterval(() => {
+    if (keyRight) {
+      clearInterval(demoLoop);
+      demoDisplay.innerHTML = "Press left arrow to rotate left";
+      DpressDemo();
+    }
+  }, 100)
+}
+
+function DpressDemo() {
+  demoLoop = setInterval(() => {
+    if (rotateLeft) {
+      clearInterval(demoLoop);
+      demoDisplay.innerHTML = "Press right arrow to rotate right";
+      LRotpressDemo();
+    }
+  }, 100)
+}
+
+function LRotpressDemo() {
+  demoLoop = setInterval(() => {
+    if (rotateRight) {
+      clearInterval(demoLoop);
+      demoDisplay.innerHTML = "Space bar to use a bomb. It clears the screen of enemies!";
+      RRotpressDemo();
+    }
+  }, 100);
+}
+
+function RRotpressDemo() {
+  enemies.push(new WanderEnemy())
+  demoLoop = setInterval(() => {
+    if (bombPress) {
+      clearInterval(demoLoop);
+      demoDisplay.innerHTML = "Destroy enemies and try to stay alive! During gameplay press P to pause. Click below to start, good luck :)"
+      soundTips.style.display = 'inline-block';
+    }
+  }, 100);
+}
+
+function startDemoReel() {
+  demoLoop = setInterval(() => {
+    if (keyUp) {
+      clearInterval(demoLoop);
+      demoDisplay.innerHTML = "Press A to move left";
+      WpressDemo();
+    }
+  }, 100);
+}
+
+function demoTurn() {
+  move();
+  shipCollisionDetection()
+  checkBulletCollision();
+  draw();
+  checkParticleLife();
+}
 
 function addMuteListener() {
   volumeCtrls.addEventListener("change", this.updateVolume);
   soundOnDisplay.addEventListener("click", this.switchMute);
   muteDisplay.addEventListener("click", this.switchMute);
+  volumeCtrls.addEventListener("mouseup", () => volumeCtrls.blur() )
 }
 
 function switchMute() {
@@ -58,6 +151,12 @@ function updateVolume() {
   mainSong.volume = volumeCtrls.value;
   deathSound.volume = volumeCtrls.value;
   enemyDestroy.volume = volumeCtrls.value;
+
+  if (volumeCtrls.value === 0) {
+    if (mute === false) {
+      switchMute();
+    }
+  }
 }
 
 function checkParticleLife() {
@@ -92,7 +191,24 @@ function startGame () {
   let initialDisplay = document.getElementById("overDisplay");
   initialDisplay.style.display = 'none';
   mainSong.play();
-  pauseGame();
+  timeToSpawn = Date.now();
+  demoDisplay.style.display = "none";
+  points = 0;
+  pointBoard.innerHTML = 'Points: ' + points;
+  points = 0;
+  ship.lives = 2;
+  ship.bombs = 2;
+  bombsDisplay.innerHTML = "Bombs Left: " + (ship.bombs);
+  livesDisplay.removeAttribute("id");
+  livesDisplay.setAttribute("id", "livesDisplay");
+  livesDisplay.innerHTML = "Lives Left: " + ship.lives;
+  soundTips.style.display = 'none';
+  clearInterval(demoInt);
+  clearInterval(demoLoop);
+  setInterval(turn, 10);
+  if (pause === true) {
+    pauseGame();
+  }
 }
 
 function emptyEnemies() {
@@ -154,6 +270,9 @@ function reset() {
     livesDisplay.innerHTML = "Lives Left: " + ship.lives;
   }
   pointBoard.innerHTML = "Points: " + points;
+  if (pause === true) {
+    pauseGame();
+  }
 }
 
 function fillBullets() {
@@ -321,5 +440,3 @@ function turn () {
     checkParticleLife();
   }
 }
-
-setInterval(turn, 10);
