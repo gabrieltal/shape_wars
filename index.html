@@ -2,44 +2,24 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css"
-      href="index.css">
     <title>Shape Wars</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
-    <link rel="icon" type="image/png" href="./docs/triangle.png">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117689004-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="icon" type="image/png" href="./public/favicon.png">
 
-    gtag('config', 'UA-117689004-1');
-  </script>
-    <audio id="bombAudio" src="./docs/cat.wav">
-    </audio>
-    <audio id="destroyEnemy" src="./docs/enemy_destroy.wav">
-    </audio>
-    <audio id="die" src="./docs/sickYell.wav">
-    </audio>
-    <audio id="mainSong" src="./docs/rolemusicPirateAndDancer.mp3"
-      loop="true">
-    </audio>
-    <script src="bundle.js"></script>
+    <audio id="bombAudio" src="./public/cat.wav"></audio>
+    <audio id="destroyEnemy" src="./public/enemy-destroy.wav"></audio>
+    <audio id="die" src="./public/death-scream.wav"></audio>
+    <audio id="mainSong" src="./public/rolemusicPirateAndDancer.mp3" loop="true"></audio>
   </head>
   <body>
     <header>
       <h1>Shape Wars</h1>
       <div id="links">
         <a href="http://www.github.com/gabrieltal/shape_wars" target="_blank">
-          <img src="./docs/githubBlack.png"
-            onmouseover="this.src='./docs/githubRed.png'"
-            onmouseout="this.src='./docs/githubBlack.png'">
+          <img src="./public/githubBlack.png" onmouseover="this.src='./public/githubRed.png'" onmouseout="this.src='./public/githubBlack.png'">
         </a>
         <a href="http://www.linkedin.com/in/gvtalavera" target="_blank">
-          <img src="./docs/lnBlack.png"
-            onmouseover="this.src='./docs/lnBlue.png'"
-            onmouseout="this.src='./docs/lnBlack.png'">
+          <img src="./public/lnBlack.png" onmouseover="this.src='./public/lnBlue.png'" onmouseout="this.src='./public/lnBlack.png'">
         </a>
       </div>
     </header>
@@ -54,8 +34,8 @@
       </div>
     </div>
     <div id="container">
-    <div id="controls">
-      <h3> Controls </h3>
+      <div id="controls">
+        <h3>Controls</h3>
         <ul>
           <li>W: move up</li>
           <li>A: move left</li>
@@ -68,17 +48,14 @@
           <li>P: pause game </li>
         </ul>
         <h3> High Score </h3>
-        <div id="highScores">
-          1000
-        </div>
+        <div id="highScores">0</div>
+      </div>
+      <canvas id="canvas" width="720" height="540"></canvas>
+      <p id="soundTipDisplay">Sound is currently off. Move the slider above to turn up volume</p>
+      <p id="demoDisplay">Tutorial: Press W to move up</p>
+      <button id="overDisplay" onclick="startGame()">Click me to start the game </button>
     </div>
-    <canvas id="canvas" width="720" height="540"></canvas>
-    <p id="soundTipDisplay">Sound is currently off. Move the slider above to turn up volume</p>
-    <p id="demoDisplay">Tutorial: Press W to move up</p>
-    <button id="overDisplay"
-    onclick="startGame()">Click me to start the game </button>
-  </div>
-  <p id="musicBy">Music by <a href="http://freemusicarchive.org/music/Rolemusic/The_Pirate_And_The_Dancer/">Rolemusic</a>, 'The Pirate And The Dancer'</p>
+    <p id="musicBy">Music by <a href="http://freemusicarchive.org/music/Rolemusic/The_Pirate_And_The_Dancer/">Rolemusic</a>, 'The Pirate And The Dancer'</p>
   </body>
   <script src="scripts/controls.js"></script>
   <script src="scripts/movingObject.js"></script>
