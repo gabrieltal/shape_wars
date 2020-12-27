@@ -17,8 +17,8 @@ export default class Input {
   }
 
   attachHandlers() {
-    document.addEventListener("keydown", keyDownHandler, false);
-    document.addEventListener("keyup", keyUpHandler, false);
+    document.addEventListener("keydown", this.keyDownHandler, false);
+    document.addEventListener("keyup", this.keyUpHandler, false);
   }
 
   keyDownHandler(e) {
@@ -42,7 +42,7 @@ export default class Input {
         this.pressed.down = true;
         break;
       case keyCodes.P:
-        this.pressed.pase = true;
+        this.pressed.pause = true;
         break;
       case keyCodes.SPACE:
         e.preventDefault();
