@@ -2,16 +2,12 @@
 
 ## Overview
 
-Shape Wars is a Vanilla JavaScript game using HTML5 Canvas. Heavily inspired by Geometry Wars and Asteroids.
+Shape Wars is a vanilla JavaScript game using HTML5 Canvas. Heavily inspired by Geometry Wars and Asteroids.
 The game is a top down action arcade shooter. I programmed the various enemy types, some enemies follow you around the board, others avoid your incoming bullets, and the rest wander aimlessly.
 
 [shapewars.xyz](https://www.shapewars.xyz)
 
 ## Installation
-
-### Requirements
-
-- [Webpack](https://webpack.js.org/guides/getting-started/)
 
 ### Setup
 
