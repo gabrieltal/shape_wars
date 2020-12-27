@@ -11,7 +11,7 @@ export default class Particles extends MovingObject {
     this.maxLife = maxLife;
   }
 
-  draw () {
+  draw (ctx) {
     this.life++;
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.size, 0, 2*Math.PI);
@@ -19,5 +19,4 @@ export default class Particles extends MovingObject {
     ctx.fill();
     ctx.closePath();
   }
-
 }

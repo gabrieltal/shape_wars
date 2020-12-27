@@ -8,30 +8,31 @@ export default class MovingObject {
     this.dy = dy;
   }
 
-  move() {
-    this.checkBounds();
+  move(game) {
+    this.checkBounds(game.ship);
     this.x += this.dx;
     this.y += this.dy;
+    this.updatePosition(game);
   }
 
-  checkBounds() {
-    if (this.x > canvas.width) {
+  checkBounds(ship) {
+    if (this.x > 720) {
       let x = 0;
       if (x === ship.x) x += 30;
       this.x = x;
-      this.y = Math.floor(Math.random() * canvas.width);
+      this.y = Math.floor(Math.random() * 540);
     } else if (this.x + this.size <= 0) {
-      this.x = canvas.width - this.size;
-      this.y = Math.floor(Math.random() * canvas.width);
+      this.x = 720 - this.size;
+      this.y = Math.floor(Math.random() * 540);
     }
-    if (this.y > canvas.width) {
+    if (this.y > 540) {
       let y = 0;
       if (y === ship.y) y += 30;
       this.y = y;
-      this.x = Math.floor(Math.random() * canvas.width);
+      this.x = Math.floor(Math.random() * 720);
     } else if (this.y <= 0) {
-      this.y = canvas.width - this.size;
-      this.x = Math.floor(Math.random() * canvas.width);
+      this.y = 540 - this.size;
+      this.x = Math.floor(Math.random() * 720);
     }
   }
 }

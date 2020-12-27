@@ -8,7 +8,7 @@ export default class Ship extends MovingObject{
     this.bombs = 2;
   }
 
-  draw() {
+  draw(ctx) {
     ctx.save();
     ctx.translate(this.x, this.y);
     ctx.rotate(this.angle);
@@ -20,44 +20,46 @@ export default class Ship extends MovingObject{
     ctx.fill();
     ctx.restore();
     ctx.closePath();
-    this.updatePosition();
   }
 
-  updatePosition() {
-    if (keyLeft) {
-      this.dx -= .04;
-    } else if (keyRight) {
-      this.dx += .04;
-    } else if (keyUp) {
-      this.dy -= .04;
-    } else if (keyDown) {
-      this.dy += .04;
+  updatePosition(game) {
+    if (game.input.pressed.left) {
+      this.dx -= .1;
+    } else if (game.input.pressed.right) {
+      this.dx += .1;
+    } else if (game.input.pressed.up) {
+      this.dy -= .1;
+    } else if (game.input.pressed.down) {
+      this.dy += .1;
     } else {
-      this.dx += this.dx > 0 ? -.02 : 0.02;
-      this.dy += this.dy > 0 ? -.02 : 0.02;
+      this.dx += this.dx > 0 ? -.1 : 0.1;
+      this.dy += this.dy > 0 ? -.1 : 0.1;
     }
 
-    if (rotateLeft) {
-      this.angle -= .03;
-    } else if (rotateRight) {
-      this.angle += .03;
+    if (game.input.pressed.rotateLeft) {
+      this.angle -= .1;
+    } else if (game.input.pressed.rotateRight) {
+      this.angle += .1;
     }
   }
 
-  checkBounds() {
-    if ( ship.x > canvas.width - ship.size ) {
+  checkBounds(ship) {
+    if (ship.x > 720 - ship.size) {
       this.dx = 0;
-      this.x = canvas.width - this.size;
+      this.x = 720 - this.size;
     }
-    if ( this.y  > canvas.height - this.size ) {
+
+    if (this.y > 540 - this.size) {
       this.dy = 0;
-      this.y = canvas.height - this.size;
+      this.y = 540 - this.size;
     }
-    if ( this.y < this.size ) {
+
+    if (this.y < this.size) {
       this.dy = 0;
       this.y = this.size;
     }
-    if ( this.x < this.size ) {
+
+    if (this.x < this.size) {
       this.dx = 0;
       this.x = this.size;
     }
