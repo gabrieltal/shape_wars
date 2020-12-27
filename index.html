@@ -12,12 +12,11 @@
 
     <main class="d-flex flex-column justify-content-center">
       <div class="d-flex justify-content-between align-items-center p-15">
-        <p class="bold mr-8">Points: <span class="points"></span></p>
-        <p class="text-blue bold mr-10">Lives Left: <span class="lives"></span></p>
-        <p class="text-green bold mr-10">Bombs Left: <span class="bombs"></span></p>
-        <button type="button" id="mute" class="mr-8">Mute</button>
-        <button type="button" id="unmute" class="mr-8">Unmute</button>
-        <input id="volume" value="0" type="range" min="0" max="1" step=".1"/>
+        <p class="bold mr-8">Points: <span id="points"></span></p>
+        <p class="text-blue bold mr-10">Lives Left: <span id="lives"></span></p>
+        <p class="text-green bold mr-10">Bombs Left: <span id="bombs"></span></p>
+        <input class="mr-8" type="checkbox" id="mute">Mute</input>
+        <input class="ml-8" id="volume" value=".5" type="range" min="0" max="1" step=".1"/>
       </div>
 
       <div class="game d-flex">
@@ -36,7 +35,7 @@
           </ul>
 
           <h2 class="border-bottom-orange mt-15 mb-10">High Score</h2>
-          <p id="highScore">0</p>
+          <p id="highscore"></p>
         </div>
 
         <div class="board">
