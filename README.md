@@ -1,8 +1,33 @@
 # Shape Wars
 
-Shape Wars is a JavaScript game using HTML5 Canvas. It is a Geometry Wars and Asteroids inspired top down action arcade shooter. Utilizes some AI that avoid bullets and follow the user.
+## Overview
 
-[Live Link](http://www.shapewars.xyz)
+Shape Wars is a Vanilla JavaScript game using HTML5 Canvas. Heavily inspired by Geometry Wars and Asteroids.
+The game is a top down action arcade shooter. I programmed the various enemy types, some enemies follow you around the board, others avoid your incoming bullets, and the rest wander aimlessly.
+
+[shapewars.xyz](https://www.shapewars.xyz)
+
+## Installation
+
+### Requirements
+
+- [NPM](https://www.npmjs.com/get-npm)
+- [Webpack](https://webpack.js.org/guides/getting-started/)
+
+### Setup
+
+```bash
+git clone https://github.com/gabrieltal/shape_wars.git
+cd shape_wars
+npm install
+```
+
+To have webpack compile and watch:
+```bash
+npm run dev
+```
+
+Then go to localhost:8080 to see the game running.
 
 ## Features
 
@@ -22,7 +47,8 @@ Players are able to move around and rotate with WASD and left and right arrow ke
 
 ![Particles](https://github.com/gabrieltal/shape_wars/blob/master/docs/particles.gif)
 
-### Future
+## TODOS
+  * Optimize and clean up code so it is object oriented
   * I'd like to add music and sound effects
   * I would like to add a backend to hold high scores
   * Power ups left on the grid to be picked up and give players bonus lives, bombs, etc
