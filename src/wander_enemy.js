@@ -1,4 +1,6 @@
-class WanderEnemy extends MovingObject{
+import MovingObject from './movingObject';
+
+export default class WanderEnemy extends MovingObject{
   constructor() {
     let x = Math.floor(Math.random() * canvas.width);
     if ( x >= ship.x - 100 && x <= ship.x + 100) x+= 200;

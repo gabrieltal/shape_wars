@@ -1,4 +1,6 @@
-class Ship extends MovingObject{
+import MovingObject from './movingObject';
+
+export default class Ship extends MovingObject{
   constructor(x, y) {
     super(x, y, 10, "white", 0, 0)
     this.angle = 0;

@@ -1,5 +1,6 @@
+import MovingObject from './movingObject';
 
-class FollowEnemy extends MovingObject {
+export default class FollowEnemy extends MovingObject {
   constructor () {
     let x = Math.floor(Math.random() * canvas.width);
     if ((x >= ship.x - 100) && (x <= ship.x + 100)) x += 200;

@@ -1,4 +1,6 @@
-class Particles extends MovingObject {
+import MovingObject from './movingObject';
+
+export default class Particles extends MovingObject {
   constructor(x, y, color, maxLife) {
     let dx = Math.random();
     dx = dx > .5 ? -dx : dx;

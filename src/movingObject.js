@@ -1,4 +1,4 @@
-class MovingObject {
+export default class MovingObject {
   constructor (x, y, size, color, dx, dy) {
     this.x = x;
     this.y = y;
