@@ -8,7 +8,6 @@ export default class Game {
     this.ctx = ctx;
     this.input = input;
     this.sound = sound;
-    this.pause = true;
     this.newFrame = this.newFrame.bind(this);
     this.ship = new Ship(360, 270);
     this.points = 0;
@@ -30,27 +29,20 @@ export default class Game {
     this.particles = [];
     this.sound.play('background');
     this.input.attachHandlers();
+    this.playing = true;
     requestAnimationFrame(this.newFrame);
   }
 
-  turn () {
-    populateBoard();
-    if (!pause) {
-      move();
-      shipCollisionDetection();
-      checkBulletCollision();
-      draw();
-      checkParticleLife();
-    }
-  }
-
   newFrame(time) {
+    // populateBoard();
     this.move();
     this.checkShipCollision();
     this.checkBulletCollision();
     this.draw();
-    this.checkParticleLife
-    requestAnimationFrame(this.newFrame);
+    this.checkParticleLife();
+    if (this.playing) {
+      requestAnimationFrame(this.newFrame);
+    }
   }
 
   move() {
@@ -169,94 +161,6 @@ export default class Game {
   }
 };
 
-function demo() {
-  ship.color = "white";
-  demoTurn();
-  startDemoReel();
-  demoInt = setInterval(demoTurn, 12);
-}
-
-function WpressDemo() {
-  demoLoop = setInterval(() => {
-    if (keyLeft) {
-      clearInterval(demoLoop);
-      demoDisplay.innerHTML = "Press S to move down";
-      ApressDemo();
-    }
-  }, 100)
-}
-
-function ApressDemo() {
-  demoLoop = setInterval(() => {
-    if (keyDown) {
-      clearInterval(demoLoop);
-      demoDisplay.innerHTML = "Press D to move right";
-      SpressDemo();
-    }
-  }, 100)
-}
-
-function SpressDemo() {
-  demoLoop = setInterval(() => {
-    if (keyRight) {
-      clearInterval(demoLoop);
-      demoDisplay.innerHTML = "Press left arrow to rotate left";
-      DpressDemo();
-    }
-  }, 100)
-}
-
-function DpressDemo() {
-  demoLoop = setInterval(() => {
-    if (rotateLeft) {
-      clearInterval(demoLoop);
-      demoDisplay.innerHTML = "Press right arrow to rotate right";
-      LRotpressDemo();
-    }
-  }, 100)
-}
-
-function LRotpressDemo() {
-  demoLoop = setInterval(() => {
-    if (rotateRight) {
-      clearInterval(demoLoop);
-      demoDisplay.innerHTML = "Space bar to use a bomb. It clears the screen of enemies!";
-      RRotpressDemo();
-    }
-  }, 100);
-}
-
-function RRotpressDemo() {
-  enemies.push(new WanderEnemy())
-  demoLoop = setInterval(() => {
-    if (bombPress) {
-      clearInterval(demoLoop);
-      demoDisplay.innerHTML = "Destroy enemies and try to stay alive! During gameplay press P to pause. Click below to start, good luck :)"
-      soundTips.style.display = 'inline-block';
-    }
-  }, 100);
-}
-
-function startDemoReel() {
-  demoLoop = setInterval(() => {
-    if (keyUp) {
-      clearInterval(demoLoop);
-      demoDisplay.innerHTML = "Press A to move left";
-      WpressDemo();
-    }
-  }, 100);
-}
-
-function demoTurn() {
-  move();
-  shipCollisionDetection()
-  checkBulletCollision();
-  draw();
-  checkParticleLife();
-}
-
-
-
 function emptyEnemies() {
   for (var i = 0; i < enemies.length; i++) {
     createParticles(enemies[i].x, enemies[i].y, enemies[i].color);
@@ -322,15 +226,6 @@ function updateLives() {
     livesDisplay.innerHTML = "Game Over!!! Press R to restart";
   } else {
     livesDisplay.innerHTML = "Lives Left: " + (ship.lives);
-  }
-}
-
-function pauseGame() {
-  pause = !pause;
-  if (pause) {
-    mainSong.pause();
-  } else {
-    mainSong.play();
   }
 }
 
