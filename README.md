@@ -11,7 +11,6 @@ The game is a top down action arcade shooter. I programmed the various enemy typ
 
 ### Requirements
 
-- [NPM](https://www.npmjs.com/get-npm)
 - [Webpack](https://webpack.js.org/guides/getting-started/)
 
 ### Setup
