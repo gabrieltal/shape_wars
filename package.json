@@ -1,0 +1,34 @@
+{
+  "name": "shape_wars",
+  "version": "1.0.0",
+  "description": "An arcade shooter game using Vanilla JS, survive as many waves of enemies and get the highest score.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack serve --watch",
+    "start": "webpack --watch",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrieltal/shape_wars.git"
+  },
+  "author": "Gabriel Talavera",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabrieltal/shape_wars/issues"
+  },
+  "homepage": "https://github.com/gabrieltal/shape_wars#readme",
+  "dependencies": {
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.0.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.11.0"
+  }
+}
