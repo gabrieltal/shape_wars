@@ -1,17 +1,33 @@
 export default class Sound {
-  constructor() {
+  constructor(volume) {
     this.background = new Audio('../public/audio/rolemusicPirateAndDancer.mp3');
     this.bomb = new Audio('../public/audio/cat.wav');
     this.death = new Audio('../public/audio/death-scream.wav');
     this.kill = new Audio('../public/audio/enemy-destroy.wav');
     this.star = new Audio('../public/audio/hadokowa_get_a_dog_pet_a_dog.mp3');
-    this.volume = 0.5;
-
     this.background.loop = true;
+    this.elements = {
+      volume: document.getElementById('volume'),
+      mute: document.getElementById('mute')
+    };
+    this.updateVolume(this.elements.volume.value);
+  }
+
+  attachHandlers() {
+    this.elements.mute.addEventListener('change', () => {
+      if (this.elements.mute.checked) {
+        this.mute();
+      } else {
+        this.unmute();
+      }
+    });
+
+    this.elements.volume.addEventListener('change', () => {
+      this.updateVolume(this.elements.volume.value);
+    });
   }
 
   play(track) {
-    this[track].volume = this.volume;
     this[track].play();
   }
 
@@ -25,15 +41,21 @@ export default class Sound {
     ];
   }
 
+  updateVolume(volume) {
+    this.all().forEach((sound) => {
+      sound.volume = volume;
+    });
+  }
+
   mute() {
     this.all().forEach((sound) => {
-      sound.mute();
+      sound.muted = true;
     });
   }
 
   unmute() {
     this.all().forEach((sound) => {
-      sound.unmute();
+      sound.muted = false;
     });
   }
 
