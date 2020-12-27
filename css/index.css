@@ -1,0 +1,171 @@
+/* ******************** */
+/* Reset */
+/* ******************** */
+* {
+  margin: 0 auto;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: lightblue;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+p {
+  font-size: 20px;
+}
+
+h1 {
+  font-size: 38px;
+}
+
+ul {
+  list-style: none;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+button {
+  padding: 6px 8px;
+}
+
+/* ******************** */
+/* Game */
+/* ******************** */
+
+.board {
+  margin: 0 25px;
+}
+
+#canvas {
+  display: block;
+  border: 3px solid orange;
+  background: transparent;
+  background-image: linear-gradient(0deg, transparent 24%,
+    rgba(255, 255, 255, .05) 25%,
+    rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, .05) 25%,
+    rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent);
+  background-size: 50px 50px;
+}
+
+/* ******************** */
+/* Flex */
+/* ******************** */
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+/* ******************** */
+/* Text */
+/* ******************** */
+
+.text-white {
+  color: white;
+}
+
+.text-blue {
+  color: lightblue;
+}
+
+.text-green {
+  color: lightgreen;
+}
+
+.text-black {
+  color: black;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.text-14 {
+  font-size: 14px !important;
+}
+
+/* ******************** */
+/* Margin */
+/* ******************** */
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.my-10 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.mr-8 {
+  margin-right: 8px;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
+
+.mt-15 {
+  margin-top: 15px;
+}
+
+/* ******************** */
+/* Padding */
+/* ******************** */
+
+.p-15 {
+  padding: 15px;
+}
+
+/* ******************** */
+/* Backgrounds & Borders */
+/* ******************** */
+
+.bg-white {
+  background-color: white;
+}
+
+.bg-black {
+  background-color: black;
+}
+
+.border-bottom-orange {
+  border-bottom: 2px solid orange;
+}
+
+/* ******************** */
+/* Utils */
+/* ******************** */
+
+.vw-100 {
+  width: 100vw;
+}
+
+.vh-100 {
+  height: 100vh;
+}
+
+.text-center {
+  text-align: center;
+}

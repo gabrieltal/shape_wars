@@ -3,67 +3,79 @@
   <head>
     <meta charset="utf-8">
     <title>Shape Wars</title>
-    <link rel="stylesheet" type="text/css" href="index.css">
     <link rel="icon" type="image/png" href="./public/favicon.png">
-
-    <audio id="bombAudio" src="./public/cat.wav"></audio>
-    <audio id="destroyEnemy" src="./public/enemy-destroy.wav"></audio>
-    <audio id="die" src="./public/death-scream.wav"></audio>
-    <audio id="mainSong" src="./public/rolemusicPirateAndDancer.mp3" loop="true"></audio>
   </head>
-  <body>
-    <header>
-      <h1>Shape Wars</h1>
-      <div id="links">
-        <a href="http://www.github.com/gabrieltal/shape_wars" target="_blank">
-          <img src="./public/githubBlack.png" onmouseover="this.src='./public/githubRed.png'" onmouseout="this.src='./public/githubBlack.png'">
-        </a>
-        <a href="http://www.linkedin.com/in/gvtalavera" target="_blank">
-          <img src="./public/lnBlack.png" onmouseover="this.src='./public/lnBlue.png'" onmouseout="this.src='./public/lnBlack.png'">
-        </a>
-      </div>
+  <body class="vw-100 vh-100 bg-black text-white">
+    <header class="d-flex justify-content-between align-items-center bg-white border-bottom-orange p-15">
+      <h1 class="text-black">Shape Wars</h1>
     </header>
-    <div id="userInfo">
-      <p id="points">Points: 0</p>
-      <div id="livesDisplay">Lives Left: </div>
-      <div id="bombsDisplay">Bombs Left: </div>
-      <div id="audioControls">
-        <i id="selectedMute" class="fas fa-volume-up"></i>
-        <i class="fas fa-volume-off"></i>
-        <input id="volume-ctrls" value="0" type="range" min="0" max="1" step=".1"/>
+
+    <main class="d-flex flex-column justify-content-center">
+      <div class="d-flex justify-content-between align-items-center p-15">
+        <p class="bold mr-8">Points: <span class="points"></span></p>
+        <p class="text-blue bold mr-10">Lives Left: <span class="lives"></span></p>
+        <p class="text-green bold mr-10">Bombs Left: <span class="bombs"></span></p>
+        <button type="button" id="mute" class="mr-8">Mute</button>
+        <button type="button" id="unmute" class="mr-8">Unmute</button>
+        <input id="volume" value="0" type="range" min="0" max="1" step=".1"/>
       </div>
-    </div>
-    <div id="container">
-      <div id="controls">
-        <h3>Controls</h3>
-        <ul>
-          <li>W: move up</li>
-          <li>A: move left</li>
-          <li>S: move down</li>
-          <li>D: move right</li>
-          <li>&larr; rotate left </li>
-          <li>&rarr; rotate right </li>
-          <li>R: restart game</li>
-          <li>(spacebar): bomb </li>
-          <li>P: pause game </li>
-        </ul>
-        <h3> High Score </h3>
-        <div id="highScores">0</div>
+
+      <div class="game d-flex">
+        <div class="controls text-center text-16">
+          <h2 class="border-bottom-orange mb-10">Controls</h2>
+          <ul>
+            <li class="my-10">W: move up</li>
+            <li class="my-10">A: move left</li>
+            <li class="my-10">S: move down</li>
+            <li class="my-10">D: move right</li>
+            <li class="my-10">&larr; rotate left </li>
+            <li class="my-10">&rarr; rotate right </li>
+            <li class="my-10">R: restart game</li>
+            <li class="my-10">(spacebar): bomb </li>
+            <li class="my-10">P: pause game </li>
+          </ul>
+
+          <h2 class="border-bottom-orange mt-15 mb-10">High Score</h2>
+          <p id="highScore">0</p>
+        </div>
+
+        <div class="board">
+          <canvas id="canvas" width="720" height="540"></canvas>
+          <button class="my-10" type="button" id="how-to">How to Play</button>
+          <button class="my-10" type="button" id="startGame">Start Game</button>
+        </div>
+
+        <div class="text-center text-14">
+          <h2 class="border-bottom-orange mb-10">Credits</h2>
+          <ul>
+            <li>Development: Gabriel Talavera</li>
+            <li>Source code:
+              <a href="http://www.github.com/gabrieltal/shape_wars" target="_blank">
+                Github
+              </a>
+            </li>
+            <li>
+              Contact:
+              <a href="http://www.linkedin.com/in/gvtalavera" target="_blank">
+                LinkedIn
+              </a>
+            </li>
+            <li class="mt-15">
+              Music: <a href="https://freemusicarchive.org/music/Rolemusic/The_Pirate_And_The_Dancer/04_rolemusic_-_the_pirate_and_the_dancer" target="_blank">
+                The Pirate And The Dancer
+              </a>
+            </li>
+            <li>
+              By: <a href="https://freemusicarchive.org/music/Rolemusic" target="_blank">Rolemusic</a>
+            </li>
+            <li>
+              From: <a href="https://freemusicarchive.org/" target="_blank">Free Music Archive</a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <canvas id="canvas" width="720" height="540"></canvas>
-      <p id="soundTipDisplay">Sound is currently off. Move the slider above to turn up volume</p>
-      <p id="demoDisplay">Tutorial: Press W to move up</p>
-      <button id="overDisplay" onclick="startGame()">Click me to start the game </button>
-    </div>
-    <p id="musicBy">Music by <a href="http://freemusicarchive.org/music/Rolemusic/The_Pirate_And_The_Dancer/">Rolemusic</a>, 'The Pirate And The Dancer'</p>
+    </main>
+
+    <script src="/bundle.js"></script>
   </body>
-  <script src="scripts/controls.js"></script>
-  <script src="scripts/movingObject.js"></script>
-  <script src="scripts/particles.js"></script>
-  <script src="scripts/ship.js"></script>
-  <script src="scripts/wander_enemy.js"></script>
-  <script src="scripts/follow_enemy.js"></script>
-  <script src="scripts/avoider_enemy.js"></script>
-  <script src="scripts/bullet.js"></script>
-  <script src="scripts/board.js"></script>
 </html>
