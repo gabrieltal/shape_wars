@@ -110,30 +110,26 @@ export default class Game {
   }
 
   checkShipCollision() {
-    // for (var i = 0; i < enemies.length; i++) {
-    //   let enemyX = enemies[i].x;
-    //   let enemyY = enemies[i].y;
-    //   let enemyWidth = enemies[i].size/2;
-    //   if (ship.x >= enemyX - enemyWidth && ship.x <= enemyX + enemyWidth
-    //      && ship.y >= enemyY - enemyWidth && ship.y <= enemyY + enemyWidth)
-    //   {
-    //     ship.color = "black";
-    //     deathSound.play();
-    //     createParticles(ship.x, ship.y, "red");
-    //       if (ship.lives > 0) {
-    //         updateLives();
-    //         timeToRespawn = Date.now();
-    //         reset();
-    //       } else {
-    //         bullets = [];
-    //         if (points > highScore) {
-    //           highScore = points;
-    //           highScoreDisplay.innerHTML = highScore;
-    //         }
-    //         updateLives();
-    //         emptyEnemies();
-    //       }
+    this.enemies.forEach((enemy) => {
+      if (this.ship.x >= enemy.x - enemy.width && this.ship.x <= enemy.x + enemy.width
+          && this.ship.y >= enemy.y - enemy.width && this.ship.y <= enemy.y + enemy.width) {
+        this.ship.color = 'black';
+        this.sound.play('death');
+        this.createParticles(this.ship.x, this.ship.y, 'red');
+      }
+    });
+    // if (ship.lives > 0) {
+    //   updateLives();
+    //   timeToRespawn = Date.now();
+    //   reset();
+    // } else {
+    //   bullets = [];
+    //   if (points > highScore) {
+    //     highScore = points;
+    //     highScoreDisplay.innerHTML = highScore;
     //   }
+    //   updateLives();
+    //   emptyEnemies();
     // }
   }
 
