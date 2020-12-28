@@ -1,7 +1,7 @@
 import MovingObject from './movingObject';
 
 export default class FollowEnemy extends MovingObject {
-  constructor () {
+  constructor (game) {
     let x = Math.floor(Math.random() * 720);
     if ((x >= game.ship.x - 100) && (x <= game.ship.x + 100)) x += 200;
     let y = Math.floor(Math.random() * 720);
