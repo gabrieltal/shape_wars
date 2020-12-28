@@ -23,22 +23,31 @@ export default class Ship extends MovingObject{
   }
 
   updatePosition(game) {
+    // Slows down player momentum
+    this.dx += this.dx > 0 ? -0.01 : 0.01;
+    this.dy += this.dy > 0 ? -0.01 : 0.01;
+
     if (game.input.pressed.left) {
       this.dx -= .1;
-    } else if (game.input.pressed.right) {
+    }
+
+    if (game.input.pressed.right) {
       this.dx += .1;
-    } else if (game.input.pressed.up) {
+    }
+
+    if (game.input.pressed.up) {
       this.dy -= .1;
-    } else if (game.input.pressed.down) {
+    }
+
+    if (game.input.pressed.down) {
       this.dy += .1;
-    } else {
-      this.dx += this.dx > 0 ? -.1 : 0.1;
-      this.dy += this.dy > 0 ? -.1 : 0.1;
     }
 
     if (game.input.pressed.rotateLeft) {
       this.angle -= .1;
-    } else if (game.input.pressed.rotateRight) {
+    }
+
+    if (game.input.pressed.rotateRight) {
       this.angle += .1;
     }
   }
