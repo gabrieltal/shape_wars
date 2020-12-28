@@ -43,6 +43,7 @@ export default class Input {
         this.pressed.down = true;
         break;
       case keyCodes.P:
+        this.game.pause();
         this.pressed.pause = true;
         break;
       case keyCodes.SPACE:

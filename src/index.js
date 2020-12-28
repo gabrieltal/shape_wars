@@ -17,5 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const game = new Game(ctx, input, sound);
   document.getElementById('startGame').addEventListener('click', function() {
     game.start();
+    this.classList.add('d-none');
+  });
+
+  document.getElementById('how-to').addEventListener('click', function() {
+    game.pause();
+    console.log('clicked HOW TO');
   });
 });

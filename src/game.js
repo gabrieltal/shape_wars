@@ -15,6 +15,7 @@ export default class Game {
     this.input = input;
     this.sound = sound;
     this.newFrame = this.newFrame.bind(this);
+    this.resume = this.resume.bind(this);
     this.ship = new Ship(360, 270);
     this.points = 0;
     this.highscore = 1000;
@@ -55,6 +56,19 @@ export default class Game {
     requestAnimationFrame(this.newFrame);
   }
 
+  pause() {
+    this.playing = false;
+    document.getElementById('message').innerHTML = "Paused. Click to resume game."
+    document.body.addEventListener('click', this.resume);
+  }
+
+  resume() {
+    this.playing = true;
+    document.getElementById('message').innerHTML = ""
+    requestAnimationFrame(this.newFrame);
+    document.body.removeEventListener('click', this.resume);
+  }
+
   newFrame(time) {
     this.addEnemies(time);
     this.move();
@@ -65,6 +79,7 @@ export default class Game {
     if (this.playing) {
       requestAnimationFrame(this.newFrame);
     }
+    this.bombPressed = true;
   }
 
   move() {
