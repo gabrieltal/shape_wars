@@ -6,6 +6,7 @@ export default class MovingObject {
     this.color = color;
     this.dx = dx;
     this.dy = dy;
+    this.width = size / 2;
   }
 
   move(game) {
