@@ -3,6 +3,7 @@ import WanderEnemy from './wander_enemy.js';
 import AvoiderEnemy from './avoider_enemy.js';
 import FollowEnemy from './follow_enemy.js';
 import Bullet from './bullet.js';
+import Particle from './particle.js';
 
 const PARTICLE_MAX_LIFE = 40;
 const num_particles = 30;
@@ -134,28 +135,19 @@ export default class Game {
   }
 
   checkBulletCollision() {
-    // for (var i = 0; i < bullets.length; i++) {
-    //   let bx = bullets[i].x;
-    //   let by = bullets[i].y;
-    //   let enemyX;
-    //   let enemyY;
-    //   let enemyWidth;
-    //   for (var j = 0; j < enemies.length; j++) {
-    //     enemyX = enemies[j].x;
-    //     enemyY = enemies[j].y;
-    //     enemyWidth = enemies[j].size/2;
-    //     if (bx >= enemyX - enemyWidth && bx <= enemyX + enemyWidth
-    //       && by >= enemyY - enemyWidth && by <= enemyY + enemyWidth ) {
-    //
-    //       createParticles(enemies[j].x, enemies[j].y, enemies[j].color);
-    //       replaceEnemy(enemies[j]);
-    //       enemies.splice(j, 1);
-    //         enemyDestroy.play();
-    //         points += 10;
-    //         pointBoard.innerHTML = "Points: " + points;
-    //     }
-    //   }
-    // }
+    this.bullets.forEach((bullet) => {
+      this.enemies.forEach((enemy, index) => {
+        if (bullet.x >= enemy.x - enemy.width && bullet.x <= enemy.x + enemy.width
+          && bullet.y >= enemy.y - enemy.width && bullet.y <= enemy.y + enemy.width
+        ) {
+          this.createParticles(enemy.x, enemy.y, enemy.color);
+          this.enemies.splice(index, 1);
+          this.sound.play('kill');
+          this.points += 10;
+          this.updateGameInfoDisplay();
+        }
+      });
+    });
   }
 
   updateGameInfoDisplay() {
