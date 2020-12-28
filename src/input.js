@@ -16,7 +16,8 @@ export default class Input {
     }
   }
 
-  attachHandlers() {
+  attachHandlers(game) {
+    this.game = game;
     document.addEventListener("keydown", this.keyDownHandler, false);
     document.addEventListener("keyup", this.keyUpHandler, false);
   }

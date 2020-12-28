@@ -50,7 +50,7 @@ export default class Game {
     this.fillBullets();
     this.particles = [];
     this.sound.play('background');
-    this.input.attachHandlers();
+    this.input.attachHandlers(this);
     this.playing = true;
     requestAnimationFrame(this.newFrame);
   }
