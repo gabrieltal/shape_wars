@@ -48,6 +48,7 @@ export default class Input {
         break;
       case keyCodes.SPACE:
         e.preventDefault();
+        this.game.bomb();
         this.pressed.space = true;
         break;
     }

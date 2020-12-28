@@ -69,6 +69,23 @@ export default class Game {
     document.body.removeEventListener('click', this.resume);
   }
 
+  bomb() {
+    if (this.ship.bombs > 0) {
+      this.sound.play('bomb');
+      this.ship.bombs -= 1;
+      this.createParticles(this.ship.x, this.ship.y, this.ship.color);
+      this.points += 100;
+
+      this.enemies.forEach((enemy) => {
+        this.createParticles(enemy.x, enemy.y, enemy.color);
+        this.points += 10;
+      });
+
+      this.enemies = [];
+      this.updateGameInfoDisplay();
+    }
+  }
+
   newFrame(time) {
     this.addEnemies(time);
     this.move();
@@ -217,18 +234,7 @@ function emptyEnemies() {
   enemies = [];
 }
 
-function bomb() {
-  if (ship.bombs > 0) {
-    bombSound.play();
-    points += 200;
-    pointBoard.innerHTML = "Points: " + points;
-    createParticles(ship.x, ship.y, "white");
-    timeToSpawn = Date.now();
-    ship.bombs -= 1;
-    this.emptyEnemies();
-    bombsDisplay.innerHTML = "Bombs Left: " + (ship.bombs);
-  }
-}
+
 
 function shipReset() {
   ship.x = canvas.width/2;
