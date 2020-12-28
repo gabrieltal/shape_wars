@@ -164,16 +164,16 @@ export default class Game {
   }
 
   checkParticleLife() {
-    // for (var i = 0; i < particles.length; i++) {
-    //   if (particles[i].life >= particles[i].maxLife) {
-    //     particles.splice(i, 1);
-    //   }
-    // }
+    this.particles.forEach((particle, i) => {
+      if (particle.life >= particle.maxLife) {
+        this.particles.splice(i, 1);
+      }
+    });
   }
 
   createParticles(x, y, color) {
     for (var i = 0; i < num_particles; i++) {
-      particles.push(new Particles(x, y, color, PARTICLE_MAX_LIFE));
+      this.particles.push(new Particle(x, y, color, PARTICLE_MAX_LIFE));
     }
   }
 
@@ -200,16 +200,6 @@ function emptyEnemies() {
     createParticles(enemies[i].x, enemies[i].y, enemies[i].color);
   }
   enemies = [];
-}
-
-function replaceEnemy(enemy) {
-  if (enemy instanceof WanderEnemy) {
-    enemies.push(new WanderEnemy());
-  } else if (enemy instanceof FollowEnemy) {
-    enemies.push(new FollowEnemy());
-  } else if (enemy instanceof AvoiderEnemy) {
-    enemies.push(new AvoiderEnemy());
-  }
 }
 
 function bomb() {
