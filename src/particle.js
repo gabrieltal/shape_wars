@@ -1,6 +1,6 @@
 import MovingObject from './movingObject';
 
-export default class Particles extends MovingObject {
+export default class Particle extends MovingObject {
   constructor(x, y, color, maxLife) {
     let dx = Math.random();
     dx = dx > .5 ? -dx : dx;
@@ -18,5 +18,8 @@ export default class Particles extends MovingObject {
     ctx.fillStyle = this.color;
     ctx.fill();
     ctx.closePath();
+  }
+
+  updatePosition() {
   }
 }
