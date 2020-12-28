@@ -1,7 +1,12 @@
+import Ship from './ship.js';
+import WanderEnemy from './wander_enemy.js';
+import AvoiderEnemy from './avoider_enemy.js';
+import FollowEnemy from './follow_enemy.js';
+import Bullet from './bullet.js';
+
 const PARTICLE_MAX_LIFE = 40;
 const num_particles = 30;
 const BULLET_COUNT = 10;
-import Ship from './ship.js';
 
 export default class Game {
   constructor(ctx, input, sound) {
@@ -12,6 +17,22 @@ export default class Game {
     this.ship = new Ship(360, 270);
     this.points = 0;
     this.highscore = 1000;
+    this.bullets = [];
+
+    this.enemyInfo = {
+      wander: {
+        spawn_rate: 2500,
+        last_spawn: null
+      },
+      follow: {
+        spawn_rate: 5000,
+        last_spawn: null
+      },
+      avoider: {
+        spawn_rate: 8000,
+        last_spawn: null
+      }
+    }
 
     this.gameInfo = {
       points: document.getElementById("points"),
@@ -25,7 +46,7 @@ export default class Game {
 
   start() {
     this.enemies = [];
-    this.bullets = [];
+    this.fillBullets();
     this.particles = [];
     this.sound.play('background');
     this.input.attachHandlers();
@@ -34,7 +55,7 @@ export default class Game {
   }
 
   newFrame(time) {
-    // populateBoard();
+    this.addEnemies(time);
     this.move();
     this.checkShipCollision();
     this.checkBulletCollision();
@@ -60,8 +81,35 @@ export default class Game {
     });
   }
 
+  addEnemies(time) {
+    if (this.enemyInfo.wander.last_spawn === null) {
+      this.enemies.push(new WanderEnemy(this));
+      this.enemies.push(new WanderEnemy(this));
+      this.enemies.push(new WanderEnemy(this));
+      this.enemies.push(new WanderEnemy(this));
+      this.enemyInfo.wander.last_spawn = time;
+      this.enemyInfo.follow.last_spawn = time;
+      this.enemyInfo.avoider.last_spawn = time;
+    } else {
+      if (time - this.enemyInfo.wander.last_spawn >= this.enemyInfo.wander.spawn_rate) {
+        this.enemies.push(new WanderEnemy(this));
+        this.enemies.push(new WanderEnemy(this));
+        this.enemyInfo.wander.last_spawn = time;
+      }
+    }
+
+    if (time - this.enemyInfo.follow.last_spawn >= this.enemyInfo.follow.spawn_rate) {
+      this.enemies.push(new FollowEnemy(this));
+      this.enemyInfo.follow.last_spawn = time;
+    }
+
+    if (time - this.enemyInfo.avoider.last_spawn >= this.enemyInfo.avoider.spawn_rate) {
+      this.enemies.push(new AvoiderEnemy(this));
+      this.enemyInfo.avoider.last_spawn = time;
+    }
+  }
+
   checkShipCollision() {
-    console.log('ship collision');
     // for (var i = 0; i < enemies.length; i++) {
     //   let enemyX = enemies[i].x;
     //   let enemyY = enemies[i].y;
@@ -90,7 +138,6 @@ export default class Game {
   }
 
   checkBulletCollision() {
-    console.log('check bullet collision');
     // for (var i = 0; i < bullets.length; i++) {
     //   let bx = bullets[i].x;
     //   let by = bullets[i].y;
@@ -129,7 +176,6 @@ export default class Game {
   }
 
   checkParticleLife() {
-    console.log('check particle life');
     // for (var i = 0; i < particles.length; i++) {
     //   if (particles[i].life >= particles[i].maxLife) {
     //     particles.splice(i, 1);
@@ -226,64 +272,5 @@ function updateLives() {
     livesDisplay.innerHTML = "Game Over!!! Press R to restart";
   } else {
     livesDisplay.innerHTML = "Lives Left: " + (ship.lives);
-  }
-}
-
-function populateBoard () {
-  let time = Date.now() - timeToSpawn;
-  if (ship.lives < 0) {
-  }
-  else if (ship.bombs < 1 || ship.lives < 2) {
-    if (time >= 1000 && enemies.length < 5) {
-      for (var i = 0; i < 6; i++) {
-        enemies.push(new WanderEnemy());
-      }
-    }
-    if (time >= 8000 && enemies.length <= 6) {
-      for (var i = 0; i < 3; i++) {
-        enemies.push(new FollowEnemy());
-        enemies.push(new WanderEnemy());
-        enemies.push(new AvoiderEnemy());
-      }
-    }
-
-    if (time >= 20000 && enemies.length <= 15) {
-      for (var i = 0; i < 2; i++) {
-        enemies.push(new FollowEnemy());
-        enemies.push(new AvoiderEnemy());
-      }
-    }
-  } else {
-    if (time < 3000 && enemies.length < 4) {
-      for (var i = 0; i < 4; i++) {
-        enemies.push(new WanderEnemy());
-      }
-    }
-
-    else if (time >= 5000 && enemies.length < 5) {
-      for (var i = 0; i < 3; i++) {
-        enemies.push(new WanderEnemy());
-      }
-    }
-
-    else if (enemies.length < 8 && time >= 10000) {
-      for (var i = 0; i < 2; i++) {
-        enemies.push(new FollowEnemy());
-      }
-    }
-
-    else if (enemies.length < 10 && time >= 15000 ) {
-      for (var i = 0; i < 3; i++) {
-        enemies.push(new FollowEnemy());
-      }
-      enemies.push(new AvoiderEnemy());
-    }
-
-    else if (enemies.length < 14 && time >= 20000 ) {
-      for (var i = 0; i < 2; i++) {
-        enemies.push(new FollowEnemy());
-        enemies.push(new AvoiderEnemy());
-      }
-    }
   }
 }
