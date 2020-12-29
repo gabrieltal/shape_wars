@@ -1,26 +1,33 @@
-var path = require("path");
-
 module.exports = {
-  context: __dirname,
-  entry: "./index.js",
+  entry: [
+    './src/index.js',
+  ],
   output: {
-    path: path.resolve(__dirname),
-    filename: "bundle.js"
+    path: __dirname,
+    publicPath: '/',
+    filename: 'bundle.js'
   },
   module: {
-    loaders: [
+    rules: [
       {
-        test: [/\.jsx?$/, /\.js?$/],
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['env']
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          "css-loader"
+        ]
+      },
+      {
+        "test": /\.js$/,
+        "exclude": /node_modules/,
+        "use": {
+          "loader": "babel-loader",
+          "options": {
+            "presets": [
+              "@babel/preset-env",
+            ]
+          }
         }
-      }
+      },
     ]
-  },
-  devtool: 'source-map',
-  resolve: {
-    extensions: [".js", ".jsx", "*"]
   }
 };

@@ -1,0 +1,269 @@
+/* ******************** */
+/* Reset */
+/* ******************** */
+* {
+  margin: 0 auto;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: lightblue;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+p {
+  font-size: 20px;
+}
+
+h1 {
+  font-size: 38px;
+}
+
+ul {
+  list-style: none;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+button {
+  border-radius: 4px;
+  padding: 10px 10px;
+  cursor: pointer;
+}
+
+/* ******************** */
+/* Game */
+/* ******************** */
+
+.board {
+  margin: 0 25px;
+}
+
+#canvas {
+  display: block;
+  border: 3px solid orange;
+  background: transparent;
+  background-image: linear-gradient(0deg, transparent 24%,
+    rgba(255, 255, 255, .05) 25%,
+    rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, .05) 25%,
+    rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent);
+  background-size: 50px 50px;
+}
+
+#how-to-modal {
+  z-index: 1000;
+}
+
+/* ******************** */
+/* Flex */
+/* ******************** */
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+/* ******************** */
+/* Text */
+/* ******************** */
+
+.text-white {
+  color: white;
+}
+
+.text-blue {
+  color: lightblue;
+}
+
+.text-green {
+  color: lightgreen;
+}
+
+.text-black {
+  color: black;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.text-14 {
+  font-size: 14px !important;
+}
+
+/* ******************** */
+/* Margin */
+/* ******************** */
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.mb-6 {
+  margin-bottom: 6px;
+}
+
+.ml-4 {
+  margin-left: 4px;
+}
+
+.mt-auto {
+  margin-top: auto;
+}
+
+.my-10 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.mr-4 {
+  margin-right: 4px;
+}
+
+.mr-8 {
+  margin-right: 8px;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
+
+.ml-8 {
+  margin-left: 8px;
+}
+
+.ml-0 {
+  margin-left: 0;
+}
+
+.mt-15 {
+  margin-top: 15px;
+}
+
+.mx-8 {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.m-auto {
+  margin: auto;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ******************** */
+/* Padding */
+/* ******************** */
+
+.p-15 {
+  padding: 15px;
+}
+
+/* ******************** */
+/* Backgrounds & Borders */
+/* ******************** */
+
+.bg-white {
+  background-color: white;
+}
+
+.bg-black {
+  background-color: black;
+}
+
+.border-bottom-orange {
+  border-bottom: 2px solid orange;
+}
+
+.btn-orange {
+  background-color: orange;
+  border: 2px solid orange;
+}
+
+/* ******************** */
+/* Utils */
+/* ******************** */
+
+.vw-100 {
+  width: 100vw;
+}
+
+.vh-100 {
+  height: 100vh;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.d-none {
+  display: none !important;
+}
+
+.d-block {
+  display: block !important;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.overlay {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+
+.top-50 {
+  top: 45%;
+}
+
+.left-50 {
+  left: 45%;
+}
+
+.modal {
+  height: 400px;
+  width: 400px;
+}
+
+.modal > ul {
+  text-align: left;
+}

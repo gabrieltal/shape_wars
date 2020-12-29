@@ -19,13 +19,13 @@ everything else proceeds.
 
 In Shape Struggle, users will be able to:
 
-- [ ] Navigate around the game board with their ship
-- [ ] Shoot down and collide with enemies which would lead to a fail state
-- [ ] Start, pause and restart the game
+- [*] Navigate around the game board with their ship
+- [*] Shoot down and collide with enemies which would lead to a fail state
+- [*] Start, pause and restart the game
 
 In addition, this project will include:
-- [ ] Various enemy types and various AI
-- [ ] Music/sound effects
+- [*] Various enemy types and various AI
+- [*] Music/sound effects
 
 ## Wireframes
 
@@ -33,11 +33,11 @@ In addition, this project will include:
  a display to list controls, an about button to give credit to the
  inspiration of the game, Geometry Wars, and a link to my Github and LinkedIn
 
-![Wireframe](https://github.com/gabrieltal/shape_struggle/blob/master/docs/shape_struggle.png)
+![Wireframe](https://github.com/gabrieltal/shape_struggle/blob/master/documents/shape_struggle.png)
 
  ## Architecture and Technologies
 
- This project will be implemented with teh following technologies:
+ This project will be implemented with the following technologies:
      * Vanilla JavaScript for overall structure and game logic,
      * HTML5 Canvas for DOM manipulation and rendering,
      * Webpack to bundle and serve up the various scripts

@@ -2,91 +2,107 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css"
-      href="index.css">
     <title>Shape Wars</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
-    <link rel="icon" type="image/png" href="./docs/triangle.png">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117689004-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-117689004-1');
-  </script>
-    <audio id="bombAudio" src="./docs/cat.wav">
-    </audio>
-    <audio id="destroyEnemy" src="./docs/enemy_destroy.wav">
-    </audio>
-    <audio id="die" src="./docs/sickYell.wav">
-    </audio>
-    <audio id="mainSong" src="./docs/rolemusicPirateAndDancer.mp3"
-      loop="true">
-    </audio>
-    <script src="bundle.js"></script>
+    <link rel="icon" type="image/png" href="./public/favicon.png">
   </head>
-  <body>
-    <header>
-      <h1>Shape Wars</h1>
-      <div id="links">
-        <a href="http://www.github.com/gabrieltal/shape_wars" target="_blank">
-          <img src="./docs/githubBlack.png"
-            onmouseover="this.src='./docs/githubRed.png'"
-            onmouseout="this.src='./docs/githubBlack.png'">
-        </a>
-        <a href="http://www.linkedin.com/in/gvtalavera" target="_blank">
-          <img src="./docs/lnBlack.png"
-            onmouseover="this.src='./docs/lnBlue.png'"
-            onmouseout="this.src='./docs/lnBlack.png'">
-        </a>
-      </div>
-    </header>
-    <div id="userInfo">
-      <p id="points">Points: 0</p>
-      <div id="livesDisplay">Lives Left: </div>
-      <div id="bombsDisplay">Bombs Left: </div>
-      <div id="audioControls">
-        <i id="selectedMute" class="fas fa-volume-up"></i>
-        <i class="fas fa-volume-off"></i>
-        <input id="volume-ctrls" value="0" type="range" min="0" max="1" step=".1"/>
-      </div>
-    </div>
-    <div id="container">
-    <div id="controls">
-      <h3> Controls </h3>
-        <ul>
-          <li>W: move up</li>
-          <li>A: move left</li>
-          <li>S: move down</li>
-          <li>D: move right</li>
-          <li>&larr; rotate left </li>
-          <li>&rarr; rotate right </li>
-          <li>R: restart game</li>
-          <li>(spacebar): bomb </li>
-          <li>P: pause game </li>
-        </ul>
-        <h3> High Score </h3>
-        <div id="highScores">
-          1000
+  <body class="vw-100 vh-100 bg-black text-white">
+    <div class="overlay d-none" id="how-to-modal">
+      <div class="container h-100 d-flex justify-content-center align-items-center">
+        <div class="modal p-15 bg-white text-black">
+          <h2 class="mb-10">How To Play</h2>
+          <p class="text-14 mb-6">
+            You take command of a small white triangle ship that shoots projectiles.
+            <br> <br>
+            Take out as many enemy shapes as you can and get the high score.
+          </p>
+          <ul>
+            <li class="d-flex align-items-center mb-6"><img class="mr-4 ml-0" src="./public/Wanderer.png" width="50px" height="50px" alt="Wander Enemy">Wander Enemies wander aimlessly</li>
+            <li class="d-flex align-items-center mb-6"><img class="mr-4 ml-0" src="./public/Follower.png" width="50px" height="50px" alt="Follower Enemy">Follower Enemies will slowly follow you</li>
+            <li class="d-flex align-items-center mb-6"><img class="mr-4 ml-0" src="./public/Avoider.png" width="50px" height="50px" alt="Avoider Enemy">Avoider Enemies will follow you and try to avoid your incoming bullets</li>
+          </ul>
+
+          <p class="text-14">Pressing the SPACEBAR will use one of your bombs and wipe the board of enemies.</p>
+
+          <button class="mt-15 mx-auto d-block" type="button" id="close-modal">Close Modal</button>
         </div>
+      </div>
     </div>
-    <canvas id="canvas" width="720" height="540"></canvas>
-    <p id="soundTipDisplay">Sound is currently off. Move the slider above to turn up volume</p>
-    <p id="demoDisplay">Tutorial: Press W to move up</p>
-    <button id="overDisplay"
-    onclick="startGame()">Click me to start the game </button>
-  </div>
-  <p id="musicBy">Music by <a href="http://freemusicarchive.org/music/Rolemusic/The_Pirate_And_The_Dancer/">Rolemusic</a>, 'The Pirate And The Dancer'</p>
+
+    <header class="d-flex justify-content-between align-items-center bg-white border-bottom-orange p-15">
+      <h1 class="text-black">Shape Wars</h1>
+    </header>
+
+    <main class="d-flex flex-column justify-content-center">
+      <div class="d-flex justify-content-between align-items-center p-15">
+        <p class="bold mr-8">Points: <span id="points"></span></p>
+        <p class="text-blue bold mr-10">Lives Left: <span id="lives"></span></p>
+        <p class="text-green bold mr-10">Bombs Left: <span id="bombs"></span></p>
+        <label class="ml-8 mr-4" for="volume">Volume: </label>
+        <input class="mr-8" id="volume" value=".3" type="range" min="0" max="1" step=".1"/>
+        <input class="mx-8" type="checkbox" id="mute">Mute</input>
+      </div>
+
+      <div class="game d-flex">
+        <div class="controls text-center text-16">
+          <h2 class="border-bottom-orange mb-10">Controls</h2>
+          <ul>
+            <li class="my-10">W: move up</li>
+            <li class="my-10">A: move left</li>
+            <li class="my-10">S: move down</li>
+            <li class="my-10">D: move right</li>
+            <li class="my-10">&larr; rotate left </li>
+            <li class="my-10">&rarr; rotate right </li>
+            <li class="my-10">R: restart game</li>
+            <li class="my-10">(spacebar): bomb </li>
+            <li class="my-10">P: pause game </li>
+          </ul>
+
+          <h2 class="border-bottom-orange mt-15 mb-10">High Score</h2>
+          <p id="highscore"></p>
+        </div>
+
+        <div class="board position-relative">
+          <canvas id="canvas" width="720" height="540"></canvas>
+          <div id="canvas-overlay" class="overlay d-none">
+            <div class="text-center position-relative top-50" id="message"></div>
+          </div>
+          <button class="position-absolute top-50 left-50 btn-orange" type="button" id="startGame">Start Game</button>
+        </div>
+
+        <div class="text-center text-16">
+          <h2 class="border-bottom-orange my-10">Game</h2>
+          <button class="my-10" type="button" id="how-to">How to Play</button>
+
+          <h2 class="border-bottom-orange mt-15 mb-10">Credits</h2>
+          <ul>
+            <li>Development: Gabriel Talavera</li>
+            <li class="d-flex align-items-center">Source code:
+              <a class="ml-4 d-flex align-items-center" href="http://www.github.com/gabrieltal/shape_wars" target="_blank" rel="noopener noreferrer">
+                <img class="mr-4 ml-0" src="./public/github.svg" width="25px" height="25px" alt="Github icon"> Github
+              </a>
+            </li>
+            <li class="d-flex align-items-center">
+              Contact:
+              <a class="ml-4 d-flex align-items-center" href="http://www.linkedin.com/in/gvtalavera" target="_blank" rel="noopener noreferrer">
+                <img class="mr-4 ml-0" src="./public/linkedin.svg" width="25px" height="25px" alt="LinkedIn icon">  LinkedIn
+              </a>
+            </li>
+            <li class="mt-15">
+              Music: <a href="https://freemusicarchive.org/music/Rolemusic/The_Pirate_And_The_Dancer/04_rolemusic_-_the_pirate_and_the_dancer" target="_blank" rel="noopener noreferrer">
+                The Pirate And The Dancer
+              </a>
+            </li>
+            <li>
+              By: <a href="https://freemusicarchive.org/music/Rolemusic" target="_blank" rel="noopener noreferrer">Rolemusic</a>
+            </li>
+            <li>
+              From: <a href="https://freemusicarchive.org/" target="_blank" rel="noopener noreferrer">Free Music Archive</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </main>
+
+    <script src="/bundle.js"></script>
   </body>
-  <script src="scripts/controls.js"></script>
-  <script src="scripts/movingObject.js"></script>
-  <script src="scripts/particles.js"></script>
-  <script src="scripts/ship.js"></script>
-  <script src="scripts/wander_enemy.js"></script>
-  <script src="scripts/follow_enemy.js"></script>
-  <script src="scripts/avoider_enemy.js"></script>
-  <script src="scripts/bullet.js"></script>
-  <script src="scripts/board.js"></script>
 </html>
