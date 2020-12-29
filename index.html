@@ -38,15 +38,19 @@
           <p id="highscore"></p>
         </div>
 
-        <div class="board">
+        <div class="board position-relative">
           <canvas id="canvas" width="720" height="540"></canvas>
-          <button class="my-10" type="button" id="how-to">How to Play</button>
-          <button class="my-10" type="button" id="startGame">Start Game</button>
-          <p id="message"></p>
+          <div id="canvas-overlay" class="overlay d-none">
+            <div class="text-center position-relative top-50" id="message"></div>
+          </div>
+          <button class="position-absolute top-50 left-50 btn-orange" type="button" id="startGame">Start Game</button>
         </div>
 
-        <div class="text-center text-14">
-          <h2 class="border-bottom-orange mb-10">Credits</h2>
+        <div class="text-center text-16">
+          <h2 class="border-bottom-orange my-10">Game</h2>
+          <button class="my-10" type="button" id="how-to">How to Play</button>
+
+          <h2 class="border-bottom-orange mt-15 mb-10">Credits</h2>
           <ul>
             <li>Development: Gabriel Talavera</li>
             <li>Source code:
