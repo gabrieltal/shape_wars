@@ -6,6 +6,8 @@ import Input from './input.js';
 document.addEventListener("DOMContentLoaded", () => {
   // Set up Canvas and User Input
   const canvas = document.getElementById("canvas");
+  canvas.width = Game.WIDTH;
+  canvas.height = Game.HEIGHT;
   const ctx = canvas.getContext("2d");
   const input = new Input();
 

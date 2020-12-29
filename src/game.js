@@ -5,11 +5,7 @@ import FollowEnemy from './follow_enemy.js';
 import Bullet from './bullet.js';
 import Particle from './particle.js';
 
-const PARTICLE_MAX_LIFE = 40;
-const num_particles = 30;
-const BULLET_COUNT = 10;
-
-export default class Game {
+class Game {
   constructor(ctx, input, sound) {
     this.ctx = ctx;
     this.input = input;
@@ -273,3 +269,13 @@ function updateLives() {
     livesDisplay.innerHTML = "Lives Left: " + (ship.lives);
   }
 }
+Game.WIDTH = 720;
+Game.HEIGHT = 540;
+Game.PARTICLE_MAX_LIFE = 40;
+Game.NUM_PARTICLES = 30;
+Game.BULLET_COUNT = 10;
+Game.INITIAL_DIFFICULTY = 0.001;
+Game.DIFFICULTY_DELTA = 0.003;
+Game.BASE_HIGHSCORE = 1000;
+
+export default Game;
