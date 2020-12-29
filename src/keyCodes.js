@@ -6,3 +6,4 @@ export const LEFT = 37;
 export const RIGHT = 39;
 export const SPACE = 32;
 export const P = 80;
+export const R = 82;

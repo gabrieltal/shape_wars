@@ -10,9 +10,7 @@ export default class Input {
       up: false,
       down: false,
       rotateLeft: false,
-      rotateRight: false,
-      space: false,
-      pause: false
+      rotateRight: false
     }
   }
 
@@ -45,6 +43,10 @@ export default class Input {
       case keyCodes.P:
         this.game.pause();
         break;
+      case keyCodes.R:
+        this.game.playing = false;
+        this.game.bullets = [];
+        break;
       case keyCodes.SPACE:
         e.preventDefault();
         if (this.game.playing) {
@@ -72,6 +74,9 @@ export default class Input {
         break;
       case keyCodes.S:
         this.pressed.down = false;
+        break;
+      case keyCodes.R:
+        this.game.restart();
         break;
     }
   }
