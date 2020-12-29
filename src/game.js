@@ -44,15 +44,16 @@ class Game {
       overlay: document.getElementById('canvas-overlay')
     };
 
+    this.input.attachHandlers(this);
     this.updateGameInfoDisplay();
   }
 
   start() {
     this.enemies = [];
+    this.bullets = [];
     this.fillBullets();
     this.particles = [];
     this.sound.play('background');
-    this.input.attachHandlers(this);
     this.playing = true;
     requestAnimationFrame(this.newFrame);
   }
