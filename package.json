@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/gabrieltal/shape_wars/issues"
   },
-  "homepage": ".",
+  "homepage": "https://shapewars.xyz",
   "dependencies": {
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0"
