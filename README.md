@@ -28,7 +28,7 @@ Then go to localhost:8080 to see the game running.
 
 Players are able to move around and rotate with WASD and left and right arrow keys respectively. Players are given one bomb to wipe the screen. The player must navigate and maneuver around the various enemy types and take them out before they are taken out.
 
-![Avoiders](https://github.com/gabrieltal/shape_wars/blob/master/docs/avoiders.gif)
+![Avoiders](https://github.com/gabrieltal/shape_wars/blob/master/documents/avoiders.gif)
 
 ### AI Enemies
    * Enemies are able to follow and pursue the player by a simple method of simply tracking the player's location compared to their own positioning and moving in the direction of the player
@@ -40,7 +40,7 @@ Players are able to move around and rotate with WASD and left and right arrow ke
 ### Particles!
    * After each enemy is destroy a parade of particles are released and give life and color to the game
 
-![Particles](https://github.com/gabrieltal/shape_wars/blob/master/docs/particles.gif)
+![Particles](https://github.com/gabrieltal/shape_wars/blob/master/documents/particles.gif)
 
 ## TODOS
   * I would like to add a backend to hold high scores
