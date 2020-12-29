@@ -26,23 +26,31 @@ Then go to localhost:8080 to see the game running.
 
 ## Features
 
-Players are able to move around and rotate with WASD and left and right arrow keys respectively. Players are given one bomb to wipe the screen. The player must navigate and maneuver around the various enemy types and take them out before they are taken out.
+Players are a ship and able to move around the board with WASD and they can rotate their ship with the left and right arrow keys.
+Players shoot projectiles and have to survive waves of enemies. Players only have 3 lives and they are given 2 bombs that can wipe the board of enemies. The goal is to get the high score.
 
 ![Avoiders](https://github.com/gabrieltal/shape_wars/blob/master/documents/avoiders.gif)
 
 ### AI Enemies
-   * Enemies are able to follow and pursue the player by a simple method of simply tracking the player's location compared to their own positioning and moving in the direction of the player
-   * Another enemy detects when bullets are near them and heading in their direction and proceed to try and dodge the bullets
+
+The game has three enemy types.
+
+  * Enemies that wander aimlessly
+  * Enemies that are able to follow and pursue the player. This is done by the enemy tracking the player's location and compared to their own current location are able to determine the direction to move in.
+  * The last enemy type also follows and pursues the player, but they are able to dodge the player's incoming bullets. The player is still able to shoot them since they aren't the fastest at dodging bullets (I needed to give the player a shot so I didn't make them super quick at dodging bullets)
 
 ### Projectiles
-   * When firing bullets the bullets are released and proceed in the direction of the user at the moment of firing
+
+When firing bullets the bullets are released and proceed in the direction of the user at the moment of firing
 
 ### Particles!
-   * After each enemy is destroy a parade of particles are released and give life and color to the game
+
+After each enemy is destroy a parade of particles are released and give life and color to the game
 
 ![Particles](https://github.com/gabrieltal/shape_wars/blob/master/documents/particles.gif)
 
 ## TODOS
+
   * I would like to add a backend to hold high scores
   * Add power ups to give players bonus lives, bombs, etc
   * Add more enemy types!
