@@ -189,6 +189,7 @@ class Game {
 
           if (this.points > this.highscore) {
             this.highscore = this.points;
+            this.message = 'New High Score! Click to Play Again.';
           }
 
           this.gameInfo.overlay.classList.remove('d-none');
