@@ -44,12 +44,12 @@ export default class Input {
         break;
       case keyCodes.P:
         this.game.pause();
-        this.pressed.pause = true;
         break;
       case keyCodes.SPACE:
         e.preventDefault();
-        this.game.bomb();
-        this.pressed.space = true;
+        if (this.game.playing) {
+          this.game.bomb();
+        }
         break;
     }
   }
@@ -72,12 +72,6 @@ export default class Input {
         break;
       case keyCodes.S:
         this.pressed.down = false;
-        break;
-      case keyCodes.SPACE:
-        this.pressed.space = false;
-        break;
-      case keyCodes.P:
-        this.pressed.pause = false;
         break;
     }
   }
