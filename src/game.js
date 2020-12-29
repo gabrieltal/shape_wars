@@ -12,10 +12,13 @@ class Game {
     this.sound = sound;
     this.newFrame = this.newFrame.bind(this);
     this.resume = this.resume.bind(this);
-    this.ship = new Ship(360, 270);
+    this.restart = this.restart.bind(this);
+    this.ship = new Ship(Game.WIDTH / 2, Game.HEIGHT / 2);
     this.points = 0;
-    this.highscore = 1000;
+    this.highscore = Game.BASE_HIGHSCORE;
+    this.difficulty = Game.INITIAL_DIFFICULTY;
     this.bullets = [];
+    this.message = '';
 
     this.enemyInfo = {
       wander: {
@@ -36,7 +39,9 @@ class Game {
       points: document.getElementById("points"),
       lives: document.getElementById('lives'),
       bombs: document.getElementById('bombs'),
-      highscore: document.getElementById('highscore')
+      highscore: document.getElementById('highscore'),
+      message: document.getElementById('message'),
+      overlay: document.getElementById('canvas-overlay')
     };
 
     this.updateGameInfoDisplay();
@@ -54,15 +59,34 @@ class Game {
 
   pause() {
     this.playing = false;
-    document.getElementById('message').innerHTML = "Paused. Click to resume game."
-    document.body.addEventListener('click', this.resume);
+    this.sound.pause();
+    this.message = 'Paused. Click to resume.';
+    this.gameInfo.overlay.classList.remove('d-none');
+    this.gameInfo.overlay.addEventListener('click', this.resume);
+    this.updateGameInfoDisplay();
   }
 
   resume() {
     this.playing = true;
-    document.getElementById('message').innerHTML = ""
+    this.sound.play('background');
+    this.message = '';
+    this.gameInfo.overlay.classList.add('d-none');
+    this.gameInfo.overlay.removeEventListener('click', this.resume);
     requestAnimationFrame(this.newFrame);
-    document.body.removeEventListener('click', this.resume);
+    this.updateGameInfoDisplay();
+  }
+
+  restart() {
+    this.gameInfo.overlay.classList.add('d-none');
+    this.gameInfo.overlay.removeEventListener('click', this.restart);
+    this.message = '';
+    this.points = 0;
+    this.ship.color = 'white';
+    this.ship.lives = 2;
+    this.ship.bombs = 2;
+    this.difficulty = Game.INITIAL_DIFFICULTY;
+    this.updateGameInfoDisplay();
+    this.start();
   }
 
   bomb() {
@@ -83,6 +107,7 @@ class Game {
   }
 
   newFrame(time) {
+    this.difficulty += Game.DIFFICULTY_DELTA;
     this.addEnemies(time);
     this.move();
     this.checkShipCollision();
@@ -92,7 +117,6 @@ class Game {
     if (this.playing) {
       requestAnimationFrame(this.newFrame);
     }
-    this.bombPressed = true;
   }
 
   move() {
@@ -119,20 +143,21 @@ class Game {
       this.enemyInfo.wander.last_spawn = time;
       this.enemyInfo.follow.last_spawn = time;
       this.enemyInfo.avoider.last_spawn = time;
-    } else {
-      if (time - this.enemyInfo.wander.last_spawn >= this.enemyInfo.wander.spawn_rate) {
-        this.enemies.push(new WanderEnemy(this));
-        this.enemies.push(new WanderEnemy(this));
-        this.enemyInfo.wander.last_spawn = time;
-      }
+      return;
     }
 
-    if (time - this.enemyInfo.follow.last_spawn >= this.enemyInfo.follow.spawn_rate) {
+    if (time - this.enemyInfo.wander.last_spawn >= (this.enemyInfo.wander.spawn_rate - this.difficulty)) {
+      this.enemies.push(new WanderEnemy(this));
+      this.enemies.push(new WanderEnemy(this));
+      this.enemyInfo.wander.last_spawn = time;
+    }
+
+    if (time - this.enemyInfo.follow.last_spawn >= (this.enemyInfo.follow.spawn_rate - this.difficulty)) {
       this.enemies.push(new FollowEnemy(this));
       this.enemyInfo.follow.last_spawn = time;
     }
 
-    if (time - this.enemyInfo.avoider.last_spawn >= this.enemyInfo.avoider.spawn_rate) {
+    if (time - this.enemyInfo.avoider.last_spawn >= (this.enemyInfo.avoider.spawn_rate - this.difficulty)) {
       this.enemies.push(new AvoiderEnemy(this));
       this.enemyInfo.avoider.last_spawn = time;
     }
@@ -145,21 +170,34 @@ class Game {
         this.ship.color = 'black';
         this.sound.play('death');
         this.createParticles(this.ship.x, this.ship.y, 'red');
+
+        if (this.ship.lives > 0) {
+          this.enemies = [];
+          this.ship.lives -= 1;
+          this.ship.x = Game.WIDTH / 2;
+          this.ship.y = Game.HEIGHT / 2;
+          this.ship.color = 'white';
+          this.enemies.push(new FollowEnemy(this));
+          this.enemies.push(new FollowEnemy(this));
+          this.enemies.push(new FollowEnemy(this));
+        } else {
+          this.bullets = [];
+
+          this.sound.pause();
+          this.playing = false;
+          this.message = 'Game Over. Click to Play Again.';
+
+          if (this.points > this.highscore) {
+            this.highscore = this.points;
+          }
+
+          this.gameInfo.overlay.classList.remove('d-none');
+          this.gameInfo.overlay.addEventListener('click', this.restart);
+        }
+
+        this.updateGameInfoDisplay();
       }
     });
-    // if (ship.lives > 0) {
-    //   updateLives();
-    //   timeToRespawn = Date.now();
-    //   reset();
-    // } else {
-    //   bullets = [];
-    //   if (points > highScore) {
-    //     highScore = points;
-    //     highScoreDisplay.innerHTML = highScore;
-    //   }
-    //   updateLives();
-    //   emptyEnemies();
-    // }
   }
 
   checkBulletCollision() {
@@ -183,10 +221,11 @@ class Game {
     this.gameInfo.lives.innerHTML = this.ship.lives
     this.gameInfo.bombs.innerHTML = this.ship.bombs;
     this.gameInfo.highscore.innerHTML = this.highscore;
+    this.gameInfo.message.innerHTML = this.message;
   }
 
   fillBullets() {
-    for (var i = 0; i < BULLET_COUNT; i++) {
+    for (var i = 0; i < Game.BULLET_COUNT; i++) {
       this.bullets.push(new Bullet(this.ship.x, this.ship.y, this.ship.angle));
     }
   }
@@ -200,13 +239,13 @@ class Game {
   }
 
   createParticles(x, y, color) {
-    for (var i = 0; i < num_particles; i++) {
-      this.particles.push(new Particle(x, y, color, PARTICLE_MAX_LIFE));
+    for (var i = 0; i < Game.NUM_PARTICLES; i++) {
+      this.particles.push(new Particle(x, y, color, Game.PARTICLE_MAX_LIFE));
     }
   }
 
   draw() {
-    this.ctx.clearRect(0, 0, 720, 540);
+    this.ctx.clearRect(0, 0, Game.WIDTH, Game.HEIGHT);
     this.ship.draw(this.ctx);
 
     this.bullets.forEach((bullet) => {
@@ -223,52 +262,6 @@ class Game {
   }
 };
 
-function emptyEnemies() {
-  for (var i = 0; i < enemies.length; i++) {
-    createParticles(enemies[i].x, enemies[i].y, enemies[i].color);
-  }
-  enemies = [];
-}
-
-
-
-function shipReset() {
-  ship.x = canvas.width/2;
-  ship.y = canvas.height/2;
-  ship.angle = 0;
-  ship.color = "white";
-}
-
-function reset() {
-  emptyEnemies();
-  shipReset();
-  timeToSpawn = Date.now();
-  resetBullets();
-  if (restart === true) {
-    points = 0;
-    ship.lives = 2;
-    ship.bombs = 2;
-    bombsDisplay.innerHTML = "Bombs Left: " + (ship.bombs);
-    livesDisplay.removeAttribute("id");
-    livesDisplay.setAttribute("id", "livesDisplay");
-    livesDisplay.innerHTML = "Lives Left: " + ship.lives;
-  }
-  pointBoard.innerHTML = "Points: " + points;
-  if (pause === true) {
-    pauseGame();
-  }
-}
-
-function updateLives() {
-  ship.lives -= 1;
-  if (ship.lives < 0) {
-    livesDisplay.removeAttribute("id");
-    livesDisplay.setAttribute("id", "gameOver");
-    livesDisplay.innerHTML = "Game Over!!! Press R to restart";
-  } else {
-    livesDisplay.innerHTML = "Lives Left: " + (ship.lives);
-  }
-}
 Game.WIDTH = 720;
 Game.HEIGHT = 540;
 Game.PARTICLE_MAX_LIFE = 40;
