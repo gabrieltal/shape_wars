@@ -6,6 +6,28 @@
     <link rel="icon" type="image/png" href="./public/favicon.png">
   </head>
   <body class="vw-100 vh-100 bg-black text-white">
+    <div class="overlay d-none" id="how-to-modal">
+      <div class="container h-100 d-flex justify-content-center align-items-center">
+        <div class="modal p-15 bg-white text-black">
+          <h2 class="mb-10">How To Play</h2>
+          <p class="text-14 mb-6">
+            You take command of a small white triangle ship that shoots projectiles.
+            <br> <br>
+            Take out as many enemy shapes as you can and get the high score.
+          </p>
+          <ul>
+            <li class="d-flex align-items-center mb-6"><img class="mr-4 ml-0" src="./public/Wanderer.png" width="50px" height="50px" alt="Wander Enemy">Wander Enemies wander aimlessly</li>
+            <li class="d-flex align-items-center mb-6"><img class="mr-4 ml-0" src="./public/Follower.png" width="50px" height="50px" alt="Follower Enemy">Follower Enemies will slowly follow you</li>
+            <li class="d-flex align-items-center mb-6"><img class="mr-4 ml-0" src="./public/Avoider.png" width="50px" height="50px" alt="Avoider Enemy">Avoider Enemies will follow you and try to avoid your incoming bullets</li>
+          </ul>
+
+          <p class="text-14">Pressing the SPACEBAR will use one of your bombs and wipe the board of enemies.</p>
+
+          <button class="mt-15 mx-auto d-block" type="button" id="close-modal">Close Modal</button>
+        </div>
+      </div>
+    </div>
+
     <header class="d-flex justify-content-between align-items-center bg-white border-bottom-orange p-15">
       <h1 class="text-black">Shape Wars</h1>
     </header>
@@ -16,7 +38,7 @@
         <p class="text-blue bold mr-10">Lives Left: <span id="lives"></span></p>
         <p class="text-green bold mr-10">Bombs Left: <span id="bombs"></span></p>
         <label class="ml-8 mr-4" for="volume">Volume: </label>
-        <input class="mr-8" id="volume" value=".5" type="range" min="0" max="1" step=".1"/>
+        <input class="mr-8" id="volume" value=".3" type="range" min="0" max="1" step=".1"/>
         <input class="mx-8" type="checkbox" id="mute">Mute</input>
       </div>
 

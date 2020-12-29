@@ -23,7 +23,18 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.getElementById('how-to').addEventListener('click', function() {
-    game.pause();
-    console.log('clicked HOW TO');
+    if (game.playing) {
+      game.pause();
+    }
+
+    document.getElementById("how-to-modal").classList.remove('d-none');
+  });
+
+  document.getElementById('how-to-modal').addEventListener('click', function() {
+    document.getElementById("how-to-modal").classList.add('d-none');
+  });
+
+  document.getElementById('close-modal').addEventListener('click', function() {
+    document.getElementById("how-to-modal").classList.add('d-none');
   });
 });

@@ -55,6 +55,10 @@ button {
   background-size: 50px 50px;
 }
 
+#how-to-modal {
+  z-index: 1000;
+}
+
 /* ******************** */
 /* Flex */
 /* ******************** */
@@ -115,6 +119,14 @@ button {
   margin-bottom: 10px;
 }
 
+.mb-6 {
+  margin-bottom: 6px;
+}
+
+.mt-auto {
+  margin-top: auto;
+}
+
 .my-10 {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -136,6 +148,10 @@ button {
   margin-left: 8px;
 }
 
+.ml-0 {
+  margin-left: 0;
+}
+
 .mt-15 {
   margin-top: 15px;
 }
@@ -147,6 +163,11 @@ button {
 
 .m-auto {
   margin: auto;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ******************** */
@@ -202,6 +223,10 @@ button {
   display: none !important;
 }
 
+.d-block {
+  display: block !important;
+}
+
 .position-relative {
   position: relative;
 }
@@ -233,4 +258,8 @@ button {
 .modal {
   height: 400px;
   width: 400px;
+}
+
+.modal > ul {
+  text-align: left;
 }
