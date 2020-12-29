@@ -120,6 +120,10 @@ button {
   margin-bottom: 10px;
 }
 
+.mr-4 {
+  margin-right: 4px;
+}
+
 .mr-8 {
   margin-right: 8px;
 }
@@ -134,6 +138,11 @@ button {
 
 .mt-15 {
   margin-top: 15px;
+}
+
+.mx-8 {
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
 /* ******************** */
