@@ -7,6 +7,7 @@ export default class AvoiderEnemy extends MovingObject {
     let y = Math.floor(Math.random() * 720);
     super(x, y, 20, "green", 0, 0);
     this.speed = .7;
+    this.points = 30;
   }
 
   draw (ctx) {

@@ -8,6 +8,7 @@ export default class WanderEnemy extends MovingObject {
     let dx = Math.random() < 0.5 ? -.5 : .5;
     let dy = Math.random() < 0.5 ? -.5 : .5;
     super(x, y, 20, "purple", dx, dy);
+    this.points = 10;
   }
 
   draw (ctx) {

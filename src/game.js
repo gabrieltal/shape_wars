@@ -99,7 +99,7 @@ class Game {
 
       this.enemies.forEach((enemy) => {
         this.createParticles(enemy.x, enemy.y, enemy.color);
-        this.points += 10;
+        this.points += enemy.points;
       });
 
       this.enemies = [];
@@ -209,9 +209,9 @@ class Game {
           && bullet.y >= enemy.y - enemy.width && bullet.y <= enemy.y + enemy.width
         ) {
           this.createParticles(enemy.x, enemy.y, enemy.color);
+          this.points += enemy.points;
           this.enemies.splice(index, 1);
           this.sound.play('kill');
-          this.points += 10;
           this.updateGameInfoDisplay();
         }
       });

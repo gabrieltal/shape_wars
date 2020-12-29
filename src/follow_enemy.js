@@ -7,6 +7,7 @@ export default class FollowEnemy extends MovingObject {
     let y = Math.floor(Math.random() * 720);
     super(x, y, 20, "blue", 0, 0);
     this.speed = .8;
+    this.points = 20;
   }
 
   draw(ctx) {
