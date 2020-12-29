@@ -43,8 +43,6 @@ Players are able to move around and rotate with WASD and left and right arrow ke
 ![Particles](https://github.com/gabrieltal/shape_wars/blob/master/docs/particles.gif)
 
 ## TODOS
-  * Optimize and clean up code so it is object oriented
-  * I'd like to add music and sound effects
   * I would like to add a backend to hold high scores
-  * Power ups left on the grid to be picked up and give players bonus lives, bombs, etc
-  * More enemy types!
+  * Add power ups to give players bonus lives, bombs, etc
+  * Add more enemy types!
