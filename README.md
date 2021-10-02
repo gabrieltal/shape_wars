@@ -1,11 +1,27 @@
 # Shape Wars
 
+<img width="100%" alt="shape wars homepage" src="https://user-images.githubusercontent.com/20470949/135734409-e0747f68-a9eb-4d38-bebf-164b6cc10b4c.png">
+
+
 ## Overview
 
-Shape Wars is a vanilla JavaScript game using HTML5 Canvas. Heavily inspired by Geometry Wars and Asteroids.
-The game is a top down action arcade shooter. I programmed the various enemy types, some enemies follow you around the board, others avoid your incoming bullets, and the rest wander aimlessly.
+Shape Wars is a vanilla JavaScript game using HTML5 Canvas.
 
 [shapewars.xyz](https://www.shapewars.xyz)
+
+## Background
+
+I made this project while attending App Academy.
+
+Heavily inspired by [Geometry Wars](https://store.steampowered.com/app/8400/Geometry_Wars_Retro_Evolved/) and Asteroids.
+The game is a top down action arcade shooter. I programmed the various enemy types, some enemies follow you around the board, others avoid your incoming bullets, and the rest wander aimlessly.
+
+The point of the game is to survive waves of incoming enemies in order to obtain the high score.
+
+One thing I would like to point out is recently (December 2020) I did a rewrite of the code to make it more object oriented, modular and actually utilized Webpack. Back when I made this in 2018 I was still young and dumb so my code was very sloppy. Check out [this pull request](https://github.com/gabrieltal/shape_wars/pull/1) I issued with the full refactor. If I ever do something like this again I'll try to do a better job at making more PRs and a Milestone so my refactors and updates can be easier to follow along with.
+
+I was really happy how the game came out and super happy after the refactor with how the code came out.
+
 
 ## Installation
 
