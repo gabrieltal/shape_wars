@@ -25,8 +25,12 @@ h1 {
 
 ul {
   list-style: none;
-  text-align: center;
+  text-align: left;
   margin-bottom: 15px;
+}
+
+li {
+  text-align: left;
 }
 
 button {
@@ -131,6 +135,14 @@ button {
   margin-top: auto;
 }
 
+.mt-25 {
+  margin-top: 25px;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
 .my-10 {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -165,6 +177,11 @@ button {
   margin-right: 8px;
 }
 
+.mx-4 {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
 .m-auto {
   margin: auto;
 }
@@ -192,10 +209,6 @@ button {
 
 .bg-black {
   background-color: black;
-}
-
-.border-bottom-orange {
-  border-bottom: 2px solid orange;
 }
 
 .btn-orange {
@@ -257,14 +270,4 @@ button {
 
 .left-50 {
   left: 45%;
-}
-
-.modal {
-  height: 400px;
-  width: 400px;
-  z-index: 1000;
-}
-
-.modal > ul {
-  text-align: left;
 }
