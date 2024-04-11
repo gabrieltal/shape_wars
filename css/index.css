@@ -39,10 +39,6 @@ button {
 /* Game */
 /* ******************** */
 
-.board {
-  margin: 0 25px;
-}
-
 #canvas {
   display: block;
   border: 3px solid orange;
@@ -53,10 +49,6 @@ button {
     linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, .05) 25%,
     rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent);
   background-size: 50px 50px;
-}
-
-#how-to-modal {
-  z-index: 1000;
 }
 
 /* ******************** */
@@ -87,19 +79,19 @@ button {
 /* Text */
 /* ******************** */
 
-.text-white {
+.color-white {
   color: white;
 }
 
-.text-blue {
+.color-blue {
   color: lightblue;
 }
 
-.text-green {
+.color-green {
   color: lightgreen;
 }
 
-.text-black {
+.color-black {
   color: black;
 }
 
@@ -107,13 +99,17 @@ button {
   font-weight: bold;
 }
 
-.text-14 {
+.font-size-14 {
   font-size: 14px !important;
 }
 
 /* ******************** */
 /* Margin */
 /* ******************** */
+
+.mb-25 {
+  margin-bottom: 25px;
+}
 
 .mb-10 {
   margin-bottom: 10px;
@@ -262,6 +258,7 @@ button {
 .modal {
   height: 400px;
   width: 400px;
+  z-index: 1000;
 }
 
 .modal > ul {
