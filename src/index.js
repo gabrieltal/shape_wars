@@ -23,21 +23,4 @@ document.addEventListener("DOMContentLoaded", () => {
     this.classList.add('d-none');
     game.start();
   });
-
-  // Add modal event listeners
-  document.getElementById('how-to').addEventListener('click', function() {
-    if (game.playing) {
-      game.pause();
-    }
-
-    document.getElementById("how-to-modal").classList.remove('d-none');
-  });
-
-  document.getElementById('how-to-modal').addEventListener('click', function() {
-    document.getElementById("how-to-modal").classList.add('d-none');
-  });
-
-  document.getElementById('close-modal').addEventListener('click', function() {
-    document.getElementById("how-to-modal").classList.add('d-none');
-  });
 });

@@ -5,31 +5,9 @@
     <title>Shape Wars</title>
     <link rel="icon" type="image/png" href="https://shapewars.xyz/public/favicon.png">
   </head>
-  <body class="vw-100 vh-100 bg-black color-white">
-    <div class="overlay modal d-none" id="how-to-modal">
-      <div class="container h-100 d-flex justify-content-center align-items-center">
-        <div class="modal p-15 bg-white color-black">
-          <h2 class="mb-10">How To Play</h2>
-          <p class="font-size-14 mb-6">
-            You take command of a small white triangle ship that shoots projectiles.
-            <br> <br>
-            Take out as many enemy shapes as you can and get the high score.
-          </p>
-          <ul>
-            <li class="d-flex align-items-center mb-6"><img class="mr-4 ml-0" src="https://shapewars.xyz/public/Wanderer.png" width="50px" height="50px" alt="Wander Enemy">Wander Enemies wander aimlessly</li>
-            <li class="d-flex align-items-center mb-6"><img class="mr-4 ml-0" src="https://shapewars.xyz/public/Follower.png" width="50px" height="50px" alt="Follower Enemy">Follower Enemies will slowly follow you</li>
-            <li class="d-flex align-items-center mb-6"><img class="mr-4 ml-0" src="https://shapewars.xyz/public/Avoider.png" width="50px" height="50px" alt="Avoider Enemy">Avoider Enemies will follow you and try to avoid your incoming bullets</li>
-          </ul>
-
-          <p class="font-size-14">Pressing the SPACEBAR will use one of your bombs and wipe the board of enemies.</p>
-
-          <button class="mt-15 mx-auto d-block" type="button" id="close-modal">Close Modal</button>
-        </div>
-      </div>
-    </div>
-
-    <header class="d-flex justify-content-between align-items-center bg-white border-bottom-orange p-15">
-      <h1 class="color-black">Shape Wars</h1>
+  <body class="vw-100 vh-100 color-white bg-black">
+    <header class="d-flex justify-content-between align-items-center p-15">
+      <h1>Shape Wars</h1>
     </header>
 
     <main class="d-flex flex-column justify-content-center">
@@ -37,30 +15,14 @@
         <p class="bold mr-8">Points: <span id="points"></span></p>
         <p class="color-blue bold mr-10">Lives Left: <span id="lives"></span></p>
         <p class="color-green bold mr-10">Bombs Left: <span id="bombs"></span></p>
+        <p class="color-white bold mr-10">High Score: <span id="highscore"></span></p>
+
         <label class="ml-8 mr-4" for="volume">Volume: </label>
         <input class="mr-8" id="volume" value=".3" type="range" min="0" max="1" step=".1"/>
         <input class="mx-8" type="checkbox" id="mute">Mute</input>
       </div>
 
       <div class="game d-flex">
-        <div class="controls text-center color-white">
-          <h2 class="border-bottom-orange mb-10">Controls</h2>
-          <ul>
-            <li class="my-10">W: move up</li>
-            <li class="my-10">A: move left</li>
-            <li class="my-10">S: move down</li>
-            <li class="my-10">D: move right</li>
-            <li class="my-10">&larr; rotate left </li>
-            <li class="my-10">&rarr; rotate right </li>
-            <li class="my-10">R: restart game</li>
-            <li class="my-10">(spacebar): bomb </li>
-            <li class="my-10">P: pause game </li>
-          </ul>
-
-          <h2 class="border-bottom-orange mt-15 mb-10">High Score</h2>
-          <p id="highscore"></p>
-        </div>
-
         <div class="mb-25 position-relative">
           <canvas id="canvas" width="720" height="540"></canvas>
           <div id="canvas-overlay" class="overlay d-none">
@@ -68,41 +30,58 @@
           </div>
           <button class="position-absolute top-50 left-50 btn-orange" type="button" id="startGame">Start Game</button>
         </div>
+      </div>
 
-        <div class="text-center color-16">
-          <h2 class="border-bottom-orange my-10">Game</h2>
-          <button class="my-10" type="button" id="how-to">How to Play</button>
+      <div>
+        <h2 class="mt-25 mb-10">How To Play</h2>
+        <hr>
+        <p class="font-size-14 my-10">
+          You take command of a small white triangle ship that shoots projectiles. Take out as many enemy shapes as you can and get the high score.
+        </p>
+        <ul>
+          <li class="d-flex align-items-center mb-6"><img class="mr-4 ml-0" src="https://shapewars.xyz/public/Wanderer.png" width="50px" height="50px" alt="Wander Enemy">Wander Enemies wander aimlessly</li>
+          <li class="d-flex align-items-center mb-6"><img class="mr-4 ml-0" src="https://shapewars.xyz/public/Follower.png" width="50px" height="50px" alt="Follower Enemy">Follower Enemies will slowly follow you</li>
+          <li class="d-flex align-items-center mb-6"><img class="mr-4 ml-0" src="https://shapewars.xyz/public/Avoider.png" width="50px" height="50px" alt="Avoider Enemy">Avoider Enemies will follow you and try to avoid your incoming bullets</li>
+        </ul>
 
-          <h2 class="border-bottom-orange mt-15 mb-10">Credits</h2>
-          <ul>
-            <li>Development: Gabriel Talavera</li>
-            <li class="d-flex align-items-center">Source code:
-              <a class="ml-4 d-flex align-items-center" href="https://www.github.com/gabrieltal/shape_wars" target="_blank" rel="noopener noreferrer">
-                <img class="mr-4 ml-0" src="https://shapewars.xyz/public/github.svg" width="25px" height="25px" alt="Github icon"> Github
-              </a>
-            </li>
-            <li class="d-flex align-items-center">
-              Contact:
-              <a class="ml-4 d-flex align-items-center" href="https://www.linkedin.com/in/gvtalavera" target="_blank" rel="noopener noreferrer">
-                <img class="mr-4 ml-0" src="https://shapewars.xyz/public/linkedin.svg" width="25px" height="25px" alt="LinkedIn icon">  LinkedIn
-              </a>
-            </li>
-            <li class="mt-15">
-              Music: <a href="https://freemusicarchive.org/music/Rolemusic/The_Pirate_And_The_Dancer/04_rolemusic_-_the_pirate_and_the_dancer" target="_blank" rel="noopener noreferrer">
-                The Pirate And The Dancer
-              </a>
-            </li>
-            <li>
-              By: <a href="https://freemusicarchive.org/music/Rolemusic" target="_blank" rel="noopener noreferrer">Rolemusic</a>
-            </li>
-            <li>
-              From: <a href="https://freemusicarchive.org/" target="_blank" rel="noopener noreferrer">Free Music Archive</a>
-            </li>
-          </ul>
-        </div>
+        <p class="font-size-14">Pressing the SPACEBAR will use one of your bombs and wipe the board of enemies.</p>
+
+        <h2 class="mt-25 mb-10">Controls</h2>
+        <hr>
+        <ul>
+          <li class="my-10">W: move up</li>
+          <li class="my-10">A: move left</li>
+          <li class="my-10">S: move down</li>
+          <li class="my-10">D: move right</li>
+          <li class="my-10">&larr; rotate left </li>
+          <li class="my-10">&rarr; rotate right </li>
+          <li class="my-10">R: restart game</li>
+          <li class="my-10">(spacebar): bomb </li>
+          <li class="my-10">P: pause game </li>
+        </ul>
+
+        <h2 class="mt-25 mb-10">Credits</h2>
+        <hr>
+        <ul>
+          <li class="mt-10 mb-6">
+            <a href="https://plantperson.info" target="_blank" rel="noopener noreferrer">
+              A Gabriel Talavera production.
+            </a>
+          </li>
+          <li class="mb-6">
+            <a href="https://www.github.com/gabrieltal/shape_wars" target="_blank" rel="noopener noreferrer">
+              Source code: Github
+            </a>
+          </li>
+          <li class="mb-6">
+            <a href="https://freemusicarchive.org/music/Rolemusic/The_Pirate_And_The_Dancer/04_rolemusic_-_the_pirate_and_the_dancer" target="_blank" rel="noopener noreferrer">
+              Music: The Pirate And The Dancer by Rolemusic
+            </a>
+          </li>
+        </ul>
       </div>
     </main>
 
-    <script src="https://shapewars.xyz/bundle.js"></script>
+    <script src="./bundle.js"></script>
   </body>
 </html>
