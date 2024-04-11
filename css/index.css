@@ -55,6 +55,43 @@ button {
   background-size: 50px 50px;
 }
 
+#startGame {
+  top: 45%;
+  left: 45%;
+}
+
+/* ******************** */
+/* Display */
+/* ******************** */
+
+.d-none {
+  display: none !important;
+}
+
+.d-block {
+  display: block !important;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.overlay {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+
 /* ******************** */
 /* Flex */
 /* ******************** */
@@ -111,6 +148,10 @@ button {
   font-size: 16px !important;
 }
 
+.text-center {
+  text-align: center;
+}
+
 /* ******************** */
 /* Margin */
 /* ******************** */
@@ -127,25 +168,12 @@ button {
   margin-bottom: 6px;
 }
 
-.ml-4 {
-  margin-left: 4px;
+.ml-8 {
+  margin-left: 8px;
 }
 
-.mt-auto {
-  margin-top: auto;
-}
-
-.mt-25 {
-  margin-top: 25px;
-}
-
-.mt-10 {
-  margin-top: 10px;
-}
-
-.my-10 {
-  margin-top: 10px;
-  margin-bottom: 10px;
+.ml-0 {
+  margin-left: 0;
 }
 
 .mr-4 {
@@ -160,16 +188,12 @@ button {
   margin-right: 10px;
 }
 
-.ml-8 {
-  margin-left: 8px;
+.mt-25 {
+  margin-top: 25px;
 }
 
-.ml-0 {
-  margin-left: 0;
-}
-
-.mt-15 {
-  margin-top: 15px;
+.mt-10 {
+  margin-top: 10px;
 }
 
 .mx-8 {
@@ -177,18 +201,9 @@ button {
   margin-right: 8px;
 }
 
-.mx-4 {
-  margin-left: 4px;
-  margin-right: 4px;
-}
-
-.m-auto {
-  margin: auto;
-}
-
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
+.my-10 {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 /* ******************** */
@@ -226,48 +241,4 @@ button {
 
 .vh-100 {
   height: 100vh;
-}
-
-.h-100 {
-  height: 100%;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.d-none {
-  display: none !important;
-}
-
-.d-block {
-  display: block !important;
-}
-
-.position-relative {
-  position: relative;
-}
-
-.position-absolute {
-  position: absolute;
-}
-
-.overlay {
-  position: absolute;
-  display: block;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 2;
-  cursor: pointer;
-}
-
-.top-50 {
-  top: 45%;
-}
-
-.left-50 {
-  left: 45%;
 }
