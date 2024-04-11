@@ -1,9 +1,9 @@
-import Ship from './ship.js';
-import WanderEnemy from './wander_enemy.js';
-import AvoiderEnemy from './avoider_enemy.js';
-import FollowEnemy from './follow_enemy.js';
-import Bullet from './bullet.js';
-import Particle from './particle.js';
+import Ship from './objects/ship.js';
+import WanderEnemy from './objects/wander_enemy.js';
+import AvoiderEnemy from './objects/avoider_enemy.js';
+import FollowEnemy from './objects/follow_enemy.js';
+import Bullet from './objects/bullet.js';
+import Particle from './objects/particle.js';
 
 class Game {
   constructor(ctx, input, sound) {

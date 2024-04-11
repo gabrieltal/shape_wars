@@ -13,17 +13,16 @@ Shape Wars is a vanilla JavaScript game using HTML5 Canvas.
 
 I made this project while attending App Academy.
 
-Heavily inspired by [Geometry Wars](https://store.steampowered.com/app/8400/Geometry_Wars_Retro_Evolved/) and Asteroids.
-The game is a top down action arcade shooter. I programmed the various enemy types, some enemies follow you around the board, others avoid your incoming bullets, and the rest wander aimlessly.
+Heavily inspired by [Geometry Wars](https://store.steampowered.com/app/8400/Geometry_Wars_Retro_Evolved/) and [Asteroids](https://store.steampowered.com/app/2058260/Asteroids/).
+The game is a top down arcade shooter. I programmed the various enemy types, some enemies follow you around, others avoid your incoming bullets, and the rest wander aimlessly.
 
 The point of the game is to survive waves of incoming enemies in order to obtain the high score.
 
-One thing I would like to point out is recently (December 2020) I did a rewrite of the code to make it more object oriented, modular and actually utilized Webpack. Back when I made this in 2018 I was still young and dumb so my code was very sloppy. Check out [this pull request](https://github.com/gabrieltal/shape_wars/pull/1) I issued with the full refactor. If I ever do something like this again I'll try to do a better job at making more PRs and a Milestone so my refactors and updates can be easier to follow along with.
+One thing I would like to point out is recently (December 2020) I did a rewrite of the code to make it more object oriented, modular and actually utilized Webpack (Young me was so stuck trying to figure this out in 2018!). Check out [this pull request](https://github.com/gabrieltal/shape_wars/pull/1) I issued with the full refactor. If I ever do something like this again I'll try to do a better job at making smaller PRs so my updates and refactors can be easier to follow along with.
 
-I was really happy how the game came out and super happy after the refactor with how the code came out.
+I was happy how the game came out. After the refactor, I was very happy with how the code came out.
 
-
-## Installation
+## Development
 
 ### Setup
 
@@ -42,26 +41,27 @@ Then go to localhost:8080 to see the game running.
 
 ## Features
 
-Players are a ship and able to move around the board with WASD and they can rotate their ship with the left and right arrow keys.
-Players shoot projectiles and have to survive waves of enemies. Players only have 3 lives and they are given 2 bombs that can wipe the board of enemies. The goal is to get the high score.
+You play as a ship and are able to move around the board with WASD commands. You can rotate the ship with the left and right arrow keys.
+
+Players shoot projectiles with the goal to survive waves of enemies and destroy as many enemies as possible. Players only have 3 lives and they are given 2 bombs that can wipe the board of enemies.
 
 ![Avoiders](https://github.com/gabrieltal/shape_wars/blob/master/documents/avoiders.gif)
 
-### AI Enemies
+### Enemy types
 
 The game has three enemy types.
 
   * Enemies that wander aimlessly
-  * Enemies that are able to follow and pursue the player. This is done by the enemy tracking the player's location and compared to their own current location are able to determine the direction to move in.
-  * The last enemy type also follows and pursues the player, but they are able to dodge the player's incoming bullets. The player is still able to shoot them since they aren't the fastest at dodging bullets (I needed to give the player a shot so I didn't make them super quick at dodging bullets)
+  * Enemies that follow and pursue the player.
+  * Enemies that follow and pursue the player and also try to dodge the player's projectiles.
 
 ### Projectiles
 
-When firing bullets the bullets are released and proceed in the direction of the user at the moment of firing
+When firing bullets the bullets are released and proceed in a straight line.
 
 ### Particles!
 
-After each enemy is destroy a parade of particles are released and give life and color to the game
+After each enemy is destroyed a parade of particles are released and give life and color to the game.
 
 ![Particles](https://github.com/gabrieltal/shape_wars/blob/master/documents/particles.gif)
 
