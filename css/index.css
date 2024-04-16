@@ -2,8 +2,12 @@
 /* Reset */
 /* ******************** */
 * {
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
+}
+
+body, main, div {
+  margin: 0 auto;
 }
 
 a {
@@ -16,11 +20,11 @@ a:hover {
 }
 
 p {
-  font-size: 20px;
+  font-size: 1rem;
 }
 
 h1 {
-  font-size: 38px;
+  font-size: 3rem;
 }
 
 ul {
@@ -31,6 +35,7 @@ ul {
 
 li {
   text-align: left;
+  font-size: 1rem;
 }
 
 button {
@@ -42,6 +47,11 @@ button {
 /* ******************** */
 /* Game */
 /* ******************** */
+
+.canvas-width {
+  max-width: 720px;
+  width: 100%;
+}
 
 #canvas {
   display: block;
@@ -108,6 +118,10 @@ button {
   justify-content: center;
 }
 
+.justify-content-end {
+  justify-content: end;
+}
+
 .align-items-center {
   align-items: center;
 }
@@ -124,12 +138,12 @@ button {
   color: white;
 }
 
-.color-blue {
-  color: lightblue;
-}
-
 .color-green {
   color: lightgreen;
+}
+
+.color-orange {
+  color: orange;
 }
 
 .color-black {
@@ -140,12 +154,12 @@ button {
   font-weight: bold;
 }
 
-.font-size-14 {
-  font-size: 14px !important;
+.font-size-small {
+  font-size: .75rem;
 }
 
-.font-size-16 {
-  font-size: 16px !important;
+.font-size-large {
+  font-size: 1.5rem;
 }
 
 .text-center {
@@ -155,6 +169,10 @@ button {
 /* ******************** */
 /* Margin */
 /* ******************** */
+
+.mb-30 {
+  margin-bottom: 30px;
+}
 
 .mb-25 {
   margin-bottom: 25px;
@@ -180,12 +198,24 @@ button {
   margin-right: 4px;
 }
 
+.mr-6 {
+  margin-right: 6px;
+}
+
 .mr-8 {
   margin-right: 8px;
 }
 
 .mr-10 {
   margin-right: 10px;
+}
+
+.mr-15 {
+  margin-right: 15px;
+}
+
+.mr-25 {
+  margin-right: 25px;
 }
 
 .mt-25 {
@@ -204,6 +234,11 @@ button {
 .my-10 {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.mx-0 {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 /* ******************** */

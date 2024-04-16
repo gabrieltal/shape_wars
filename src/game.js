@@ -170,11 +170,11 @@ class Game {
           && this.ship.y >= enemy.y - enemy.width && this.ship.y <= enemy.y + enemy.width) {
         this.ship.color = 'black';
         this.sound.play('death');
+        this.ship.lives -= 1;
         this.createParticles(this.ship.x, this.ship.y, 'red');
 
         if (this.ship.lives > 0) {
           this.enemies = [];
-          this.ship.lives -= 1;
           this.ship.x = Game.WIDTH / 2;
           this.ship.y = Game.HEIGHT / 2;
           this.ship.color = 'white';
